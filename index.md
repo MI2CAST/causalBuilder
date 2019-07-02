@@ -20,8 +20,8 @@ Build causal statements by creating à-la-carte VSM causal templates. These temp
 		    <th>Causal statement</th>
 		</tr>
 		<tr>
-			<th><input type="checkbox" name="typesource" value="typesource" checked onclick="return false;"> Biological type <br></th>
-			<th><input type="checkbox" name="typetarget" value="typetarget" checked onclick="return false;"> Biological type <br> </th>
+			<th><input type="checkbox" name="typesource" value="typesource"> Biological type <br></th>
+			<th><input type="checkbox" name="typetarget" value="typetarget"> Biological type <br> </th>
 			<th></th>
 			<th><input type="checkbox" name="reference" value="reference"> Reference(s) (pubmed) <br> 
 			    <input type="number" id="nbPubmed" name="nbPubmed" min="0" max="10" placeholder="Nb of pmids"> </th>
