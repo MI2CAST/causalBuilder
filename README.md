@@ -9,4 +9,4 @@ The causal builder will be a web application that uses the [VSM](https://github.
 [vtoure.github.io/causalBuilder](https://vtoure.github.io/causalBuilder)
 
 ## Notes
-The application under development!
+The application is under development!
