@@ -2,7 +2,7 @@
 layout: default
 ---
 
-Build causal statements by creating à-la-carte VSM causal templates. These templates are compatible with the causal checklist available in [github](https://github.com/vtoure/MICAST).
+Build causal statements by creating à-la-carte VSM causal templates. These templates are compatible with the MI2CAST checklist available in [github](https://github.com/vtoure/MI2CAST).
 
 # Select the terms to add in the causal statement
 
