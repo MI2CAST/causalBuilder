@@ -2,7 +2,7 @@
 layout: default
 ---
 
-Build causal statements by creating à-la-carte VSM causal templates. These templates are compatible with the MI2CAST checklist available in [github](https://github.com/vtoure/MI2CAST).
+Curation interface for generating customized molecular causal statements. The causal statements are compatible with the MI2CAST (Minimum Information about a Molecular Interaction Causal Statement) checklist available in [github](https://github.com/vtoure/MI2CAST) and take advantage of the [VSM framework](https://github.com/vsmjs/) to create causal templates.
 
 # Select the terms to add in the causal statement
 
@@ -11,17 +11,17 @@ Build causal statements by creating à-la-carte VSM causal templates. These temp
     <meta charset="UTF-8">
 
     <!-- Begin Jekyll SEO tag v2.5.0 -->
-    <title>CausalBuilder | À-la-carte VSM templates for causal statements</title>
+    <title>CausalBuilder | Curation interface for molecular causal statements</title>
     <meta name="generator" content="Jekyll v3.8.5" />
     <meta property="og:title" content="CausalBuilder" />
     <meta property="og:locale" content="en_US" />
-    <meta name="description" content="À-la-carte VSM templates for causal statements" />
-    <meta property="og:description" content="À-la-carte VSM templates for causal statements" />
+    <meta name="description" content="Curation interface for molecular causal statements" />
+    <meta property="og:description" content="Curation interface for molecular causal statements" />
     <link rel="canonical" href="https://vtoure.github.io/causalBuilder/" />
     <meta property="og:url" content="https://vtoure.github.io/causalBuilder/" />
     <meta property="og:site_name" content="CausalBuilder" />
     <script type="application/ld+json">
-    {"@type":"WebSite","url":"https://vtoure.github.io/causalBuilder/","name":"CausalBuilder","description":"À-la-carte VSM templates for causal statements","headline":"CausalBuilder","@context":"http://schema.org"}</script>
+    {"@type":"WebSite","url":"https://vtoure.github.io/causalBuilder/","name":"CausalBuilder","description":"Curation interface for molecular causal statements","headline":"CausalBuilder","@context":"http://schema.org"}</script>
     <!-- End Jekyll SEO tag -->
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,6 +45,18 @@ Build causal statements by creating à-la-carte VSM causal templates. These temp
           apiKey: '5904481f-f6cb-4c71-94d8-3b775cf0f19e'
         });
         //vsmbox.vsmDictionary.bioPortalDefaultPageSize = 20;
+        
+        vsmbox.initialValue = {
+          terms: [
+            {},
+            {queryOptions: {
+        filter: { dictID: [ 'http://data.bioontology.org/search?q=regulates&ontologies=MI' ] }}},
+            {}
+          ],
+          conns: [
+            { type: 'T', pos: [ 0, 1, 2 ] }
+          ]
+        };
       }
 
       function fillVsmBox(){
@@ -59,23 +71,30 @@ Build causal statements by creating à-la-carte VSM causal templates. These temp
           ]
         };
       }
+      
+      function doTypeSource(checkboxElem){
+        if(checkboxElem.checked){
+          vsmbox.initialValue = {
+          terms: [
+            {},
+            { str: 'is a', classID: null, instID: null },
+            {queryOptions: {
+        	filter: { dictID: [ 'http://data.bioontology.org/ontologies/MI' ] }}}
+          ],
+          conns: [
+            { type: 'T', pos: [ 0, 1, 2 ] }
+          ]
+          };
+        }
+        else{
+         //remove annotation biological type source
+         }
+      }
     </script>
   </head>
   <body>
-    <section class="page-header">
-      <h1 class="project-name">CausalBuilder</h1>
-      <h2 class="project-tagline">À-la-carte VSM templates for causal statements</h2>
-      
-        <a href="https://github.com/vtoure/causalBuilder" class="btn">View on GitHub</a>
-    </section>
-
-
     <section class="main-content">
-      <p>Build causal statements by creating à-la-carte VSM causal templates. These templates are compatible with the MI2CAST checklist available in <a href="https://github.com/vtoure/MI2CAST">github</a>.</p>
-
-<h1 id="select-the-terms-to-add-in-the-causal-statement">Select the terms to add in the causal statement</h1>
-
-	<table style="width:110%" border="0">
+	<table style="width:100%" border="0">
   		<tr>
 	  		<th>Source entity</th>
 			<th>Target entity</th> 
@@ -83,7 +102,7 @@ Build causal statements by creating à-la-carte VSM causal templates. These temp
 		    <th>Causal statement</th>
 		</tr>
 		<tr>
-			<th><input type="checkbox" name="typesource" value="typesource" /> Biological type <br /></th>
+			<th><input type="checkbox" name="typesource" value="typesource" onchange="doTypeSource(this)" /> Biological type <br /></th>
 			<th><input type="checkbox" name="typetarget" value="typetarget" /> Biological type <br /> </th>
 			<th></th>
 			<th><input type="checkbox" name="reference" value="reference" /> Reference(s) (pubmed) <br /> 
@@ -103,9 +122,7 @@ Build causal statements by creating à-la-carte VSM causal templates. These temp
 			 	<input type="number" id="nbStateTarget" name="nbStateTarget" min="0" max="10" placeholder="Nb of states" /></th>
 			<th></th>
 			<th><input type="checkbox" name="expEvidence" value="expEvidence" /> Experimental evidence <br />
-			 	<input type="number" id="nbexpEvidence" name="nbexpEvidence" min="0" max="10" placeholder="Nb of experimental evidences" /> </th>
-
-			
+			 	<input type="number" id="nbexpEvidence" name="nbexpEvidence" min="0" max="10" placeholder="Nb of experimental evidences" /> </th>	
 		</tr>
 		<tr>
 			<th><input type="checkbox" name="expSetupSource" value="expSetupSource" /> Experimental setup <br /></th>
@@ -140,24 +157,15 @@ Build causal statements by creating à-la-carte VSM causal templates. These temp
 		</tr>
 
 	</table>
-	
 	<br />
-	
-	<button type="button_go" onclick="fillVsmBox()">Get the VSM template!</button> 
 
-	<br><br>
 	 
 	<vsm-box id="vsm-box"></vsm-box>
 	 
-<h3> Notes </h3>
-<p> </p>
-
-      <footer class="site-footer">
-        
-          <span class="site-footer-owner"><a href="https://github.com/vtoure/causalBuilder">causalBuilder</a> is maintained by <a href="https://github.com/vtoure">vtoure</a>.</span>
-        
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
-      </footer>
+     <footer class="site-footer">
+      <span class="site-footer-owner"><a href="https://github.com/vtoure/causalBuilder">causalBuilder</a> is maintained by <a href="https://github.com/vtoure">vtoure</a>.</span>
+      <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
+     </footer>
     </section>
 
     

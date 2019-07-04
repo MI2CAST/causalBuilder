@@ -16,7 +16,7 @@
 title: CausalBuilder
 email: vasundra.toure@ntnu.no
 description: >- # this means to ignore newlines until "baseurl:"
-  À-la-carte VSM templates for causal statements
+  Curation interface for molecular causal statements
 
 # Build settings
 markdown: kramdown
