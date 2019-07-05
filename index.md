@@ -28,7 +28,7 @@ Curation interface for generating customized molecular causal statements. The ca
     vsmbox.initialValue = {
       terms: [
         {},
-        {queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/search?q=regulates&ontologies=MI' ] }}},
+        {queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/MI' ] }}},
         {}
       ],
       conns: [
