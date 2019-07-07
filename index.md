@@ -10,9 +10,9 @@ Curation interface for generating customized molecular causal statements. The ca
 <script src="https://unpkg.com/vsm-dictionary-cacher@1.2.0/dist/vsm-dictionary-cacher.min.js"></script>
 <script src="https://unpkg.com/vsm-box@0.3.1/dist/vsm-box.standalone.min.js"></script>
 
-<script src="/template-builder.js"></script>
 
 <script>
+
   var vsmbox;      // The <vsm-box> HTML-element.
   var panelState;  // An Object that represents the current values in web-page's template configuration panel.
 
