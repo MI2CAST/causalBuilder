@@ -2,22 +2,24 @@
 layout: default
 ---
 
-Curation interface for generating customized molecular causal statements. The causal statements are compatible with the MI2CAST (Minimum Information about a Molecular Interaction Causal Statement) checklist available in [github](https://github.com/vtoure/MI2CAST) and take advantage of the [VSM framework](https://github.com/vsmjs/) to create causal templates.
+Curation interface for generating customized molecular causal statements. The causal statements are compatible with the MI2CAST (Minimum Information about a Molecular Interaction Causal Statement) checklist available on [GitHub](https://github.com/vtoure/MI2CAST) and take advantage of the [VSM framework](https://github.com/vsmjs/) to generate customized causal statement VSM-templates.
 
 # Select the terms to add in the causal statement
 
-<script src="https://unpkg.com/vsm-dictionary-bioportal@1.0.1/dist/vsm-dictionary-bioportal.min.js"></script>
+<script src="https://unpkg.com/vsm-dictionary-bioportal@1.1.0/dist/vsm-dictionary-bioportal.min.js"></script>
 <script src="https://unpkg.com/vsm-dictionary-cacher@1.2.0/dist/vsm-dictionary-cacher.min.js"></script>
 <script src="https://unpkg.com/vsm-box@0.3.1/dist/vsm-box.standalone.min.js"></script>
 
+<script src="template-builder.js"></script>
+
 <script>
-  var vsmbox;
+  var vsmbox;      // The <vsm-box> HTML-element.
+  var panelState;  // An Object that represents the current values in web-page's template configuration panel.
 
   window.onload = function() {
     vsmbox = document.getElementById('vsm-box');
-    //vsmbox.sizes = {connFootDepth:28, theConnsLevelHeight:30}; 
+    ///vsmbox.sizes = { connFootDepth: 28, theConnsLevelHeight: 30 }; 
     
-
     var VsmDictionaryBioPortalCached =
       VsmDictionaryCacher( VsmDictionaryBioPortal, { predictEmpties: false } );
 
@@ -26,28 +28,26 @@ Curation interface for generating customized molecular causal statements. The ca
     });
     //vsmbox.vsmDictionary.bioPortalDefaultPageSize = 20;
     
-    vsmbox.initialValue = {
-      terms: [
-        {},
-        {queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/MI' ] }}},
-        {}
-      ],
-      conns: [
-        { type: 'T', pos: [ 0, 1, 2 ] }
-      ]
-    };
+    vsmbox.addEventListener('change',      onVsmBoxChange);  // Captures user-generated changes.
+    vsmbox.addEventListener('change-init', onVsmBoxChange);  // Captures the change of placing a new template.
+
+    fillVsmBox();
   }
 
-  function fillVsmBox(){
-    vsmbox.initialValue = {
-      terms: [
-        {},
-        { str: 'up-regulates', classID: 'http://purl.obolibrary.org/obo/MI_2235', instID: null },
-        {}
+
+  /**
+   * Just a temporary hard-coded `panelState` filler. It should be calculated from the checkboxes etc.
+   */
+  function computePanelState() {
+    panelState = {
+      sourceType: true,
+      sourceActivity: false,
+      sourceState: [
+        'mod',
+        'modrespos'
       ],
-      conns: [
-        { type: 'T', pos: [ 0, 1, 2 ] }
-      ]
+      targetType: true,
+      reference: 2
     };
   }
  
@@ -97,3 +97,5 @@ Curation interface for generating customized molecular causal statements. The ca
 </div> 
 
 <vsm-box id="vsm-box"></vsm-box>
+<br>
+<button onclick="log(extractData());">Log data</button>
