@@ -9,6 +9,7 @@ Curation interface for generating customized molecular causal statements. The ca
 <script src="https://unpkg.com/vsm-dictionary-bioportal@1.1.0/dist/vsm-dictionary-bioportal.min.js"></script>
 <script src="https://unpkg.com/vsm-dictionary-cacher@1.2.0/dist/vsm-dictionary-cacher.min.js"></script>
 <script src="https://unpkg.com/vsm-box@0.3.1/dist/vsm-box.standalone.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 
 
 <script>
@@ -50,9 +51,6 @@ Curation interface for generating customized molecular causal statements. The ca
       reference: 2
     };
   }
-
-
-
 
 
   /**
@@ -520,8 +518,6 @@ Curation interface for generating customized molecular causal statements. The ca
   ];
 
 
-
-
   function fillVsmBox(){
     computePanelState();
     
@@ -529,8 +525,6 @@ Curation interface for generating customized molecular causal statements. The ca
     insertionTasks.forEach(doInsertionTask);
     vsmbox.initialValue = vsmSent;
   }
-
-
 
   function doInsertionTask(task) {
     var state = panelState[task.panelCondition];
@@ -548,7 +542,7 @@ Curation interface for generating customized molecular causal statements. The ca
       for (var i = 0;  i < state;  i++) {
         insertFrag(task.findTag,  task.insertFrag,  TagIndexDelimiter + i,  task.panelCondition + ' ' + i);
       }
-    }  
+    }
   }
 
 
@@ -702,15 +696,54 @@ Curation interface for generating customized molecular causal statements. The ca
       return o;
     }, {});
   }
+  
+  /* Creation and removal of biological state checkboxes */
+  function createRemoveState(checkBox, divTag) {
+    //Get the number of biological states in current div (divSourceStates or divTargetStates)
+    var count = parseInt(($('#' + divTag.id).children().size())); 
+  	if($('#' + checkBox.id).is(':checked')){
+  	  count = count + 1;
+  	  nameCheckbox = checkBox.id.substring(0, checkBox.id.length-1); //remove last character which correspond to the number of biological state
+  	  //Create new checkbox and add it's label
+  	  $('#' + divTag.id).append(' <div id="biologicalState'+count+'"> <input type="checkbox" id="' + nameCheckbox + count + 
+  	  '" name="' + checkBox.name + '" onchange="createRemoveState(this,' + divTag.id + ')" >' +
+  	  ' <label for="' + nameCheckbox + count + '" >' + checkBox.name + ' </label> <select> <option value="mod">modif</option>' + 
+  	  ' <option value="modres">modif+res</option> <option value="modrespos">modif+res+pos</option> </select> <br> <br> </div>');
+
+  	  //Disable previous checkboxes 
+  	  for(i = 1; i < parseInt(($("#" + divTag.id).children().size()))-1; i ++){
+      	document.getElementById(checkBox.id.substring(0, checkBox.id.length-1)+i).disabled = true;
+      }
+  	}
+  	else{ //unchecking a checkbox
+  	log($('#' + divTag.id).children().last());
+  	  $('#' + divTag.id).children().last().remove(); //remove last label of checkbox
+  	  //$('#' + divTag.id).children().last().remove(); //remove last checkbox
+      //Enable the 'second previous' checkbox to be clickable again
+  	  if((count-2) !== 0){
+  	  	document.getElementById(checkBox.id.substring(0, checkBox.id.length-1)+(count-2)).removeAttribute('disabled');
+  	   }
+    }
+  }
 
 </script>
 
-<div class="row">
+  <div class="row">
   <div class="column">
   <h3> Source Entity </h3>
   <input type="checkbox" id="sourceType" /> Biological type <br> <br>
   <input type="checkbox" id="sourceActivity" /> Biological activity <br> <br>
-  <input type="checkbox" id="sourceState" /> Biological state <br> <br>
+  <div id="divSourceStates">
+    <div id="biologicalState1">
+  	<input type="checkbox" name="Biological state" id="sourceState1" onchange='createRemoveState(this,divSourceStates);' />
+  	 <label for="sourceState1">Biological state  </label> 
+	 <select>
+	  <option value="mod">modif</option>
+	  <option value="modres">modif+res</option>
+	  <option value="modrespos">modif+res+pos</option>
+	  </select> <br> <br>
+	</div>
+  </div>
   <input type="checkbox" id="sourceExpSetup" /> Experimental setup <br> <br>
   <input type="checkbox" id="sourceSpecies" /> Species <br> <br>
   <input type="checkbox" id="sourceCompartment" /> Compartment <br> <br>
@@ -720,7 +753,18 @@ Curation interface for generating customized molecular causal statements. The ca
   <h3> Target Entity </h3>
   <input type="checkbox" id="targetType" /> Biological type <br> <br>
   <input type="checkbox" id="targetActivity" /> Biological activity <br> <br>
-  <input type="checkbox" id="targetState" /> Biological state <br> <br>
+   
+  <div id="divTargetStates">
+    <div id="biologicalState1">
+      <input type="checkbox" name="Biological state" id="targetState1" onchange='createRemoveState(this,divTargetStates);' />
+      <label for="targetState1">Biological state </label> 
+      <select>
+	  <option value="mod">modif</option>
+	  <option value="modres">modif+res</option>
+	  <option value="modrespos">modif+res+pos</option>
+	  </select> <br> <br>
+    </div>
+  </div>
   <input type="checkbox" id="targetExpSetup" /> Experimental setup <br> <br>
   <input type="checkbox" id="targetSpecies" /> Species <br> <br>
   <input type="checkbox" id="targetCompartment" /> Compartment <br> <br>
