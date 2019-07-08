@@ -9,7 +9,7 @@ Curation interface for generating customized molecular causal statements. The ca
 <script src="https://unpkg.com/vsm-dictionary-bioportal@1.1.0/dist/vsm-dictionary-bioportal.min.js"></script>
 <script src="https://unpkg.com/vsm-dictionary-cacher@1.2.0/dist/vsm-dictionary-cacher.min.js"></script>
 <script src="https://unpkg.com/vsm-box@0.3.1/dist/vsm-box.standalone.min.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
 
 
 <script>
