@@ -21,6 +21,8 @@ Curation interface for generating customized molecular causal statements. The ca
     vsmbox = document.getElementById('vsm-box');
     ///vsmbox.sizes = { connFootDepth: 28, theConnsLevelHeight: 30 }; 
     
+    makeAllRequestsHttps();  // To make VsmDictionaryBioportal's http-requests work on GitHub Pages.
+    
     var VsmDictionaryBioPortalCached =
       VsmDictionaryCacher( VsmDictionaryBioPortal, { predictEmpties: false } );
 
@@ -34,6 +36,15 @@ Curation interface for generating customized molecular causal statements. The ca
 
     fillVsmBox();
   }
+
+
+  function makeAllRequestsHttps() {
+    var meta = document.createElement('meta');
+    meta.httpEquiv = "Content-Security-Policy";
+    meta.content = "upgrade-insecure-requests";
+    document.getElementsByTagName('head')[0].appendChild(meta);
+  }
+
 
 
   /**
