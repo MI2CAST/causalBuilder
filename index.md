@@ -48,18 +48,34 @@ Curation interface for generating customized molecular causal statements. The ca
 
 
   /**
-   * Just a temporary hard-coded `panelState` filler. It should be calculated from the checkboxes etc.
+   * Initial panelState filler.
+   *
    */
   function computePanelState() {
     panelState = {
-      sourceType: true,
+      sourceType: false,
       sourceActivity: false,
       sourceState: [
-        'mod',
-        'modrespos'
       ],
-      targetType: true,
-      reference: 2
+      sourceExperiment: false,
+      sourceSpecies: false,
+      sourceCompartment: false,
+      targetType: false,
+      targetActivity: false,
+      targetState: [
+      ],
+      targetExperiment,
+      targetSpecies,
+      targetCompartment,
+      regulationMechanism: false,
+      regulationSpecies: false,
+      regulationCompartment: false,
+      regulationCellLine: false,
+      regulationCellType: false,
+      regulationTissue: false,
+      reference: 0,
+      assertion: 0,
+      experimentalEvidence: 0
     };
   }
 
@@ -716,10 +732,19 @@ Curation interface for generating customized molecular causal statements. The ca
   	  count = count + 1;
   	  nameCheckbox = checkBox.id.substring(0, checkBox.id.length-1); //remove last character which correspond to the number of biological state
   	  //Create new checkbox and add it's label
-  	  $('#' + divTag.id).append(' <div id="biologicalState'+count+'"> <input type="checkbox" id="' + nameCheckbox + count + 
-  	  '" name="' + checkBox.name + '" onchange="createRemoveState(this,' + divTag.id + ')" >' +
-  	  ' <label for="' + nameCheckbox + count + '" >' + checkBox.name + ' </label> <select> <option value="mod">modif</option>' + 
-  	  ' <option value="modres">modif+res</option> <option value="modrespos">modif+res+pos</option> </select> <br> <br> </div>');
+  	  var newState = 
+  	   '<div id="'+divTag.id+count+'"> ' +
+  	  	'<input type="checkbox" id="' + nameCheckbox + count + '" name="' + checkBox.name + '" onchange="createRemoveState(this,' + divTag.id + ')" > ' +
+  	    '<label for="' + nameCheckbox + count + '" >' + checkBox.name + ' </label> ' +
+  	    '<select onchange = "updatePanelState(this)"> ' + 
+  	     '<option style="display:none"></option> ' +
+  	     '<option value="mod">mod</option> ' +
+  	     '<option value="modres">mod+res</option> ' + 
+  	     '<option value="modpos">mod+pos</option> ' +
+  	     '<option value="modrespos">mod+res+pos</option> '+
+  	    '</select> <br> <br> ' +
+  	   '</div> ';
+  	  $('#' + divTag.id).append(newState);
 
   	  //Disable previous checkboxes 
   	  for(i = 1; i < parseInt(($("#" + divTag.id).children().size()))-1; i ++){
@@ -727,14 +752,46 @@ Curation interface for generating customized molecular causal statements. The ca
       }
   	}
   	else{ //unchecking a checkbox
-  	log($('#' + divTag.id).children().last());
   	  $('#' + divTag.id).children().last().remove(); //remove last label of checkbox
-  	  //$('#' + divTag.id).children().last().remove(); //remove last checkbox
-      //Enable the 'second previous' checkbox to be clickable again
+      //Enable the second preceding checkbox to be clickable again
   	  if((count-2) !== 0){
   	  	document.getElementById(checkBox.id.substring(0, checkBox.id.length-1)+(count-2)).removeAttribute('disabled');
   	   }
     }
+  }
+  
+  
+  function updatePanelState(element){
+    if(element.type == 'checkbox'){ 
+      if($('#' + element.id).is(':checked')){
+       //when a checkbox is checked, update the state of the corresponding key in the panel to 'true'
+       panelState[element.id] = true;
+      }
+      else{
+      //when a checkbox is unchecked, update the state of the corresponding key in the panel to 'false'
+      panelState[element.id] = false;
+      }
+     
+    }
+    else if(element.type == 'select-one'){
+      if($(element).parent().find('input:checkbox').is(':checked')){
+      //when the type of metadata about a biological state is selected AND if the checkbox of the biological state is checked,
+      // add the type to the corresponding key in the panel.
+       stateCheckbox = $(element).parent().find('input:checkbox')[0];
+       panelState[stateCheckbox.id.substring(0, stateCheckbox.id.length-1)].push(element.options[element.selectedIndex].value) ;
+      }
+      else{ // If the biological state checkbox is not checked when a type of metadata is selected: send an alert message for warning the user.
+       alert("The biological state is not checked! \n" +
+       "If you want this information to appear, check the 'Biological state' box above.");
+      }
+    }
+    else if(element.type == 'number'){
+     panelState[element.id] = parseInt(element.value);
+    }
+
+    vsmSent = clone(vsmRoot);
+    insertionTasks.forEach(doInsertionTask);
+    vsmbox.initialValue = vsmSent;
   }
 
 </script>
@@ -742,63 +799,67 @@ Curation interface for generating customized molecular causal statements. The ca
   <div class="row">
   <div class="column">
   <h3> Source Entity </h3>
-  <input type="checkbox" id="sourceType" /> Biological type <br> <br>
-  <input type="checkbox" id="sourceActivity" /> Biological activity <br> <br>
+  <input type="checkbox" id="sourceType" onchange='updatePanelState(this);' /> Biological type <br> <br>
+  <input type="checkbox" id="sourceActivity" onchange='updatePanelState(this);' /> Biological activity <br> <br>
   <div id="divSourceStates">
-    <div id="biologicalState1">
+    <div id="divSourceState1">
   	<input type="checkbox" name="Biological state" id="sourceState1" onchange='createRemoveState(this,divSourceStates);' />
   	 <label for="sourceState1">Biological state  </label> 
-	 <select>
-	  <option value="mod">modif</option>
-	  <option value="modres">modif+res</option>
-	  <option value="modrespos">modif+res+pos</option>
+	 <select onchange = 'updatePanelState(this)' >
+	  <option style="display:none"></option>
+	  <option value="mod">mod</option>
+	  <option value="modres">mod+res</option>
+	  <option value="modpos">mod+pos</option>
+	  <option value="modrespos">mod+res+pos</option>
 	  </select> <br> <br>
 	</div>
   </div>
-  <input type="checkbox" id="sourceExpSetup" /> Experimental setup <br> <br>
-  <input type="checkbox" id="sourceSpecies" /> Species <br> <br>
-  <input type="checkbox" id="sourceCompartment" /> Compartment <br> <br>
+  <input type="checkbox" id="sourceExperiment" onchange='updatePanelState(this);' /> Experimental setup <br> <br>
+  <input type="checkbox" id="sourceSpecies" onchange='updatePanelState(this);' /> Species <br> <br>
+  <input type="checkbox" id="sourceCompartment" onchange='updatePanelState(this);' /> Compartment <br> <br>
   </div>
   
   <div class="column">
   <h3> Target Entity </h3>
-  <input type="checkbox" id="targetType" /> Biological type <br> <br>
-  <input type="checkbox" id="targetActivity" /> Biological activity <br> <br>
+  <input type="checkbox" id="targetType" onchange='updatePanelState(this);' /> Biological type <br> <br>
+  <input type="checkbox" id="targetActivity" onchange='updatePanelState(this);' /> Biological activity <br> <br>
    
   <div id="divTargetStates">
-    <div id="biologicalState1">
+    <div id="divTargetState1">
       <input type="checkbox" name="Biological state" id="targetState1" onchange='createRemoveState(this,divTargetStates);' />
       <label for="targetState1">Biological state </label> 
-      <select>
-	  <option value="mod">modif</option>
-	  <option value="modres">modif+res</option>
-	  <option value="modrespos">modif+res+pos</option>
+      <select onchange = 'updatePanelState(this)'>
+      <option style="display:none"></option>
+	  <option value="mod">mod</option>
+	  <option value="modres">mod+res</option>
+	  <option value="modpos">mod+pos</option>
+	  <option value="modrespos">mod+res+pos</option>
 	  </select> <br> <br>
     </div>
   </div>
-  <input type="checkbox" id="targetExpSetup" /> Experimental setup <br> <br>
-  <input type="checkbox" id="targetSpecies" /> Species <br> <br>
-  <input type="checkbox" id="targetCompartment" /> Compartment <br> <br>
+  <input type="checkbox" id="targetExperiment" onchange='updatePanelState(this);' /> Experimental setup <br> <br>
+  <input type="checkbox" id="targetSpecies" onchange='updatePanelState(this);' /> Species <br> <br>
+  <input type="checkbox" id="targetCompartment" onchange='updatePanelState(this);' /> Compartment <br> <br>
   </div>
   
   <div class="column">
   <h3> Regulation</h3>
-  <input type="checkbox" id="mechanism" /> Biological mechanism <br> <br>
-  <input type="checkbox" id="regSpecies" /> Species <br> <br>
-  <input type="checkbox" id="regCompartment" /> Compartment <br> <br>
-  <input type="checkbox" id="cellLine" /> Cell line <br> <br>
-  <input type="checkbox" id="cellType" /> Cell Type <br> <br>
-  <input type="checkbox" id="tissueType" /> Tissue type <br> <br>
+  <input type="checkbox" id="regulationMechanism" onchange='updatePanelState(this);' /> Biological mechanism <br> <br>
+  <input type="checkbox" id="regulationSpecies" onchange='updatePanelState(this);' /> Species <br> <br>
+  <input type="checkbox" id="regulationCompartment" onchange='updatePanelState(this);' /> Compartment <br> <br>
+  <input type="checkbox" id="regulationCellLine" onchange='updatePanelState(this);' /> Cell line <br> <br>
+  <input type="checkbox" id="regulationCellType" onchange='updatePanelState(this);' /> Cell Type <br> <br>
+  <input type="checkbox" id="regulationTissue" onchange='updatePanelState(this);' /> Tissue type <br> <br>
   </div>
   
   <div class="column">
   <h3> Causal Statement</h3>
    Reference(s)
-   <input type="number" id="reference" min="0" max="10" placeholder="Nb of pmids" /> <br> <br>
+   <input type="number" id="reference" min="0" max="10" placeholder="Nb of pmids" onchange='updatePanelState(this);' /> <br> <br>
    Assertion
-   <input type="number" id="assertion"  min="0" max="10" placeholder="Nb of assertions" /> <br> <br>
+   <input type="number" id="assertion"  min="0" max="10" placeholder="Nb of assertions" onchange='updatePanelState(this);' /> <br> <br>
    Experimental evidence 
-   <input type="number" id="expEvidence" min="0" max="10" placeholder="Nb of exp. evidences" />
+   <input type="number" id="experimentalEvidence" min="0" max="10" placeholder="Nb of exp. evidences" onchange='updatePanelState(this);' />
    
   </div>
 </div> 
