@@ -808,3 +808,39 @@ a {
 
 .site-footer-credits {
   color: #819198; }
+
+h1 {
+  font-size: 1.5em;
+  margin: 0.67em 0; }
+
+table {
+  font-size: 14px; }
+
+* {
+  box-sizing: border-box; }
+
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px; }
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both; }
+
+div.column input {
+  text-align: center; }
+
+/*
+#vsm-box .term{
+	font-size:20px;
+	line-height: normal;
+}
+
+#vsm-box .term.inp input{
+	font-size: 17px;
+}
+*/
