@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Documentation
-permalink: /index
+permalink: /documentation
 ---
 
 # CausalBuilder user documentation
