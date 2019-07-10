@@ -4,9 +4,8 @@ layout: default
 
 Curation interface for generating customized molecular causal statements. The causal statements are compatible with the MI2CAST (Minimum Information about a Molecular Interaction Causal Statement) checklist available on [GitHub](https://github.com/vtoure/MI2CAST) and take advantage of the [VSM framework](https://github.com/vsmjs/) to generate customized causal statement VSM-templates.
 
-__Note:__ Make sure to select all the terms you need before filling the templates.
 
-# Select the terms to add in the causal statement
+### 1. Select the terms to add in the causal statement
 
 <script src="https://unpkg.com/vsm-dictionary-bioportal@1.1.0/dist/vsm-dictionary-bioportal.min.js"></script>
 <script src="https://unpkg.com/vsm-dictionary-cacher@1.2.0/dist/vsm-dictionary-cacher.min.js"></script>
@@ -871,6 +870,9 @@ __Note:__ Make sure to select all the terms you need before filling the template
   </div>
 </div> 
 
+### 2. Fill the VSM box
 <vsm-box id="vsm-box"></vsm-box>
 <br>
+
+### 3. Download the causal statement
 <button onclick="log(extractData());">Log data</button>
