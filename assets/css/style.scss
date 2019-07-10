@@ -13,11 +13,15 @@ table { font-size: 14px; }
   box-sizing: border-box;
 }
 
-/* Create three equal columns that floats next to each other */
+/* Create four equal columns that floats next to each other */
 .column {
   float: left;
   width: 25%;
-  padding: 10px;
+}
+
+.column_logo {
+  float: left;
+  width: 33%;
 }
 
 /* Clear floats after the columns */
@@ -31,6 +35,18 @@ div.column input {
     text-align: center; 
 }
 
+input[type=number]{
+  width: 120px;
+}
+
+div p {
+text-align: justify;
+}
+
+td, th {
+    border: 1px solid grey
+}
+
 /*
 #vsm-box .term{
 	font-size:20px;
@@ -40,4 +56,5 @@ div.column input {
 #vsm-box .term.inp input{
 	font-size: 17px;
 }
+
 */

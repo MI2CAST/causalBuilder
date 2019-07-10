@@ -2,9 +2,6 @@
 layout: default
 ---
 
-Curation interface for generating customized molecular causal statements. The causal statements are compatible with the MI2CAST (Minimum Information about a Molecular Interaction Causal Statement) checklist available on [GitHub](https://github.com/vtoure/MI2CAST) and take advantage of the [VSM framework](https://github.com/vsmjs/) to generate customized causal statement VSM-templates.
-
-
 ### 1. Select the terms to add in the causal statement
 
 <script src="https://unpkg.com/vsm-dictionary-bioportal@1.1.0/dist/vsm-dictionary-bioportal.min.js"></script>
@@ -820,7 +817,7 @@ Curation interface for generating customized molecular causal statements. The ca
 
   <div class="row">
   <div class="column">
-    <h3> Source Entity </h3>
+    <h4> Source Entity </h4>
     <input type="checkbox" id="sourceType" onchange='updatePanelState(this);' /> Biological type <br> <br>
     <input type="checkbox" id="sourceActivity" onchange='updatePanelState(this);' /> Biological activity <br> <br>
     <div id="divSourceStates">
@@ -835,7 +832,7 @@ Curation interface for generating customized molecular causal statements. The ca
   </div>
   
   <div class="column">
-    <h3> Target Entity </h3>
+    <h4> Target Entity </h4>
     <input type="checkbox" id="targetType" onchange='updatePanelState(this);' /> Biological type <br> <br>
     <input type="checkbox" id="targetActivity" onchange='updatePanelState(this);' /> Biological activity <br> <br>
     <div id="divTargetStates">
@@ -850,7 +847,7 @@ Curation interface for generating customized molecular causal statements. The ca
   </div>
   
   <div class="column">
-    <h3> Regulation</h3>
+    <h4> Regulation</h4>
     <input type="checkbox" id="regulationMechanism" onchange='updatePanelState(this);' /> Biological mechanism <br> <br>
     <input type="checkbox" id="regulationSpecies" onchange='updatePanelState(this);' /> Species <br> <br>
     <input type="checkbox" id="regulationCompartment" onchange='updatePanelState(this);' /> Compartment <br> <br>
@@ -860,12 +857,12 @@ Curation interface for generating customized molecular causal statements. The ca
   </div>
   
   <div class="column">
-    <h3> Causal Statement</h3>
-    Reference(s)
+    <h4> Causal Statement</h4>
+    Reference(s) <br>
     <input type="number" id="reference" min="0" max="10" placeholder="0" onchange='updatePanelState(this);' /> <br> <br>
-    Assertion
+    Assertion <br>
     <input type="number" id="assertion"  min="0" max="10" placeholder="0" onchange='updatePanelState(this);' /> <br> <br>
-    Experimental evidence 
+    Experimental evidence <br>
     <input type="number" id="experimentalEvidence" min="0" max="10" placeholder="0" onchange='updatePanelState(this);' />
   </div>
 </div> 

@@ -4,16 +4,16 @@ title: Documentation
 permalink: /documentation
 ---
 
-# CausalBuilder documentation
+# User documentation
 
-The causalBuilder is a web application for building causal statements from customized templates. 
+<div style="text-align: justify">The causalBuilder is a web application for building molecular causal statements. This curation interface allows to create customized molecular causal statements with the annotation of selected metadata. The interface takes advantage of the <a href="https://github.com/vsmjs/"> VSM framework </a> to build VSM-templates compatible with the production of causal statements. You build the causal statement, with the metadata you wish to annotate. The causal statements generated are compatible with the MI2CAST (Minimum Information about a Molecular Interaction Causal Statement) checklist that is available on <a href="https://github.com/vtoure/MI2CAST">MI2CAST GitHub project</a>.
+</div>
 
 ## How to use the web application?
 Go to the [causalBuilder home page](https://vtoure.github.io/causalBuilder) and follow the steps below:
 
 ### 1. Select all the terms to add in the causal statement
 Click on the desired checkboxes: if you would like to annotate the biological type of a source entity, select the "biological type" checkbox under "Source Entity".
-*insert image*
 
 #### 1.1 Checkbox terms
 By selecting a checkbox, the VSM box below the list of terms is automatically updated to insert the blocks of information that you will later on annotate.
@@ -37,9 +37,7 @@ The reference and assertion of a causal statement can each be zero, one or many.
 ### 3. Load causal statement in the desired format
 CausalBuilder can generate XXX and XXX files. All information filled in the VSM template will be translated accordingly in these file formats.
 
-<aside class="warning">
-If the VSM template is manually modified (new terms are added that do not come from step 1.), these will not be taken into account in the files.
-</aside>
+__Warning__: If the VSM template is manually modified (terms are added and do not come from step 1.) the new added terms will not be taken into account in the downloaded file(s).
 
 ## Questions? Contact us!
 Vasundra Touré: <vasundra.toure@ntnu.no>
