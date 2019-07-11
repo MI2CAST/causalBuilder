@@ -12,7 +12,7 @@ permalink: /documentation
 ## What is a molecular interaction causal statement?
 > __In simple words__: It is a directed interaction between biological entities where a source entity regulates the activity or the quantity of a target entity, given a certain context:
 >
-> ![Causal statement](https://github.com/vtoure/causalBuilder/raw/master/images/causal_statement.svg "Figure 1: Representation of a causal statement.")
+> ![Causal statement](https://github.com/vtoure/causalBuilder/raw/master/images/causal_statement.png "Figure 1: Representation of a causal statement.")
 >
 > __In more details__: A molecular interaction causal statement can be decomposed into a molecular interaction and a causal statement. The __molecular interaction__ covers undirected interactions between biological entities (e.g., protein, chemical, gene, transcript, complex), whether they are with or without physical interactions. The __causal statement__ adds a causal aspect to the molecular interaction with a regulatory event and a direction of the regulation, i.e., a biological entity A (called source) regulating a biological entity B (called target). Furthermore, a causal statement describes in addition contextual information to enrich the statement.
 
