@@ -71,8 +71,7 @@ layout: default
       regulationCellType: false,
       regulationTissue: false,
       reference: 0,
-      assertion: 0,
-      experimentalEvidence: 0
+      evidence: 0
     };
   }
 
@@ -181,20 +180,12 @@ layout: default
   const Reference = {
   };
 
-  const AssessedByAssertion = {
+  const AssessedByEvidence = {
     str: 'is assessed by', classID: null, instID: null
   };
-  const Assertion = {
+  const Evidence = {
     queryOptions: {filter: { dictID: [ 'http://data.bioontology.org/ontologies/ECO' ] }}
   };
-
-  const ShownInExperimentalEvidence = {
-    str: 'is shown in', classID: null, instID: null
-  };
-  const ExperimentalEvidence = {
-    queryOptions: {filter: { dictID: [ 'http://data.bioontology.org/ontologies/ECO' ] }}
-  };
-
 
 
 
@@ -255,8 +246,7 @@ layout: default
     'regulationCellLine',
     'regulationCompartment',
     'reference',
-    'assertion',
-    'experimentalEvidence',
+    'evidence',
   ];
 
 
@@ -523,22 +513,13 @@ layout: default
         }
     },
 
-    { panelCondition: 'assertion',
+    { panelCondition: 'evidence',
       findTag: 'regulation',
       insertFrag:
-        { terms: [ 0, AssessedByAssertion, X(Assertion, 'assertion', 'assertion') ],
+        { terms: [ 0, AssessedByEvidence, X(Evidence, 'evidence', 'evidence') ],
           conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
         }
-    },
-
-    { panelCondition: 'experimentalEvidence',
-      findTag: 'regulation',
-      insertFrag:
-        { terms: [ 0, ShownInExperimentalEvidence, X(ExperimentalEvidence, 'experimentalEvidence', 'exp. evidence') ],
-          conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
-        }
-    },
-    
+    },    
   ];
 
 
@@ -860,10 +841,8 @@ layout: default
     <h4> Causal Statement</h4>
     Reference(s) <br>
     <input type="number" id="reference" min="0" max="10" placeholder="0" onchange='updatePanelState(this);' /> <br> <br>
-    Assertion <br>
-    <input type="number" id="assertion"  min="0" max="10" placeholder="0" onchange='updatePanelState(this);' /> <br> <br>
-    Experimental evidence <br>
-    <input type="number" id="experimentalEvidence" min="0" max="10" placeholder="0" onchange='updatePanelState(this);' />
+    Evidence(s) <br>
+    <input type="number" id="evidence"  min="0" max="10" placeholder="0" onchange='updatePanelState(this);' />     
   </div>
 </div> 
 

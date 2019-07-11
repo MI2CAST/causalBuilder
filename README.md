@@ -9,7 +9,7 @@ The causalBuilder is a web application that uses the [VSM](https://github.com/vs
 [vtoure.github.io/causalBuilder](https://vtoure.github.io/causalBuilder)
 
 ## Documentation
-See [the Documentation page](documentation) for instructions on how to build a causal statement from the interface.
+See [the Documentation page](documentation.md) for instructions on how to build a causal statement from the interface.
 
 ## Notes
 The application is under development!
