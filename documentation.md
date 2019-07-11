@@ -23,6 +23,10 @@ Go to the [causalBuilder home page](https://vtoure.github.io/causalBuilder) and 
 ### 1. Select all the terms to add in the causal statement
 Click on the desired checkboxes: if you would like to annotate the biological type of a source entity, select the "biological type" checkbox under "Source Entity".
 
+<video width = 500 controls>
+  <source src="https://github.com/vtoure/causalBuilder/raw/master/videos/select_checkbox.webm" type="video/webm">
+</video>
+
 #### 1.1 Checkbox terms
 By selecting a checkbox, the VSM box below the list of terms is automatically updated to insert the blocks of information that you will later on annotate.
 
