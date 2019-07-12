@@ -24,11 +24,11 @@ permalink: /documentation
 > * a VSM-connector: grouping of VSM-terms with semantics (subject-object-predicate),
 > * a VSM-sentence: association of VSM-terms connected with VSM-connectors.
 >
-> ![VSM box](https://github.com/vtoure/causalBuilder/raw/master/images/VSM.png "Example of a VSM-sentence with VSM-terms, VSM-connectors.")
+> <img src="https://github.com/vtoure/causalBuilder/raw/master/images/VSM.png" alt="Example of a VSM-sentence with VSM-terms, VSM-connecto" width="400"/>
 >
 > The causalBuilder is built on top of the VSM framework to facilitate the annotation of causal statements with contextual information. CausalBuilder generates on-demand templates of VSM sentences to be filled in by the user.
 >
-> ![Minimum statement VSM](https://github.com/vtoure/causalBuilder/raw/master/images/minimum_statement_VSM.png)
+> <img src="https://github.com/vtoure/causalBuilder/raw/master/images/minimum_statement_VSM.png" alt="Minimum causal statement with VSM" width="400"/>
 >
 > To know more about VSM, check the [VSM introduction](http://scicura.org/vsm/intro.html).
 
@@ -41,7 +41,8 @@ Go to the [causalBuilder home page](https://vtoure.github.io/causalBuilder) and 
 #### 1.1 Adding a term from a checkbox
 Click on the desired checkbox to select annotation to be added in the causal statement. For instance, if you would like to annotate the biological type of a source entity, select the *biological type* checkbox under *Source Entity*.
 
-![Checkbox](https://github.com/vtoure/causalBuilder/raw/master/images/checkbox.pdf "The Biological type of source entity checkbox is checked.")
+<img src="https://github.com/vtoure/causalBuilder/raw/master/images/checkbox.png" alt="The Biological type of source entity checkbox is checked" width="600"/>
+
 
 
 #### 1.2 Adding a biological state
