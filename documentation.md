@@ -21,14 +21,14 @@ permalink: /documentation
 ## What is VSM (Visual Syntax Method)?
 > VSM is a general framework for communicating pieces of information that are both human and computer understandable. VSM defines three components:
 > * a VSM-term: association of a term (human-readable) and an identifier (machine-readable),
-> * a VSM-connector: grouping of VSM-terms with semantics,
+> * a VSM-connector: grouping of VSM-terms with semantics (subject-object-predicate),
 > * a VSM-sentence: association of VSM-terms connected with VSM-connectors.
 >
-> ![VSM box](https://github.com/vtoure/causalBuilder/raw/master/images/VSM/pdf "Example of a VSM-sentence with VSM-terms, VSM-connectors.")
+> ![VSM box](https://github.com/vtoure/causalBuilder/raw/master/images/VSM.png "Example of a VSM-sentence with VSM-terms, VSM-connectors.")
 >
 > The causalBuilder is built on top of the VSM framework to facilitate the annotation of causal statements with contextual information. CausalBuilder generates on-demand templates of VSM sentences to be filled in by the user.
 >
-> ![Minimum statement VSM](https://github.com/vtoure/causalBuilder/raw/master/images/minimum_statement_VSM.pdf)
+> ![Minimum statement VSM](https://github.com/vtoure/causalBuilder/raw/master/images/minimum_statement_VSM.png)
 >
 > To know more about VSM, check the [VSM introduction](http://scicura.org/vsm/intro.html).
 
