@@ -35,8 +35,8 @@ permalink: /documentation
 
 ## How to use the web application?
 The causalBuilder is divided in three parts: 
-- the selection of annotation terms to add in the causal statement
-- the VSM-sentence "template" that is progressively built as the annotation terms are selected. The template then needs to be filled in manually by the user with the adequate data.
+- the selection of annotation terms to add in the causal statement,
+- the VSM-sentence "template" that is progressively built as the annotation terms are selected. The template then needs to be filled in manually by the user with the adequate data,
 - the output files generated of the causal statement filled in the VSM-sentence.  
 
 
@@ -60,14 +60,14 @@ A biological entity, whether it is a source or target entity can have multiple b
 *The position corresponds to the position of the modified amino acid in the entity.*
 * state with modification, residue and position information (*mod+res+pos*).
 
-<img src="https://github.com/vtoure/causalBuilder/raw/master/images/biological_state.png" alt="Checked biological state with 'modification' selected" height="300"/>
+<img src="https://github.com/vtoure/causalBuilder/raw/master/images/biological_state.png" alt="Checked biological state with 'modification' selected" height="200"/>
 
 Once the *biological state* is checked, a new one appears below to be able to annotate another biological state. If the checkbox is not checked and the type of annotation selected, the terms will not appear in the VSM-sentence.
 
 #### 1.3 Adding reference(s) and evidence(s)
 A causal statement can have 0, 1 or many references and/or evidences. Indicate the number of *reference* and *evidence* metadata wished to annotate by entering a number or by using the arrow on the right side of the box. By default, the amount is set to zero.  
 
-<img src="https://github.com/vtoure/causalBuilder/raw/master/images/reference_evidence.png" alt="Annotation of one reference and zero evidence" height="400"/>
+<img src="https://github.com/vtoure/causalBuilder/raw/master/images/reference_evidence.png" alt="Annotation of one reference and zero evidence" height="300"/>
 
 
 When a checkbox is checked, a type selected or a number added in the reference/evidence, see that the VSM box is automatically updated to insert the blocks of information that you will annotate.
