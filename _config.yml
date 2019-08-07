@@ -17,7 +17,7 @@ title: CausalBuilder
 email: vasundra.toure@ntnu.no
 description: >- # this means to ignore newlines until "baseurl:"
   Curation interface for molecular causal statements
-url: https://github.com/vtoure/causalBuilder/
+url: https://vtoure.github.io/causalBuilder/
 
 # Build settings
 markdown: kramdown
