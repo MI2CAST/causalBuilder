@@ -24,11 +24,11 @@ permalink: /documentation
 > * a VSM-connector: grouping of VSM-terms with semantics (subject-object-predicate),
 > * a VSM-sentence: association of VSM-terms connected with VSM-connectors.
 >
-> <img src="https://github.com/vtoure/causalBuilder/raw/master/images/VSM.png" alt="Example of a VSM-sentence with VSM-terms, VSM-connectors" width="600"/>
+> <img src="{{site.url}}/images/VSM.png" alt="Example of a VSM-sentence with VSM-terms, VSM-connectors" width="600"/>
 >
 > The causalBuilder is built on top of the VSM framework to facilitate the annotation of causal statements with contextual information. CausalBuilder generates on-demand templates of VSM sentences to be filled in by the user.
 >
-> <img src="https://github.com/vtoure/causalBuilder/raw/master/images/minimum_statement_VSM.png" alt="Minimum causal statement with VSM" width="600"/>
+> <img src="{{site.url}}/images/minimum_statement_VSM.png" alt="Minimum causal statement with VSM" width="600"/>
 >
 > To know more about VSM, check the [VSM introduction](http://scicura.org/vsm/intro.html).
 
