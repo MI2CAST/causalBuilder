@@ -47,7 +47,7 @@ layout: default
   window.onload = function() {
     vsmbox = document.getElementsByTagName('vsm-box')[0];
     vsmbox.sizes = { minWidth: 500 }; 
-    ///vsmbox.queryOptions = { perPage: 10 };
+    vsmbox.queryOptions = { perPage: 20 };
 
     makeAllRequestsHttps();  // To make VsmDictionaryBioportal's http-requests work on GitHub Pages.
 
