@@ -9,15 +9,13 @@ The __causalBuilder__ is developed by [Vasundra Touré](https://www.ntnu.edu/emp
 <br> <br>
 <div class="row">
   <div class="column_logo">
-    <img src="https://github.com/vtoure/causalBuilder/raw/master/images/logo_ntnu.png" alt="logo-ntnu">
+    <img src="{{site.url}}/images/logo/logo_ntnu.png" alt="logo-ntnu">
   </div>
   <div class="column_logo">
-    <img src="https://github.com/vtoure/causalBuilder/raw/master/images/logo_ntnu_health.png" alt="logo-ntnu-health"><br>
+    <img src="{{site.url}}/images/logo/logo_ntnu_health.png" alt="logo-ntnu-health"><br>
     NTNU Health 
   </div>
   <div class="column_logo">
-    <img src="https://github.com/vtoure/causalBuilder/raw/master/images/logo_eracosysmed.png" alt="logo-ntnu-eracosysmed">
+    <img src="{{site.url}}/images/logo/logo_eracosysmed.png" alt="logo-ntnu-eracosysmed">
   </div>
 </div>
-
-
