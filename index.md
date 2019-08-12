@@ -231,9 +231,9 @@ layout: default
    */
   var vsmRoot = {
     terms: [
-      X(Entity,     'source'),
-      X(Regulation, 'regulation'),
-      X(Entity,     'target'),
+      X(Entity,     'source',     'source'),
+      X(Regulation, 'regulation', 'regulation'),
+      X(Entity,     'target',     'target'),
     ],
     conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
   };
