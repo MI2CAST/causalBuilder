@@ -4,30 +4,53 @@ layout: default
 
 ### 1. Select the terms to add in the causal statement
 
-<script src="https://unpkg.com/vsm-dictionary-bioportal@1.1.0/dist/vsm-dictionary-bioportal.min.js"></script>
+<script src="https://unpkg.com/vsm-dictionary-complex-portal@1.0.1/dist/vsm-dictionary-complex-portal.min.js"></script>
+<script src="https://unpkg.com/vsm-dictionary-ensembl-genomes@1.0.2/dist/vsm-dictionary-ensembl-genomes.min.js"></script>
+<script src="https://unpkg.com/vsm-dictionary-ensembl@1.0.3/dist/vsm-dictionary-ensembl.min.js"></script>
+<script src="https://unpkg.com/vsm-dictionary-rnacentral@1.0.1/dist/vsm-dictionary-rnacentral.min.js"></script>
+<script src="https://unpkg.com/vsm-dictionary-uniprot@1.0.5/dist/vsm-dictionary-uniprot.min.js"></script>
+<script src="https://unpkg.com/vsm-dictionary-bioportal@1.1.3/dist/vsm-dictionary-bioportal.min.js"></script>
 <script src="https://unpkg.com/vsm-dictionary-cacher@1.2.0/dist/vsm-dictionary-cacher.min.js"></script>
+<script src="https://unpkg.com/vsm-dictionary-combiner@1.0.1/dist/vsm-dictionary-combiner.min.js"></script>
 <script src="https://unpkg.com/vsm-box@0.3.1/dist/vsm-box.standalone.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
 
 <script>
 
+  // initialize the vsm-dictionaries
+  var VsmDictUniprot     	= new VsmDictionaryUniprot({log: true});
+  var VsmDictComplexPortal  = new VsmDictionaryComplexPortal({log: true});
+  var VsmDictEnsemblGenomes = new VsmDictionaryEnsemblGenomes({log: true});
+  var VsmDictEnsembl    	= new VsmDictionaryEnsembl({log: true});
+  var VsmDictRNAcentral  	= new VsmDictionaryRNAcentral({log: true});
+  var key = '5904481f-f6cb-4c71-94d8-3b775cf0f19e';
+  var VsmDictBioPortal      = new VsmDictionaryBioPortal({ log: true, apiKey: key });
+  
+  // initialize a cached version of the combiner
+  var VsmDictionaryCombinerCached = VsmDictionaryCacher(VsmDictionaryCombiner, { predictEmpties: false });
+  var dictionary = new VsmDictionaryCombinerCached({
+    // Give all required dictionaries as initialized Objects in this array
+    dictionaries: [
+      VsmDictComplexPortal,
+      VsmDictEnsemblGenomes,
+      VsmDictEnsembl,
+      VsmDictRNAcentral,
+      VsmDictUniprot,
+      VsmDictBioPortal
+    ],
+    errorIfAllErrors: true
+  });
+
   var vsmbox;      // The <vsm-box> HTML-element.
-  var panelState;  // An Object that represents the current values in web-page's template configuration panel.
+  var panelState;  // An object that represents the current values in web-page's template configuration panel.
 
   window.onload = function() {
-    vsmbox = document.getElementById('vsm-box');
+    vsmbox = document.getElementsByTagName('vsm-box')[0];
     ///vsmbox.sizes = { connFootDepth: 28, theConnsLevelHeight: 30 }; 
     
     makeAllRequestsHttps();  // To make VsmDictionaryBioportal's http-requests work on GitHub Pages.
-    
-    var VsmDictionaryBioPortalCached =
-      VsmDictionaryCacher( VsmDictionaryBioPortal, { predictEmpties: false } );
 
-    vsmbox.vsmDictionary = new VsmDictionaryBioPortalCached({
-      apiKey: '5904481f-f6cb-4c71-94d8-3b775cf0f19e'
-    });
-    //vsmbox.vsmDictionary.bioPortalDefaultPageSize = 20;
-    
+    vsmbox.vsmDictionary = dictionary
     vsmbox.addEventListener('change',      onVsmBoxChange);  // Captures user-generated changes.
     vsmbox.addEventListener('change-init', onVsmBoxChange);  // Captures the change of placing a new template.
 
