@@ -12,7 +12,7 @@ permalink: /documentation
 ## What is a molecular interaction causal statement?
 > __In simple words__: It is a directed interaction between biological entities where a source entity regulates the activity or the quantity of a target entity, given a certain context:
 >
-> ![Causal statement](https://github.com/vtoure/causalBuilder/raw/master/images/causal_statement.png "Description of a causal statement.")
+> ![Causal statement]({{site.url}}/images/causal_statement.png "Description of a causal statement.")
 >
 > __In more details__: A molecular interaction causal statement can be decomposed into a molecular interaction and a causal statement. The __molecular interaction__ covers undirected interactions between biological entities (e.g., protein, chemical, gene, transcript, complex), whether they are with or without physical interactions. The __causal statement__ adds a causal aspect to the molecular interaction with a regulatory event and a direction of the regulation, i.e., a biological entity A (called source) regulating a biological entity B (called target). Furthermore, a causal statement describes in addition contextual information to enrich the statement.
 >
@@ -24,11 +24,11 @@ permalink: /documentation
 > * a VSM-connector: grouping of VSM-terms with semantics (subject-object-predicate),
 > * a VSM-sentence: association of VSM-terms connected with VSM-connectors.
 >
-> <img src="https://github.com/vtoure/causalBuilder/raw/master/images/VSM.png" alt="Example of a VSM-sentence with VSM-terms, VSM-connectors" width="600"/>
+> <img src="{{site.url}}/images/VSM.png" alt="Example of a VSM-sentence with VSM-terms, VSM-connectors" width="600"/>
 >
 > The causalBuilder is built on top of the VSM framework to facilitate the annotation of causal statements with contextual information. CausalBuilder generates on-demand templates of VSM sentences to be filled in by the user.
 >
-> <img src="https://github.com/vtoure/causalBuilder/raw/master/images/minimum_statement_VSM.png" alt="Minimum causal statement with VSM" width="600"/>
+> <img src="{{site.url}}/images/minimum_statement_VSM.png" alt="Minimum causal statement with VSM" width="600"/>
 >
 > To know more about VSM, check the [VSM introduction](http://scicura.org/vsm/intro.html).
 
@@ -47,7 +47,7 @@ Go to the [causalBuilder home page](https://vtoure.github.io/causalBuilder) and 
 #### 1.1 Adding a term from a checkbox
 Click on the desired checkbox to select annotation to be added in the causal statement. For instance, if you would like to annotate the biological type of a source entity, select the *biological type* checkbox under *Source Entity*.
 
-<img src="https://github.com/vtoure/causalBuilder/raw/master/images/checkbox.png" alt="The Biological type of source entity checkbox is checked" width="600"/>
+<img src="{{site.url}}/images/checkbox.png" alt="The Biological type of source entity checkbox is checked" width="600"/>
 
 
 #### 1.2 Adding a biological state
@@ -60,14 +60,14 @@ A biological entity, whether it is a source or target entity can have multiple b
 *The position corresponds to the position of the modified amino acid in the entity.*
 * state with modification, residue and position information (*mod+res+pos*).
 
-<img src="https://github.com/vtoure/causalBuilder/raw/master/images/biological_state.png" alt="Checked biological state with 'modification' selected" height="200"/>
+<img src="{{site.url}}/images/biological_state.png" alt="Checked biological state with 'modification' selected" height="200"/>
 
 Once the *biological state* is checked, a new one appears below to be able to annotate another biological state. If the checkbox is not checked and the type of annotation selected, the terms will not appear in the VSM-sentence.
 
 #### 1.3 Adding reference(s) and evidence(s)
 A causal statement can have 0, 1 or many references and/or evidences. Indicate the number of *reference* and *evidence* metadata wished to annotate by entering a number or by using the arrow on the right side of the box. By default, the amount is set to zero.  
 
-<img src="https://github.com/vtoure/causalBuilder/raw/master/images/reference_evidence.png" alt="Annotation of one reference and zero evidence" height="300"/>
+<img src="{{site.url}}/images/reference_evidence.png" alt="Annotation of one reference and zero evidence" height="300"/>
 
 
 When a checkbox is checked, a type selected or a number added in the reference/evidence, see that the VSM box is automatically updated to insert the blocks of information that you will annotate.
