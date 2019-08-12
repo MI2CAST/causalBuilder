@@ -4,15 +4,15 @@ layout: default
 
 ### 1. Select the terms to add in the causal statement
 
-<script src="https://unpkg.com/vsm-dictionary-complex-portal@1.0.1/dist/vsm-dictionary-complex-portal.min.js"></script>
-<script src="https://unpkg.com/vsm-dictionary-ensembl-genomes@1.0.2/dist/vsm-dictionary-ensembl-genomes.min.js"></script>
-<script src="https://unpkg.com/vsm-dictionary-ensembl@1.0.3/dist/vsm-dictionary-ensembl.min.js"></script>
-<script src="https://unpkg.com/vsm-dictionary-rnacentral@1.0.1/dist/vsm-dictionary-rnacentral.min.js"></script>
-<script src="https://unpkg.com/vsm-dictionary-uniprot@1.0.5/dist/vsm-dictionary-uniprot.min.js"></script>
-<script src="https://unpkg.com/vsm-dictionary-bioportal@1.1.3/dist/vsm-dictionary-bioportal.min.js"></script>
-<script src="https://unpkg.com/vsm-dictionary-cacher@1.2.0/dist/vsm-dictionary-cacher.min.js"></script>
-<script src="https://unpkg.com/vsm-dictionary-combiner@1.0.1/dist/vsm-dictionary-combiner.min.js"></script>
-<script src="https://unpkg.com/vsm-box@0.3.1/dist/vsm-box.standalone.min.js"></script>
+<script src="https://unpkg.com/vsm-dictionary-complex-portal@^1.0.1/dist/vsm-dictionary-complex-portal.min.js"></script>
+<script src="https://unpkg.com/vsm-dictionary-ensembl-genomes@^1.0.2/dist/vsm-dictionary-ensembl-genomes.min.js"></script>
+<script src="https://unpkg.com/vsm-dictionary-ensembl@^1.0.3/dist/vsm-dictionary-ensembl.min.js"></script>
+<script src="https://unpkg.com/vsm-dictionary-rnacentral@^1.0.1/dist/vsm-dictionary-rnacentral.min.js"></script>
+<script src="https://unpkg.com/vsm-dictionary-uniprot@^1.0.5/dist/vsm-dictionary-uniprot.min.js"></script>
+<script src="https://unpkg.com/vsm-dictionary-bioportal@^1.1.3/dist/vsm-dictionary-bioportal.min.js"></script>
+<script src="https://unpkg.com/vsm-dictionary-cacher@^1.2.0/dist/vsm-dictionary-cacher.min.js"></script>
+<script src="https://unpkg.com/vsm-dictionary-combiner@^1.0.1/dist/vsm-dictionary-combiner.min.js"></script>
+<script src="https://unpkg.com/vsm-box@^1.0.0/dist/vsm-box.standalone.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
 
 <script>
@@ -46,11 +46,12 @@ layout: default
 
   window.onload = function() {
     vsmbox = document.getElementsByTagName('vsm-box')[0];
-    ///vsmbox.sizes = { connFootDepth: 28, theConnsLevelHeight: 30 }; 
-    
+    vsmbox.sizes = { minWidth: 500 }; 
+    ///vsmbox.queryOptions = { perPage: 10 };
+
     makeAllRequestsHttps();  // To make VsmDictionaryBioportal's http-requests work on GitHub Pages.
 
-    vsmbox.vsmDictionary = dictionary
+    vsmbox.vsmDictionary = dictionary;
     vsmbox.addEventListener('change',      onVsmBoxChange);  // Captures user-generated changes.
     vsmbox.addEventListener('change-init', onVsmBoxChange);  // Captures the change of placing a new template.
 
