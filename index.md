@@ -18,25 +18,25 @@ layout: default
 <script>
 
   // initialize the vsm-dictionaries
-  var VsmDictUniprot     	= new VsmDictionaryUniprot({log: true});
-  var VsmDictComplexPortal  = new VsmDictionaryComplexPortal({log: true});
-  var VsmDictEnsemblGenomes = new VsmDictionaryEnsemblGenomes({log: true});
-  var VsmDictEnsembl    	= new VsmDictionaryEnsembl({log: true});
-  var VsmDictRNAcentral  	= new VsmDictionaryRNAcentral({log: true});
+  var VsmDictUniprot     	= new VsmDictionaryUniprot();
+  var VsmDictComplexPortal  = new VsmDictionaryComplexPortal();
+  var VsmDictEnsemblGenomes = new VsmDictionaryEnsemblGenomes();
+  var VsmDictEnsembl    	= new VsmDictionaryEnsembl();
+  var VsmDictRNAcentral  	= new VsmDictionaryRNAcentral();
   var key = '5904481f-f6cb-4c71-94d8-3b775cf0f19e';
-  var VsmDictBioPortal      = new VsmDictionaryBioPortal({ log: true, apiKey: key });
+  var VsmDictBioPortal      = new VsmDictionaryBioPortal({ apiKey: key });
   
   // initialize a cached version of the combiner
   var VsmDictionaryCombinerCached = VsmDictionaryCacher(VsmDictionaryCombiner, { predictEmpties: false });
   var dictionary = new VsmDictionaryCombinerCached({
     // Give all required dictionaries as initialized Objects in this array
     dictionaries: [
-      VsmDictComplexPortal,
-      VsmDictEnsemblGenomes,
+      VsmDictUniprot,
       VsmDictEnsembl,
       VsmDictRNAcentral,
-      VsmDictUniprot,
-      VsmDictBioPortal
+      VsmDictComplexPortal,
+      VsmDictBioPortal,
+      VsmDictEnsemblGenomes
     ],
     errorIfAllErrors: true
   });
@@ -47,7 +47,7 @@ layout: default
   window.onload = function() {
     vsmbox = document.getElementsByTagName('vsm-box')[0];
     vsmbox.sizes = { minWidth: 500 }; 
-    vsmbox.queryOptions = { perPage: 20 };
+    vsmbox.queryOptions = { perPage: 5 };
 
     makeAllRequestsHttps();  // To make VsmDictionaryBioportal's http-requests work on GitHub Pages.
 
@@ -104,7 +104,16 @@ layout: default
    * A collection of all the VSM-term Objects that we will use.
    */
   
-  const Entity = {};
+  const Entity = {
+    queryOptions: { filter: { dictID: [ 
+      'https://www.uniprot.org',
+      'https://www.ensembl.org',
+      'https://www.rnacentral.org',
+      'http://data.bioontology.org/ontologies/CHEBI',
+      'http://www.ensemblgenomes.org',
+      'https://www.ebi.ac.uk/complexportal',
+      'http://data.bioontology.org/ontologies/GO' ] }}
+  };
 
   const Regulation = {
     queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/MI' ] }}
@@ -154,14 +163,14 @@ layout: default
   };
 
   const PartOfSpecies = {
-    str: 'is part of', classID: null, instID: null
+    str: 'in', classID: null, instID: null
   };
   const Species = {
     queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/NCBITAXON' ] }}
   };
 
   const PartOfCompartment = {
-     str: 'part of', classID: null, instID: null
+     str: 'in', classID: null, instID: null
   };
   const Compartment = {
     queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/GO' ] }}
@@ -175,14 +184,14 @@ layout: default
   };
 
   const PartOfTissue = {
-    str: 'part of', classID: null, instID: null
+    str: 'in', classID: null, instID: null
   };
   const Tissue = {
     queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/UBERON' ] }}
   };
 
   const PartOfCellType = {
-    str: 'part of', classID: null, instID: null
+    str: 'in', classID: null, instID: null
   };
   const CellType = {
     queryOptions: { filter: { dictID: [
@@ -192,7 +201,7 @@ layout: default
   };
 
   const PartOfCellLine = {
-    str: 'part of', classID: null, instID: null
+    str: 'in', classID: null, instID: null
   };
   const CellLine = {
      queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/BTO' ] }}
@@ -341,7 +350,7 @@ layout: default
         'modpos':
           { terms: [ 0,
               HasState, X(Modification, 'sourceStateMod', 'modification'),
-              AtPosition, X(Position, 'sourceStateModPos', 'position')
+              AtPosition, X(Position, 'sourceStateModPos', 'pos')
             ],
             conns: [
               { type: 'T', pos: [ 0, 1, 2 ] },
@@ -352,7 +361,7 @@ layout: default
           { terms: [ 0,
               HasState, X(Modification, 'sourceStateMod', 'modification'),
               OfResidue, X(Residue, 'sourceStateModRes', 'residue'),
-              AtPosition, X(Position, 'sourceStateModPos', 'position')
+              AtPosition, X(Position, 'sourceStateModPos', 'pos')
             ],
             conns: [
               { type: 'T', pos: [ 0, 1, 2 ] },
@@ -427,7 +436,7 @@ layout: default
         'modpos':
           { terms: [ 0,
               HasState, X(Modification, 'targetStateMod', 'modification'),
-              AtPosition, X(Position, 'targetStateModPos', 'position')
+              AtPosition, X(Position, 'targetStateModPos', 'pos')
             ],
             conns: [
               { type: 'T', pos: [ 0, 1, 2 ] },
@@ -438,7 +447,7 @@ layout: default
           { terms: [ 0,
               HasState, X(Modification, 'targetStateMod', 'modification'),
               OfResidue, X(Residue, 'targetStateModRes', 'residue'),
-              AtPosition, X(Position, 'targetStateModPos', 'position')
+              AtPosition, X(Position, 'targetStateModPos', 'pos')
             ],
             conns: [
               { type: 'T', pos: [ 0, 1, 2 ] },
@@ -864,9 +873,9 @@ layout: default
   <div class="column">
     <h4> Causal Statement</h4>
     Reference(s) <br>
-    <input type="number" id="reference" min="0" max="10" placeholder="0" onchange='updatePanelState(this);' /> <br> <br>
-    Evidence(s) <br>
-    <input type="number" id="evidence"  min="0" max="10" placeholder="0" onchange='updatePanelState(this);' />     
+    <input title= "Number of references: PMIDs, DOIs" type="number" id="reference" min="0" max="10" placeholder="0" onchange='updatePanelState(this);' /> <br> <br>
+    Evidence <br>
+    <input title="Number of evidence codes" type="number" id="evidence"  min="0" max="10" placeholder="0" onchange='updatePanelState(this);' />     
   </div>
 </div> 
 
