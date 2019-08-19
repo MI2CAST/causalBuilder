@@ -3,6 +3,10 @@
 
 @import "{{ site.theme }}";
 
+/* increased width and reduced padding of main-content */
+.main-content {
+  max-width: 75rem; 
+  padding: 2rem 1rem;}
 h1 {
   font-size: 1.5em;
   margin: 0.67em 0; }
