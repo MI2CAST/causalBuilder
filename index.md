@@ -2,8 +2,6 @@
 layout: default
 ---
 
-### 1. Select the terms to add in the causal statement
-
 <script src="https://unpkg.com/vsm-dictionary-complex-portal@^1.0.1/dist/vsm-dictionary-complex-portal.min.js"></script>
 <script src="https://unpkg.com/vsm-dictionary-ensembl-genomes@^1.0.2/dist/vsm-dictionary-ensembl-genomes.min.js"></script>
 <script src="https://unpkg.com/vsm-dictionary-ensembl@^1.0.3/dist/vsm-dictionary-ensembl.min.js"></script>
@@ -15,8 +13,93 @@ layout: default
 <script src="https://unpkg.com/vsm-box@^1.0.0/dist/vsm-box.standalone.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
 
-<script>
 
+### 1. Select the databases to annotate your entities with
+
+<div class="row">
+  <div class="column">
+    <h4> Source Entity </h4>
+    <input title="Annotation of a protein as a regulator" type="checkbox" id="sourceUniprot" onchange= 'updateEntityDatabase(this)'/> Uniprot <br>
+    <input title="Annotation of a gene as a regulator" type="checkbox" id="sourceEnsembl" onchange= 'updateEntityDatabase(this)'/> Ensembl <br>
+    <input title="Annotation of a gene as a regulator" type="checkbox" id="sourceEnsemblGen" onchange= 'updateEntityDatabase(this)'/> Ensembl genomes <br>
+    <input title="Annotation of a transcript as a regulator" type="checkbox" id="sourceRnacentral" onchange= 'updateEntityDatabase(this)'/> RNA Central <br>
+    <input title="Annotation of a chemical as a regulator" type="checkbox" id="sourceChebi" onchange= 'updateEntityDatabase(this)'/> ChEBI <br> 
+    <input title="Annotation of a complex as a regulator" type="checkbox" id="sourceComplexportal" onchange= 'updateEntityDatabase(this)'/> Complex Portal <br> <br>
+  </div>
+  <div class="column">
+    <h4> Target Entity </h4>
+    <input title="Annotation of a protein as a regulatee" type="checkbox" id="targetUniprot" onchange= 'updateEntityDatabase(this)'/> Uniprot <br>
+    <input title="Annotation of a gene as a regulatee" type="checkbox" id="targetEnsembl" onchange= 'updateEntityDatabase(this)'/> Ensembl <br>
+    <input title="Annotation of a gene as a regulatee" type="checkbox" id="targetEnsemblGen" onchange= 'updateEntityDatabase(this)'/> Ensembl genomes <br>
+    <input title="Annotation of a transcript as a regulatee" type="checkbox" id="targetRnacentral" onchange= 'updateEntityDatabase(this)'/> RNA Central <br>
+    <input title="Annotation of a chemical as a regulatee" type="checkbox" id="targetChebi" onchange= 'updateEntityDatabase(this)'/> ChEBI <br>
+    <input title="Annotation of a complex as a regulatee" type="checkbox" id="targetComplexportal" onchange= 'updateEntityDatabase(this)'/> Complex Portal <br> <br>
+  </div>
+</div>
+
+<script>
+  const EntityDbs = {
+    "sourceUniprot" : "https://www.uniprot.org",
+    "targetUniprot" : "https://www.uniprot.org",
+    "sourceEnsembl" : "https://www.ensembl.org",
+    "targetEnsembl" : "https://www.ensembl.org",
+    "sourceRnacentral" : "https://www.rnacentral.org",
+    "targetRnacentral" : "https://www.rnacentral.org",
+    "sourceEnsemblGen" : "http://www.ensemblgenomes.org",
+    "targetEnsemblGen" : "http://www.ensemblgenomes.org",
+    "sourceChebi" : "http://data.bioontology.org/ontologies/CHEBI",
+    "targetChebi" : "http://data.bioontology.org/ontologies/CHEBI",
+    "sourceComplexportal" : "https://www.ebi.ac.uk/complexportal",
+    "targetComplexportal" : "https://www.ebi.ac.uk/complexportal"
+  }
+
+  /**
+   * Limits the dictionaries during autocomplete of source and target entities,
+   * based on the selected databases by the user. This facilitates the search and retrieve less noisy data to the user.  
+   * By default: all dictionaries are used
+   */
+  function updateEntityDatabase(checkbox){
+    if(checkbox.type == 'checkbox'){ 
+      if($('#' + checkbox.id).is(':checked')){
+        if(checkbox.id.includes("source")){
+            SourceEntity.queryOptions.filter.dictID.push(EntityDbs[checkbox.id]);
+        }
+        else{ //target
+            TargetEntity.queryOptions.filter.dictID.push(EntityDbs[checkbox.id]);
+        }
+      }
+      else{
+        if(checkbox.id.includes("source")){
+          var index = SourceEntity.queryOptions.filter.dictID.indexOf(EntityDbs[checkbox.id]);
+          if (index >= 0) {
+            SourceEntity.queryOptions.filter.dictID.splice( index, 1 );
+          }
+        }
+        else{ //target
+        var index = TargetEntity.queryOptions.filter.dictID.indexOf(EntityDbs[checkbox.id]);
+          if (index >= 0) {
+            TargetEntity.queryOptions.filter.dictID.splice( index, 1 );
+          }
+        }
+      }
+    }
+    // update VSM root with new dictionaries for autocomplete
+    vsmRoot = {
+      terms: [
+        X(SourceEntity,     'source',     'source'),
+        X(Regulation, 'regulation', 'regulation'),
+        X(TargetEntity,     'target',     'target'),
+      ],
+      conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
+    };
+    fillVsmBox();
+  }
+</script>
+
+
+### 2. Select the terms to add in the causal statement
+
+<script>
   // initialize the vsm-dictionaries
   var VsmDictUniprot     	= new VsmDictionaryUniprot();
   var VsmDictComplexPortal  = new VsmDictionaryComplexPortal();
@@ -47,7 +130,7 @@ layout: default
   window.onload = function() {
     vsmbox = document.getElementsByTagName('vsm-box')[0];
     vsmbox.sizes = { minWidth: 500 }; 
-    vsmbox.queryOptions = { perPage: 5 };
+    vsmbox.queryOptions = { perPage: 7 };
 
     makeAllRequestsHttps();  // To make VsmDictionaryBioportal's http-requests work on GitHub Pages.
 
@@ -70,20 +153,19 @@ layout: default
 
   /**
    * Initial panelState
-   *
    */
   function computePanelState() {
     panelState = {
       sourceType: false,
       sourceActivity: false,
-      sourceState: [
+      sourceModification: [
       ],
       sourceExperiment: false,
       sourceSpecies: false,
       sourceCompartment: false,
       targetType: false,
       targetActivity: false,
-      targetState: [
+      targetModification: [
       ],
       targetExperiment,
       targetSpecies,
@@ -104,15 +186,12 @@ layout: default
    * A collection of all the VSM-term Objects that we will use.
    */
   
-  const Entity = {
-    queryOptions: { filter: { dictID: [ 
-      'https://www.uniprot.org',
-      'https://www.ensembl.org',
-      'https://www.rnacentral.org',
-      'http://data.bioontology.org/ontologies/CHEBI',
-      'http://www.ensemblgenomes.org',
-      'https://www.ebi.ac.uk/complexportal',
-      'http://data.bioontology.org/ontologies/GO' ] }}
+    const SourceEntity = {
+    queryOptions: { filter: { dictID: [] }}
+  };
+
+    const TargetEntity = {
+    queryOptions: { filter: { dictID: [] }}
   };
 
   const Regulation = {
@@ -240,9 +319,9 @@ layout: default
    */
   var vsmRoot = {
     terms: [
-      X(Entity,     'source',     'source'),
+      X(SourceEntity,     'source',     'source'),
       X(Regulation, 'regulation', 'regulation'),
-      X(Entity,     'target',     'target'),
+      X(TargetEntity,     'target',     'target'),
     ],
     conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
   };
@@ -256,9 +335,9 @@ layout: default
     'source',
     'sourceType',
     'sourceActivity',
-    'sourceStateMod',
-    'sourceStateModRes',
-    'sourceStateModPos',
+    'sourceModificationMod',
+    'sourceModificationModRes',
+    'sourceModificationModPos',
     'sourceExperiment',
     'sourceSpecies',
     'sourceCompartment',
@@ -266,9 +345,9 @@ layout: default
     'target',
     'targetType',
     'targetActivity',
-    'targetStateMod',
-    'targetStateModRes',
-    'targetStateModPos',
+    'targetModificationMod',
+    'targetModificationModRes',
+    'targetModificationModPos',
     'targetExperiment',
     'targetSpecies',
     'targetCompartment',
@@ -330,17 +409,17 @@ layout: default
         }
     },
 
-    { panelCondition: 'sourceState',
+    { panelCondition: 'sourceModification',
       findTag: 'source',
       insertVariants: {
         'mod':
-          { terms: [ 0, HasState, X(Modification, 'sourceStateMod', 'modification') ],
+          { terms: [ 0, HasState, X(Modification, 'sourceModificationMod', 'modification') ],
             conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
           },
         'modres':
           { terms: [ 0,
-              HasState, X(Modification, 'sourceStateMod', 'modification'),
-              OfResidue, X(Residue, 'sourceStateModRes', 'residue')
+              HasState, X(Modification, 'sourceModificationMod', 'modification'),
+              OfResidue, X(Residue, 'sourceModificationModRes', 'residue')
             ],
             conns: [
               { type: 'T', pos: [ 0, 1, 2 ] },
@@ -349,8 +428,8 @@ layout: default
           },
         'modpos':
           { terms: [ 0,
-              HasState, X(Modification, 'sourceStateMod', 'modification'),
-              AtPosition, X(Position, 'sourceStateModPos', 'pos')
+              HasState, X(Modification, 'sourceModificationMod', 'modification'),
+              AtPosition, X(Position, 'sourceModificationModPos', 'pos')
             ],
             conns: [
               { type: 'T', pos: [ 0, 1, 2 ] },
@@ -359,9 +438,9 @@ layout: default
           },
         'modrespos':
           { terms: [ 0,
-              HasState, X(Modification, 'sourceStateMod', 'modification'),
-              OfResidue, X(Residue, 'sourceStateModRes', 'residue'),
-              AtPosition, X(Position, 'sourceStateModPos', 'pos')
+              HasState, X(Modification, 'sourceModificationMod', 'modification'),
+              OfResidue, X(Residue, 'sourceModificationModRes', 'residue'),
+              AtPosition, X(Position, 'sourceModificationModPos', 'pos')
             ],
             conns: [
               { type: 'T', pos: [ 0, 1, 2 ] },
@@ -416,17 +495,17 @@ layout: default
         }
     },
 
-    { panelCondition: 'targetState',
+    { panelCondition: 'targetModification',
       findTag: 'target',
       insertVariants: {
         'mod':
-          { terms: [ 0, HasState, X(Modification, 'targetStateMod', 'modification') ],
+          { terms: [ 0, HasState, X(Modification, 'targetModificationMod', 'modification') ],
             conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
           },
         'modres':
           { terms: [ 0,
-              HasState, X(Modification, 'targetStateMod', 'modification'),
-              OfResidue, X(Residue, 'targetStateModRes', 'residue')
+              HasState, X(Modification, 'targetModificationMod', 'modification'),
+              OfResidue, X(Residue, 'targetModificationModRes', 'residue')
             ],
             conns: [
               { type: 'T', pos: [ 0, 1, 2 ] },
@@ -435,8 +514,8 @@ layout: default
           },
         'modpos':
           { terms: [ 0,
-              HasState, X(Modification, 'targetStateMod', 'modification'),
-              AtPosition, X(Position, 'targetStateModPos', 'pos')
+              HasState, X(Modification, 'targetModificationMod', 'modification'),
+              AtPosition, X(Position, 'targetModificationModPos', 'pos')
             ],
             conns: [
               { type: 'T', pos: [ 0, 1, 2 ] },
@@ -445,9 +524,9 @@ layout: default
           },
         'modrespos':
           { terms: [ 0,
-              HasState, X(Modification, 'targetStateMod', 'modification'),
-              OfResidue, X(Residue, 'targetStateModRes', 'residue'),
-              AtPosition, X(Position, 'targetStateModPos', 'pos')
+              HasState, X(Modification, 'targetModificationMod', 'modification'),
+              OfResidue, X(Residue, 'targetModificationModRes', 'residue'),
+              AtPosition, X(Position, 'targetModificationModPos', 'pos')
             ],
             conns: [
               { type: 'T', pos: [ 0, 1, 2 ] },
@@ -735,17 +814,17 @@ layout: default
     }, {});
   }
   
-  /* Creation and removal of biological state checkboxes */
+  /* Creation and removal of biological modification checkboxes */
   function createRemoveState(checkBox, divTagListStates, currentState) {
-    //Get the number of biological states in current list of source or target states (divTagListStates) 
+    //Get the number of biological modifications in current list of source or target states (divTagListStates) 
     var count = parseInt(($('#' + currentState.id).parent().children().size())); 
 
   	if($('#' + checkBox.id).is(':checked')){ 
-      //Add a select option to annotate the biological state type: mod, modpos, modres, modposres
+      //Add a select option to annotate the biological modification type: mod, modpos, modres, modposres
   	  count = count + 1;
-      //remove last character which correspond to the number of the biological state
+      //remove last character which correspond to the number of the biological modification
   	  nameCheckbox = checkBox.id.substring(0, checkBox.id.length-1);
-      //id of biological state without the number of the biological state
+      //id of biological modification without the number of the biological modification
       idState = currentState.id.substring(0, currentState.id.length-1); 
 
       //Create select options:
@@ -762,7 +841,7 @@ layout: default
           $('#' + currentState.id).append(options);
         }
 
-  	  //Create new checkbox for possible new biological state that can be checked then annotated.
+  	  //Create new checkbox for possible new biological modification that can be checked then annotated.
   	  var newState = 
   	   "<div id='"+ idState + count + "'> " +
   	   "<input type='checkbox' id='" + nameCheckbox + count + "' name='" + checkBox.name + "' onchange='createRemoveState(this," + divTagListStates.id + ", " + idState + count +")' > " +
@@ -781,7 +860,7 @@ layout: default
   	  if((count-2) !== 0){
   	  	document.getElementById(checkBox.id.substring(0, checkBox.id.length-1)+(count-2)).removeAttribute('disabled');
   	   }
-       //Update the 'sourceState' or 'targetState' array in 'panelState' to remove the selected option in the checkbox
+       //Update the 'sourceModification' or 'targetModification' array in 'panelState' to remove the selected option in the checkbox
        updatePanelState(checkBox);
        $('#' + currentState.id+':last').find('select').remove(); //remove 'select' options
   	  $('#' + divTagListStates.id).children().last().remove(); //remove last label of checkbox
@@ -796,10 +875,10 @@ layout: default
         panelState[element.id] = true;
       }
       else{
-         //Check case where a biological state checkbox is unchecked
-         if(element.id.substring(0, element.id.length-1) == 'sourceState' || element.id.substring(0, element.id.length-1) == 'targetState'){
+         //Check case where a biological modification checkbox is unchecked
+         if(element.id.substring(0, element.id.length-1) == 'sourceModification' || element.id.substring(0, element.id.length-1) == 'targetModification'){
            if($(element).parent().find('option:selected')[0].value != ""){ //an option has been selected: mod || modpos || modres || modposres
-             state = element.id.substring(0, element.id.length-1); //'sourceState' or 'targetState'
+             state = element.id.substring(0, element.id.length-1); //'sourceModification' or 'targetModification'
              //Get the value to remove from the 'select' option 
              valueToRemove = $(element).parent().find('option:selected')[0].value;
              indexValueToRemove = panelState[state].indexOf(valueToRemove);
@@ -813,7 +892,7 @@ layout: default
       }
     }
     else if(element.type == 'select-one'){
-       //when the type of metadata about a biological state is selected AND if the checkbox of the biological state is checked, add the type to the corresponding key in the panel.
+       //when the type of metadata about a biological modification is selected AND if the checkbox of the biological modification is checked, add the type to the corresponding key in the panel.
        stateCheckbox = $(element).parent().find('input:checkbox')[0];
        panelState[stateCheckbox.id.substring(0, stateCheckbox.id.length-1)].push(element.options[element.selectedIndex].value) ;
        document.getElementById(element.id).disabled = true;
@@ -832,12 +911,12 @@ layout: default
   <div class="row">
   <div class="column">
     <h4> Source Entity </h4>
-    <input type="checkbox" id="sourceType" onchange='updatePanelState(this);' /> Biological type <br> <br>
+    <input title="To annotate only when the source entity's identifier does not correspond to the exact biological type" type="checkbox" id="sourceType" onchange='updatePanelState(this);' /> Biological type <br> <br>
     <input type="checkbox" id="sourceActivity" onchange='updatePanelState(this);' /> Biological activity <br> <br>
     <div id="divSourceStates">
       <div id="divSourceState1">
-  	    <input type="checkbox" name="Biological state" id="sourceState1" onchange='createRemoveState(this,divSourceStates, divSourceState1);' />
-  	    <label for="sourceState1">Biological state  </label> <br> <br>
+  	    <input type="checkbox" name="Biological modification" id="sourceModification1" onchange='createRemoveState(this,divSourceStates, divSourceState1);' />
+  	    <label for="sourceModification1">Biological modification  </label> <br> <br>
 	    </div>
     </div>
     <input type="checkbox" id="sourceExperiment" onchange='updatePanelState(this);' /> Experimental setup <br> <br>
@@ -847,12 +926,12 @@ layout: default
   
   <div class="column">
     <h4> Target Entity </h4>
-    <input type="checkbox" id="targetType" onchange='updatePanelState(this);' /> Biological type <br> <br>
+    <input title="To annotate only when the target entity's identifier does not correspond to the exact biological type" type="checkbox" id="targetType" onchange='updatePanelState(this);' /> Biological type <br> <br>
     <input type="checkbox" id="targetActivity" onchange='updatePanelState(this);' /> Biological activity <br> <br>
     <div id="divTargetStates">
       <div id="divTargetState1">
-        <input type="checkbox" name="Biological state" id="targetState1" onchange='createRemoveState(this,divTargetStates, divTargetState1);' />
-        <label for="targetState1">Biological state </label> <br> <br>
+        <input type="checkbox" name="Biological modification" id="targetModification1" onchange='createRemoveState(this,divTargetStates, divTargetState1);' />
+        <label for="targetModification1">Biological modification </label> <br> <br>
       </div>
     </div>
     <input type="checkbox" id="targetExperiment" onchange='updatePanelState(this);' /> Experimental setup <br> <br>
@@ -879,9 +958,9 @@ layout: default
   </div>
 </div> 
 
-### 2. Fill the VSM box
+### 3. Fill the VSM box
 <vsm-box id="vsm-box"></vsm-box>
 <br>
 
-### 3. Download the causal statement
+### 4. Download the causal statement
 <button onclick="log(extractData());">Log data</button>
