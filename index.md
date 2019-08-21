@@ -55,11 +55,11 @@ layout: default
 
   /**
    * Limits the dictionaries during autocomplete of source and target entities,
-   * based on the selected databases by the user. This facilitates the search and retrieve less noisy data to the user.  
+   * based on the selected databases by the user. This facilitates the search and retrieve less noisy data to the user. 
    * By default: all dictionaries are used
    */
   function updateEntityDatabase(checkbox){
-    if(checkbox.type == 'checkbox'){ 
+    if(checkbox.type == 'checkbox'){
       if($('#' + checkbox.id).is(':checked')){
         if(checkbox.id.includes("source")){
             SourceEntity.queryOptions.filter.dictID.push(EntityDbs[checkbox.id]);
@@ -161,17 +161,17 @@ layout: default
       sourceModification: [
       ],
       sourceExperiment: false,
-      sourceSpecies: false,
+      sourceTaxon: false,
       sourceCompartment: false,
       targetType: false,
       targetActivity: false,
       targetModification: [
       ],
       targetExperiment,
-      targetSpecies,
+      targetTaxon,
       targetCompartment,
       regulationMechanism: false,
-      regulationSpecies: false,
+      regulationTaxon: false,
       regulationCompartment: false,
       regulationCellLine: false,
       regulationCellType: false,
@@ -241,10 +241,10 @@ layout: default
     queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/ECO' ] }}
   };
 
-  const PartOfSpecies = {
+  const PartOfTaxon = {
     str: 'in', classID: null, instID: null
   };
-  const Species = {
+  const Taxon = {
     queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/NCBITAXON' ] }}
   };
 
@@ -339,7 +339,7 @@ layout: default
     'sourceModificationModRes',
     'sourceModificationModPos',
     'sourceExperiment',
-    'sourceSpecies',
+    'sourceTaxon',
     'sourceCompartment',
     'regulation',
     'target',
@@ -349,10 +349,10 @@ layout: default
     'targetModificationModRes',
     'targetModificationModPos',
     'targetExperiment',
-    'targetSpecies',
+    'targetTaxon',
     'targetCompartment',
     'regulationMechanism',
-    'regulationSpecies',
+    'regulationTaxon',
     'regulationTissue',
     'regulationCellType',
     'regulationCellLine',
@@ -459,10 +459,10 @@ layout: default
         }
     },
 
-    { panelCondition: 'sourceSpecies',
+    { panelCondition: 'sourceTaxon',
       findTag: 'source',
       insertFrag:
-        { terms: [ 0, PartOfSpecies, X(Species, 'sourceSpecies', 'species') ],
+        { terms: [ 0, PartOfTaxon, X(Taxon, 'sourceTaxon', 'taxon') ],
           conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
         }
     },
@@ -545,10 +545,10 @@ layout: default
         }
     },
 
-    { panelCondition: 'targetSpecies',
+    { panelCondition: 'targetTaxon',
       findTag: 'target',
       insertFrag:
-        { terms: [ 0, PartOfSpecies, X(Species, 'targetSpecies', 'species') ],
+        { terms: [ 0, PartOfTaxon, X(Taxon, 'targetTaxon', 'taxon') ],
           conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
         }
     },
@@ -573,10 +573,10 @@ layout: default
         }
     },
     
-    { panelCondition: 'regulationSpecies',
+    { panelCondition: 'regulationTaxon',
       findTag: 'regulation',
       insertFrag:
-        { terms: [ 0, PartOfSpecies, X(Species, 'regulationSpecies', 'species') ],
+        { terms: [ 0, PartOfTaxon, X(Taxon, 'regulationTaxon', 'taxon') ],
           conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
         }
     },
@@ -816,8 +816,8 @@ layout: default
   
   /* Creation and removal of biological modification checkboxes */
   function createRemoveState(checkBox, divTagListStates, currentState) {
-    //Get the number of biological modifications in current list of source or target states (divTagListStates) 
-    var count = parseInt(($('#' + currentState.id).parent().children().size())); 
+    //Get the number of biological modifications in current list of source or target states (divTagListStates)
+    var count = parseInt(($('#' + currentState.id).parent().children().size()));
 
   	if($('#' + checkBox.id).is(':checked')){ 
       //Add a select option to annotate the biological modification type: mod, modpos, modres, modposres
@@ -920,7 +920,7 @@ layout: default
 	    </div>
     </div>
     <input type="checkbox" id="sourceExperiment" onchange='updatePanelState(this);' /> Experimental setup <br> <br>
-    <input type="checkbox" id="sourceSpecies" onchange='updatePanelState(this);' /> Species <br> <br>
+    <input type="checkbox" id="sourceTaxon" onchange='updatePanelState(this);' /> Taxon <br> <br>
     <input type="checkbox" id="sourceCompartment" onchange='updatePanelState(this);' /> Compartment <br> <br>
   </div>
   
@@ -935,14 +935,14 @@ layout: default
       </div>
     </div>
     <input type="checkbox" id="targetExperiment" onchange='updatePanelState(this);' /> Experimental setup <br> <br>
-    <input type="checkbox" id="targetSpecies" onchange='updatePanelState(this);' /> Species <br> <br>
+    <input type="checkbox" id="targetTaxon" onchange='updatePanelState(this);' /> Taxon <br> <br>
     <input type="checkbox" id="targetCompartment" onchange='updatePanelState(this);' /> Compartment <br> <br>
   </div>
   
   <div class="column">
     <h4> Regulation</h4>
     <input type="checkbox" id="regulationMechanism" onchange='updatePanelState(this);' /> Biological mechanism <br> <br>
-    <input type="checkbox" id="regulationSpecies" onchange='updatePanelState(this);' /> Species <br> <br>
+    <input type="checkbox" id="regulationTaxon" onchange='updatePanelState(this);' /> Taxon <br> <br>
     <input type="checkbox" id="regulationCompartment" onchange='updatePanelState(this);' /> Compartment <br> <br>
     <input type="checkbox" id="regulationCellLine" onchange='updatePanelState(this);' /> Cell line <br> <br>
     <input type="checkbox" id="regulationCellType" onchange='updatePanelState(this);' /> Cell Type <br> <br>
