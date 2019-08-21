@@ -92,7 +92,8 @@ layout: default
       ],
       conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
     };
-    fillVsmBox();
+
+    updateVsmBox();
   }
 </script>
 
@@ -137,8 +138,7 @@ layout: default
     vsmbox.vsmDictionary = dictionary;
     vsmbox.addEventListener('change',      onVsmBoxChange);  // Captures user-generated changes.
     vsmbox.addEventListener('change-init', onVsmBoxChange);  // Captures the change of placing a new template.
-
-    fillVsmBox();
+    initVsmBox();
   }
 
 
@@ -154,7 +154,7 @@ layout: default
   /**
    * Initial panelState
    */
-  function computePanelState() {
+  function computeInitialPanelState() {
     panelState = {
       sourceType: false,
       sourceActivity: false,
@@ -634,13 +634,32 @@ layout: default
     },    
   ];
 
-
-  function fillVsmBox(){
-    computePanelState();
-    
+  function updateVsmBox(){
+    if(typeof vsmSentInBox !== "undefined"){
+      vsmSentInBox.terms.reduce((o, term) => {
+        vsmRoot.terms.reduce((obj, term1) =>{ //keep annotation about source | regulation | target
+          if (term.tag === term1.tag) {
+          Object.assign(term1, term);
+          }
+        }, {});
+        //TODO: cases with multiple tags (modification, reference & evidence)
+        insertionTasks.reduce((obj, termtask) =>{ //keep annotation of the rest of metadata
+          if(typeof termtask.insertFrag !== "undefined"){
+            if(termtask.insertFrag.terms[2].tag === term.tag){
+              Object.assign(termtask.insertFrag.terms[2], term);
+            }
+          }
+        }, {});
+      }, {});
+    }
     vsmSent = clone(vsmRoot);
     insertionTasks.forEach(doInsertionTask);
     vsmbox.initialValue = vsmSent;
+  }
+
+  function initVsmBox(){
+    computeInitialPanelState();
+    updateVsmBox();
   }
 
   function doInsertionTask(task) {
@@ -900,10 +919,7 @@ layout: default
     else if(element.type == 'number'){
        panelState[element.id] = parseInt(element.value);
     }
-
-    vsmSent = clone(vsmRoot);
-    insertionTasks.forEach(doInsertionTask);
-    vsmbox.initialValue = vsmSent;
+    updateVsmBox();
   }
 
 </script>
