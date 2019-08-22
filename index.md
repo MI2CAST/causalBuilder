@@ -12,8 +12,8 @@ layout: default
 <script src="https://unpkg.com/vsm-dictionary-combiner@^1.0.1/dist/vsm-dictionary-combiner.min.js"></script>
 <script src="https://unpkg.com/vsm-box@^1.0.0/dist/vsm-box.standalone.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
-<link href="http://www.jqueryscript.net/demo/jQuery-Plugin-For-Multi-Select-List-with-Checkboxes-MultiSelect/jquery.multiselect.css" rel="stylesheet" type="text/css">
-<script src="http://www.jqueryscript.net/demo/jQuery-Plugin-For-Multi-Select-List-with-Checkboxes-MultiSelect/jquery.multiselect.js"></script>
+<link href="https://www.jqueryscript.net/demo/jQuery-Plugin-For-Multi-Select-List-with-Checkboxes-MultiSelect/jquery.multiselect.css" rel="stylesheet" type="text/css">
+<script src="https://www.jqueryscript.net/demo/jQuery-Plugin-For-Multi-Select-List-with-Checkboxes-MultiSelect/jquery.multiselect.js"></script>
 
 
 ### 1. Select the terms to add in the causal statement
