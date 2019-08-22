@@ -12,93 +12,11 @@ layout: default
 <script src="https://unpkg.com/vsm-dictionary-combiner@^1.0.1/dist/vsm-dictionary-combiner.min.js"></script>
 <script src="https://unpkg.com/vsm-box@^1.0.0/dist/vsm-box.standalone.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+<link href="http://www.jqueryscript.net/demo/jQuery-Plugin-For-Multi-Select-List-with-Checkboxes-MultiSelect/jquery.multiselect.css" rel="stylesheet" type="text/css">
+<script src="http://www.jqueryscript.net/demo/jQuery-Plugin-For-Multi-Select-List-with-Checkboxes-MultiSelect/jquery.multiselect.js"></script>
 
 
-### 1. Select the databases to annotate your entities with
-
-<div class="row">
-  <div class="column">
-    <h4> Source Entity </h4>
-    <input title="Annotation of a protein as a regulator" type="checkbox" id="sourceUniprot" onchange= 'updateEntityDatabase(this)'/> Uniprot <br>
-    <input title="Annotation of a gene as a regulator" type="checkbox" id="sourceEnsembl" onchange= 'updateEntityDatabase(this)'/> Ensembl <br>
-    <input title="Annotation of a gene as a regulator" type="checkbox" id="sourceEnsemblGen" onchange= 'updateEntityDatabase(this)'/> Ensembl genomes <br>
-    <input title="Annotation of a transcript as a regulator" type="checkbox" id="sourceRnacentral" onchange= 'updateEntityDatabase(this)'/> RNA Central <br>
-    <input title="Annotation of a chemical as a regulator" type="checkbox" id="sourceChebi" onchange= 'updateEntityDatabase(this)'/> ChEBI <br> 
-    <input title="Annotation of a complex as a regulator" type="checkbox" id="sourceComplexportal" onchange= 'updateEntityDatabase(this)'/> Complex Portal <br> <br>
-  </div>
-  <div class="column">
-    <h4> Target Entity </h4>
-    <input title="Annotation of a protein as a regulatee" type="checkbox" id="targetUniprot" onchange= 'updateEntityDatabase(this)'/> Uniprot <br>
-    <input title="Annotation of a gene as a regulatee" type="checkbox" id="targetEnsembl" onchange= 'updateEntityDatabase(this)'/> Ensembl <br>
-    <input title="Annotation of a gene as a regulatee" type="checkbox" id="targetEnsemblGen" onchange= 'updateEntityDatabase(this)'/> Ensembl genomes <br>
-    <input title="Annotation of a transcript as a regulatee" type="checkbox" id="targetRnacentral" onchange= 'updateEntityDatabase(this)'/> RNA Central <br>
-    <input title="Annotation of a chemical as a regulatee" type="checkbox" id="targetChebi" onchange= 'updateEntityDatabase(this)'/> ChEBI <br>
-    <input title="Annotation of a complex as a regulatee" type="checkbox" id="targetComplexportal" onchange= 'updateEntityDatabase(this)'/> Complex Portal <br> <br>
-  </div>
-</div>
-
-<script>
-  const EntityDbs = {
-    "sourceUniprot" : "https://www.uniprot.org",
-    "targetUniprot" : "https://www.uniprot.org",
-    "sourceEnsembl" : "https://www.ensembl.org",
-    "targetEnsembl" : "https://www.ensembl.org",
-    "sourceRnacentral" : "https://www.rnacentral.org",
-    "targetRnacentral" : "https://www.rnacentral.org",
-    "sourceEnsemblGen" : "http://www.ensemblgenomes.org",
-    "targetEnsemblGen" : "http://www.ensemblgenomes.org",
-    "sourceChebi" : "http://data.bioontology.org/ontologies/CHEBI",
-    "targetChebi" : "http://data.bioontology.org/ontologies/CHEBI",
-    "sourceComplexportal" : "https://www.ebi.ac.uk/complexportal",
-    "targetComplexportal" : "https://www.ebi.ac.uk/complexportal"
-  }
-
-  /**
-   * Limits the dictionaries during autocomplete of source and target entities,
-   * based on the selected databases by the user. This facilitates the search and retrieve less noisy data to the user. 
-   * By default: all dictionaries are used
-   */
-  function updateEntityDatabase(checkbox){
-    if(checkbox.type == 'checkbox'){
-      if($('#' + checkbox.id).is(':checked')){
-        if(checkbox.id.includes("source")){
-            SourceEntity.queryOptions.filter.dictID.push(EntityDbs[checkbox.id]);
-        }
-        else{ //target
-            TargetEntity.queryOptions.filter.dictID.push(EntityDbs[checkbox.id]);
-        }
-      }
-      else{
-        if(checkbox.id.includes("source")){
-          var index = SourceEntity.queryOptions.filter.dictID.indexOf(EntityDbs[checkbox.id]);
-          if (index >= 0) {
-            SourceEntity.queryOptions.filter.dictID.splice( index, 1 );
-          }
-        }
-        else{ //target
-        var index = TargetEntity.queryOptions.filter.dictID.indexOf(EntityDbs[checkbox.id]);
-          if (index >= 0) {
-            TargetEntity.queryOptions.filter.dictID.splice( index, 1 );
-          }
-        }
-      }
-    }
-    // update VSM root with new dictionaries for autocomplete
-    vsmRoot = {
-      terms: [
-        X(SourceEntity,     'source',     'source'),
-        X(Regulation, 'regulation', 'regulation'),
-        X(TargetEntity,     'target',     'target'),
-      ],
-      conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
-    };
-
-    updateVsmBox();
-  }
-</script>
-
-
-### 2. Select the terms to add in the causal statement
+### 1. Select the terms to add in the causal statement
 
 <script>
   // initialize the vsm-dictionaries
@@ -142,11 +60,22 @@ layout: default
   }
 
 
+
   function makeAllRequestsHttps() {
     var meta = document.createElement('meta');
     meta.httpEquiv = "Content-Security-Policy";
     meta.content = "upgrade-insecure-requests";
     document.getElementsByTagName('head')[0].appendChild(meta);
+  }
+
+
+
+  /**
+   * First initialisation of the vsmbox
+   */
+  function initVsmBox(){
+    computeInitialPanelState();
+    updateVsmBox();
   }
 
 
@@ -180,6 +109,107 @@ layout: default
       evidence: 0
     };
   }
+
+
+
+ /**
+  * Update the VSM box whenever a change occurs in the interface that adds or removes a vsm term.
+  * This function:
+  * -  keeps track of annotation already entered by the user + DB selection (updateEntityDatabase())
+  * - calls 'doInsertionTasks' to add/remove the vsm term.
+  * - sends back the updated vsmbox
+  */
+  function updateVsmBox(){
+    if(typeof vsmSentInBox !== "undefined"){ //there has been some annotation done in the vsmbox
+      vsmSentInBox.terms.reduce((objVsm, oldVsmTerm) => {
+        vsmRoot.terms.reduce((objRoot, newVsmTerm) =>{ //keep annotation about source | regulation | target
+          if (oldVsmTerm.tag === newVsmTerm.tag) {
+            delete oldVsmTerm.queryOptions; // to keep the database(s) selected for the entities
+            // update the rest of the properties
+            Object.assign(newVsmTerm, oldVsmTerm);
+          }
+        }, {});
+        //TODO: cases with multiple tags (modification, reference & evidence)
+        insertionTasks.reduce((obj_meta, newMetaTerm) =>{ //keep annotation of the rest of metadata
+          if(typeof newMetaTerm.insertFrag !== "undefined"){
+            if(newMetaTerm.insertFrag.terms[2].tag === oldVsmTerm.tag){
+              delete oldVsmTerm.queryOptions;
+              Object.assign(newMetaTerm.insertFrag.terms[2], oldVsmTerm);
+            }
+          }
+        }, {});
+      }, {});
+    }
+
+    vsmSent = clone(vsmRoot);
+    insertionTasks.forEach(doInsertionTask);
+    vsmbox.initialValue = vsmSent;
+  }
+
+
+
+  /**
+   * Mapping between the DB name associated with the type of the entity (source|target) and the databases' links
+   */
+  const EntityDbs = {
+    "sourceUniprot" : "https://www.uniprot.org",
+    "targetUniprot" : "https://www.uniprot.org",
+    "sourceEnsembl" : "https://www.ensembl.org",
+    "targetEnsembl" : "https://www.ensembl.org",
+    "sourceRnacentral" : "https://www.rnacentral.org",
+    "targetRnacentral" : "https://www.rnacentral.org",
+    "sourceEnsemblGen" : "http://www.ensemblgenomes.org",
+    "targetEnsemblGen" : "http://www.ensemblgenomes.org",
+    "sourceChebi" : "http://data.bioontology.org/ontologies/CHEBI",
+    "targetChebi" : "http://data.bioontology.org/ontologies/CHEBI",
+    "sourceComplexportal" : "https://www.ebi.ac.uk/complexportal",
+    "targetComplexportal" : "https://www.ebi.ac.uk/complexportal"
+  }
+
+
+
+  /**
+   * Limits the dictionaries during autocomplete of source and target entities,
+   * based on the selected databases by the user. This facilitates the search and retrieve less noisy data to the user. 
+   * By default: all dictionaries are used
+   */
+  function updateEntityDatabase(list, type){
+    if(type === "source"){
+      SourceEntity.queryOptions.filter.dictID = [];
+      if(list === null){
+        SourceEntity.queryOptions.filter.dictID = [];
+      }
+      else{
+        list.reduce((o,term) =>{
+          SourceEntity.queryOptions.filter.dictID.push(EntityDbs[term]);
+        }, {});
+      }
+    }
+    else{ // type of entity is target -> target DB is modified
+      TargetEntity.queryOptions.filter.dictID = [];
+      if(list === null){
+        TargetEntity.queryOptions.filter.dictID = [];
+      }
+      else{
+        list.reduce((o,term) =>{
+          TargetEntity.queryOptions.filter.dictID.push(EntityDbs[term]);
+        }, {});
+      }
+    }
+
+    // update VSM root with new dictionaries for autocomplete
+    vsmRoot = {
+      terms: [
+        X(SourceEntity,     'source',     'source'),
+        X(Regulation, 'regulation', 'regulation'),
+        X(TargetEntity,     'target',     'target'),
+      ],
+      conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
+    };
+
+    updateVsmBox();
+  }
+
 
 
   /**
@@ -390,7 +420,7 @@ layout: default
    * and as values: corresponding `insertFrag`-like objects.
    */
   var insertionTasks = [
-    
+
     // --- SOURCE ENTITY extensions ---
     
     { panelCondition: 'sourceType',
@@ -634,33 +664,7 @@ layout: default
     },    
   ];
 
-  function updateVsmBox(){
-    if(typeof vsmSentInBox !== "undefined"){
-      vsmSentInBox.terms.reduce((o, term) => {
-        vsmRoot.terms.reduce((obj, term1) =>{ //keep annotation about source | regulation | target
-          if (term.tag === term1.tag) {
-          Object.assign(term1, term);
-          }
-        }, {});
-        //TODO: cases with multiple tags (modification, reference & evidence)
-        insertionTasks.reduce((obj, termtask) =>{ //keep annotation of the rest of metadata
-          if(typeof termtask.insertFrag !== "undefined"){
-            if(termtask.insertFrag.terms[2].tag === term.tag){
-              Object.assign(termtask.insertFrag.terms[2], term);
-            }
-          }
-        }, {});
-      }, {});
-    }
-    vsmSent = clone(vsmRoot);
-    insertionTasks.forEach(doInsertionTask);
-    vsmbox.initialValue = vsmSent;
-  }
 
-  function initVsmBox(){
-    computeInitialPanelState();
-    updateVsmBox();
-  }
 
   function doInsertionTask(task) {
     var state = panelState[task.panelCondition];
@@ -790,6 +794,7 @@ layout: default
   }
 
 
+
   /**
    * This can be called to retrieve what the user has filled out in the
    * template's empty fields.
@@ -833,7 +838,11 @@ layout: default
     }, {});
   }
   
-  /* Creation and removal of biological modification checkboxes */
+
+
+  /** 
+   * Creation and removal of biological modification checkboxes 
+   */
   function createRemoveState(checkBox, divTagListStates, currentState) {
     //Get the number of biological modifications in current list of source or target states (divTagListStates)
     var count = parseInt(($('#' + currentState.id).parent().children().size()));
@@ -878,14 +887,15 @@ layout: default
       //Enable the second preceding checkbox to be clickable again
   	  if((count-2) !== 0){
   	  	document.getElementById(checkBox.id.substring(0, checkBox.id.length-1)+(count-2)).removeAttribute('disabled');
-  	   }
-       //Update the 'sourceModification' or 'targetModification' array in 'panelState' to remove the selected option in the checkbox
-       updatePanelState(checkBox);
-       $('#' + currentState.id+':last').find('select').remove(); //remove 'select' options
+  	  }
+      //Update the 'sourceModification' or 'targetModification' array in 'panelState' to remove the selected option in the checkbox
+      updatePanelState(checkBox);
+      $('#' + currentState.id+':last').find('select').remove(); //remove 'select' options
   	  $('#' + divTagListStates.id).children().last().remove(); //remove last label of checkbox
     }
   }
   
+
   
   function updatePanelState(element){
     if(element.type == 'checkbox'){ 
@@ -922,61 +932,101 @@ layout: default
     updateVsmBox();
   }
 
+
 </script>
 
-  <div class="row">
+<div class="row">
   <div class="column">
-    <h4> Source Entity </h4>
-    <input title="To annotate only when the source entity's identifier does not correspond to the exact biological type" type="checkbox" id="sourceType" onchange='updatePanelState(this);' /> Biological type <br> <br>
-    <input type="checkbox" id="sourceActivity" onchange='updatePanelState(this);' /> Biological activity <br> <br>
-    <div id="divSourceStates">
-      <div id="divSourceState1">
-  	    <input type="checkbox" name="Biological modification" id="sourceModification1" onchange='createRemoveState(this,divSourceStates, divSourceState1);' />
-  	    <label for="sourceModification1">Biological modification  </label> <br> <br>
-	    </div>
-    </div>
-    <input type="checkbox" id="sourceExperiment" onchange='updatePanelState(this);' /> Experimental setup <br> <br>
-    <input type="checkbox" id="sourceTaxon" onchange='updatePanelState(this);' /> Taxon <br> <br>
-    <input type="checkbox" id="sourceCompartment" onchange='updatePanelState(this);' /> Compartment <br> <br>
-  </div>
-  
-  <div class="column">
-    <h4> Target Entity </h4>
-    <input title="To annotate only when the target entity's identifier does not correspond to the exact biological type" type="checkbox" id="targetType" onchange='updatePanelState(this);' /> Biological type <br> <br>
-    <input type="checkbox" id="targetActivity" onchange='updatePanelState(this);' /> Biological activity <br> <br>
-    <div id="divTargetStates">
-      <div id="divTargetState1">
-        <input type="checkbox" name="Biological modification" id="targetModification1" onchange='createRemoveState(this,divTargetStates, divTargetState1);' />
-        <label for="targetModification1">Biological modification </label> <br> <br>
+    <h4>  Source Entity </h4>
+      <div class="dropdownbox">
+        <select name="source_database" multiple class="form-control" id="source_db">
+          <option value="sourceUniprot">Uniprot</option>
+          <option value="sourceEnsembl">Ensembl</option>
+          <option value="sourceEnsemblGen">Ensembl genomes</option>
+          <option value="sourceRnacentral">RNA central</option>
+          <option value="sourceChebi">ChEBI</option>
+          <option value="sourceComplexportal">Complex Portal</option>
+        </select>
       </div>
-    </div>
-    <input type="checkbox" id="targetExperiment" onchange='updatePanelState(this);' /> Experimental setup <br> <br>
-    <input type="checkbox" id="targetTaxon" onchange='updatePanelState(this);' /> Taxon <br> <br>
-    <input type="checkbox" id="targetCompartment" onchange='updatePanelState(this);' /> Compartment <br> <br>
+      <label><input title="To annotate only when the source entity's identifier does not correspond to the exact biological type" type="checkbox" id="sourceType" onchange='updatePanelState(this);' /> Biological type </label><br> <br>
+      <label><input type="checkbox" id="sourceActivity" onchange='updatePanelState(this);' /> Biological activity </label><br> <br>
+      <div id="divSourceStates">
+        <div id="divSourceState1">
+          <input type="checkbox" name="Biological modification" id="sourceModification1" onchange='createRemoveState(this,divSourceStates, divSourceState1);' />
+          <label for="sourceModification1">Biological modification  </label> <br> <br>
+        </div>
+      </div>
+      <label><input type="checkbox" id="sourceExperiment" onchange='updatePanelState(this);' /> Experimental setup </label><br> <br>
+      <label><input type="checkbox" id="sourceTaxon" onchange='updatePanelState(this);' /> Taxon </label><br> <br>
+      <label><input type="checkbox" id="sourceCompartment" onchange='updatePanelState(this);' /> Compartment </label><br> <br>
   </div>
-  
+  <div class="column">
+    <h4>  Target entity </h4>
+      <div class="dropdownbox">
+        <select name="target_database" multiple class="form-control" id="target_db">
+          <option value="targetUniprot">Uniprot</option>
+          <option value="targetEnsembl">Ensembl</option>
+          <option value="targetEnsemblGen">Ensembl genomes</option>
+          <option value="targetRnacentral">RNA central</option>
+          <option value="targetChebi">ChEBI</option>
+          <option value="targetComplexportal">Complex Portal</option>
+        </select>
+      </div>
+      <label><input title="To annotate only when the target entity's identifier does not correspond to the exact biological type" type="checkbox" id="targetType" onchange='updatePanelState(this);' /> Biological type </label><br> <br>
+      <label><input type="checkbox" id="targetActivity" onchange='updatePanelState(this);' /> Biological activity </label><br> <br>
+      <div id="divTargetStates">
+        <div id="divTargetState1">
+          <input type="checkbox" name="Biological modification" id="targetModification1" onchange='createRemoveState(this,divTargetStates, divTargetState1);' />
+          <label for="targetModification1">Biological modification </label> <br> <br>
+        </div>
+      </div>
+      <label><input type="checkbox" id="targetExperiment" onchange='updatePanelState(this);' /> Experimental setup </label><br> <br>
+      <label><input type="checkbox" id="targetTaxon" onchange='updatePanelState(this);' /> Taxon </label><br> <br>
+      <label><input type="checkbox" id="targetCompartment" onchange='updatePanelState(this);' /> Compartment </label><br> <br>
+  </div>
   <div class="column">
     <h4> Regulation</h4>
-    <input type="checkbox" id="regulationMechanism" onchange='updatePanelState(this);' /> Biological mechanism <br> <br>
-    <input type="checkbox" id="regulationTaxon" onchange='updatePanelState(this);' /> Taxon <br> <br>
-    <input type="checkbox" id="regulationCompartment" onchange='updatePanelState(this);' /> Compartment <br> <br>
-    <input type="checkbox" id="regulationCellLine" onchange='updatePanelState(this);' /> Cell line <br> <br>
-    <input type="checkbox" id="regulationCellType" onchange='updatePanelState(this);' /> Cell Type <br> <br>
-    <input type="checkbox" id="regulationTissue" onchange='updatePanelState(this);' /> Tissue type <br> <br>
+      <label><input type="checkbox" id="regulationMechanism" onchange='updatePanelState(this);' /> Biological mechanism </label><br> <br>
+      <label><input type="checkbox" id="regulationTaxon" onchange='updatePanelState(this);' /> Taxon </label><br> <br>
+      <label><input type="checkbox" id="regulationCompartment" onchange='updatePanelState(this);' /> Compartment </label><br> <br>
+      <label><input type="checkbox" id="regulationCellLine" onchange='updatePanelState(this);' /> Cell line </label><br> <br>
+      <label><input type="checkbox" id="regulationCellType" onchange='updatePanelState(this);' /> Cell Type </label><br> <br>
+      <label><input type="checkbox" id="regulationTissue" onchange='updatePanelState(this);' /> Tissue type </label><br> <br>
   </div>
   
   <div class="column">
     <h4> Causal Statement</h4>
-    Reference(s) <br>
-    <input title= "Number of references: PMIDs, DOIs" type="number" id="reference" min="0" max="10" placeholder="0" onchange='updatePanelState(this);' /> <br> <br>
-    Evidence <br>
-    <input title="Number of evidence codes" type="number" id="evidence"  min="0" max="10" placeholder="0" onchange='updatePanelState(this);' />     
+      Reference(s) <br>
+      <input title= "Number of references: PMIDs, DOIs" type="number" id="reference" min="0" max="10" placeholder="0" onchange='updatePanelState(this);' /> <br> <br>
+      Evidence <br>
+      <input title="Number of evidence codes" type="number" id="evidence"  min="0" max="10" placeholder="0" onchange='updatePanelState(this);' />     
   </div>
 </div> 
 
-### 3. Fill the VSM box
+<script>
+
+  $('select[multiple]').multiselect({
+    columns: 1,
+    placeholder: 'Select database(s)'
+  });
+
+
+  $('#source_db').on('change',function() {
+    updateEntityDatabase($(this).val(), "source");
+  });
+
+
+  $('#target_db').on('change',function() {
+    updateEntityDatabase($(this).val(), "target");
+  });
+
+</script>
+
+
+### 2. Fill the VSM box
 <vsm-box id="vsm-box"></vsm-box>
 <br>
 
-### 4. Download the causal statement
+
+### 3. Download the causal statement
 <button onclick="log(extractData());">Log data</button>
