@@ -47,6 +47,8 @@ Go to the [causalBuilder home page](https://vtoure.github.io/causalBuilder) and 
 #### 1.1 Select the database to annotate your entities
 By default, all databases will be checked for the annotation of entities (Uniprot, Ensembl, Complex Portal, RNA central, etc). To restrict the options (and get more accurate terms), click on the desired database(s) for the annotation of your source and target entities. The selection should be based on the biological type of the entity. For instance, if your source entity is a protein, check the _Uniprot_ under _Source entity_, then the options in the VSM-term of the 'source' will be restricted to Uniprot identifiers only (step 2).
 
+<img src="{{site.url}}/images/documentation/database_selection.gif" id="gif" alt="Selection of databases to annotate entities"/>
+
 #### 1.2 Adding a term from a checkbox
 Click on the desired checkbox to select annotation to be added in the causal statement. For instance, if you would like to annotate the biological type of a source entity, select the *biological type* checkbox under *Source Entity*.
 
