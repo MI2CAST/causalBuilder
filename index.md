@@ -8,7 +8,7 @@ layout: default
 <script src="https://unpkg.com/vsm-dictionary-rnacentral@^1.0.1/dist/vsm-dictionary-rnacentral.min.js"></script>
 <script src="https://unpkg.com/vsm-dictionary-uniprot@^1.0.5/dist/vsm-dictionary-uniprot.min.js"></script>
 <script src="https://unpkg.com/vsm-dictionary-bioportal@^1.1.3/dist/vsm-dictionary-bioportal.min.js"></script>
-<script src="https://unpkg.com/vsm-dictionary-cacher@^1.2.0/dist/vsm-dictionary-cacher.min.js"></script>
+<script src="https://unpkg.com/vsm-dictionary-cacher@^1.2.1/dist/vsm-dictionary-cacher.min.js"></script>
 <script src="https://unpkg.com/vsm-dictionary-combiner@^1.0.1/dist/vsm-dictionary-combiner.min.js"></script>
 <script src="https://unpkg.com/vsm-box@^1.0.0/dist/vsm-box.standalone.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
