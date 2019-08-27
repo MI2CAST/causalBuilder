@@ -838,6 +838,154 @@ layout: default
     }, {});
   }
   
+  /**
+   * Export to a causal-JSON format
+   */
+   function exportCausalJson(){
+    causalJson = {};
+    causalJson.causalStatement = {};
+    fillCausalJson(causalJson, extractData());
+    downloadObjectAsJson(causalJson, "causalJson");
+    log(causalJson);
+  }
+
+  /**
+   * Taken from: https://stackoverflow.com/questions/19721439/download-json-object-as-a-file-from-browser
+   */
+  function downloadObjectAsJson(exportObj, exportName){
+    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
+    var downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href",     dataStr);
+    downloadAnchorNode.setAttribute("download", exportName + ".json");
+    document.body.appendChild(downloadAnchorNode); // required for firefox
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+  }
+
+  function fillCausalJson(json, terms){
+    for (key in terms) {
+      if (terms.hasOwnProperty(key)) {
+        switch(key){
+          case "sourceType":
+            addStatement("source", "biologicalType", terms[key], json);
+            break;
+          case "sourceActivity":
+            addStatement("source", "biologicalActivity", terms[key], json);
+            break;
+          case "sourceTaxon":
+            addStatement("source", "entityTaxon", terms[key], json);
+            break;
+           case "sourceModificationMod":
+            json.causalStatement["source"]["biologicalModifications"] = {};
+            for(let index of terms[key].keys()){
+              json.causalStatement["source"]["biologicalModifications"]["biologicalModification"+index] = {}; 
+              json.causalStatement["source"]["biologicalModifications"]['biologicalModification'+index]['modification'] = {};
+              json.causalStatement["source"]["biologicalModifications"]['biologicalModification'+index]['modification']['identifier'] = terms[key][index].id;
+              json.causalStatement["source"]["biologicalModifications"]['biologicalModification'+index]['modification']['name'] = terms[key][index].str;
+            }
+            break;
+          case "sourceModificationModPos":
+            for(let index of terms[key].keys()){
+              if(index in terms[key] !== false){
+              json.causalStatement["source"]["biologicalModifications"]['biologicalModification'+index]['position'] =  terms[key][index].str;
+              }
+            }
+            break;
+          case "sourceModificationModRes":
+            for(let index of terms[key].keys()){
+              if(index in terms[key] !== false){
+                json.causalStatement["source"]["biologicalModifications"]['biologicalModification'+index]['residue'] = {};
+                json.causalStatement["source"]["biologicalModifications"]['biologicalModification'+index]['residue']['identifier'] = terms[key][index].id;
+                json.causalStatement["source"]["biologicalModifications"]['biologicalModification'+index]['residue']['name'] = terms[key][index].str;
+              }
+            }
+            break;
+          case "sourceCompartment":
+            addStatement("source", "entityCompartment", terms[key], json);
+            break;
+          case "targetType":
+            addStatement("target", "biologicalType", terms[key], json);
+            break;
+          case "targetActivity":
+            addStatement("target", "biologicalActivity", terms[key], json);
+            break;
+          case "targetTaxon":
+            addStatement("target", "entityTaxon", terms[key], json);
+            break;
+          case "targetModificationMod":
+            json.causalStatement["target"]["biologicalModifications"] = {};
+            for(let index of terms[key].keys()){
+              json.causalStatement["target"]["biologicalModifications"]["biologicalModification"+index] = {}; 
+              json.causalStatement["target"]["biologicalModifications"]['biologicalModification'+index]['modification'] = {};
+              json.causalStatement["target"]["biologicalModifications"]['biologicalModification'+index]['modification']['identifier'] = terms[key][index].id;
+              json.causalStatement["target"]["biologicalModifications"]['biologicalModification'+index]['modification']['name'] = terms[key][index].str;
+            }
+            break;
+          case "targetModificationModPos":
+            for(let index of terms[key].keys()){
+              if(index in terms[key] !== false){
+                json.causalStatement["target"]["biologicalModifications"]['biologicalModification'+index]['position'] =  terms[key][index].str;
+              }
+            }
+            break;
+          case "targetModificationModRes":
+            for(let index of terms[key].keys()){
+              if(index in terms[key] !== false){
+                json.causalStatement["target"]["biologicalModifications"]['biologicalModification'+index]['residue'] = {};
+                json.causalStatement["target"]["biologicalModifications"]['biologicalModification'+index]['residue']['identifier'] = terms[key][index].id;
+                json.causalStatement["target"]["biologicalModifications"]['biologicalModification'+index]['residue']['name'] = terms[key][index].str;
+              }
+            }
+            break;
+          case "targetCompartment":
+            addStatement("target", "entityCompartment", terms[key], json);
+            break;     
+          case "regulationMechanism":
+            addStatement("regulation", "biologicalMechanism", terms[key], json);
+            break;
+          case "regulationTaxon":
+            addStatement("regulation", "regulationTaxon", terms[key], json);
+            break;
+          case "regulationCompartment":
+            addStatement("regulation", "regulationCompartment", terms[key], json);
+            break;
+          case "regulationCellLine":
+            addStatement("regulation", "cellLine", terms[key], json);
+            break;
+          case "regulationCellType":
+            addStatement("regulation", "cellType", terms[key], json);
+            break;
+          case "regulationTissueType":
+            addStatement("regulation", "tissueType", terms[key], json);
+            break;
+          case "reference":
+            json.causalStatement["references"] = {};
+            for(let index of terms[key].keys()){
+              json.causalStatement["references"]["reference"+index] = terms[key][index].id;
+            }
+            break;
+          case "evidence":
+            json.causalStatement["evidences"] = {};
+            for(let index of terms[key].keys()){
+              json.causalStatement["evidences"]["evidence"+index] = {};
+              json.causalStatement["evidences"]["evidence"+index]["identifier"] = terms[key][index].id;
+              json.causalStatement["evidences"]["evidence"+index]["name"] = terms[key][index].str;
+            }
+            break;
+          default: // term = (source | target | regulation)
+            json.causalStatement[key] = {}; 
+            json.causalStatement[key]['identifier'] = terms[key].id;
+            json.causalStatement[key]['name'] = terms[key].str;
+        }
+      }
+    }  
+  }
+
+  function addStatement(entity, metadata, term, json){
+    json.causalStatement[entity][metadata] = {}; 
+    json.causalStatement[entity][metadata]["identifier"] = term.id;
+    json.causalStatement[entity][metadata]["name"] = term.str;
+  }
 
 
   /** 
@@ -1029,4 +1177,5 @@ layout: default
 
 
 ### 3. Download the causal statement
-<button onclick="log(extractData());">Log data</button>
+<button onclick="log(exportCausalJson());">causal-JSON</button>
+<button onclick="log(extractData());">log data</button>
