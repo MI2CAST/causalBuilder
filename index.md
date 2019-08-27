@@ -170,11 +170,10 @@ layout: default
 
   /**
    * Limits the dictionaries during autocomplete of source and target entities,
-   * based on the selected databases by the user. This facilitates the search and retrieve less noisy data to the user. 
+   * based on the selected databases by the user. This facilitates the search and retrieves less noisy data to the user. 
    * By default: all dictionaries are used
    */
   function updateEntityDatabase(list, type){
-
     entityToUpdate = {};
     if(type === "source"){
       entityToUpdate = SourceEntity;
@@ -221,7 +220,7 @@ layout: default
   };
 
   const Regulation = {
-    queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/MI' ] }}
+    queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/MI', "http://data.bioontology.org/ontologies/OBOREL" ] }}
   };
 
   const IsAType = {
