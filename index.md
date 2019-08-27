@@ -174,27 +174,23 @@ layout: default
    * By default: all dictionaries are used
    */
   function updateEntityDatabase(list, type){
+
+    entityToUpdate = {};
     if(type === "source"){
-      SourceEntity.queryOptions.filter.dictID = [];
-      if(list === null){
-        SourceEntity.queryOptions.filter.dictID = [];
-      }
-      else{
-        list.reduce((o,term) =>{
-          SourceEntity.queryOptions.filter.dictID.push(EntityDbs[term]);
-        }, {});
-      }
+      entityToUpdate = SourceEntity;
     }
-    else{ // type of entity is target -> target DB is modified
-      TargetEntity.queryOptions.filter.dictID = [];
-      if(list === null){
-        TargetEntity.queryOptions.filter.dictID = [];
-      }
-      else{
-        list.reduce((o,term) =>{
-          TargetEntity.queryOptions.filter.dictID.push(EntityDbs[term]);
-        }, {});
-      }
+    else{
+      entityToUpdate = TargetEntity;
+    }
+
+    entityToUpdate.queryOptions.filter.dictID = [];
+    if(list === null){
+      entityToUpdate.queryOptions.filter.dictID = [];
+    }
+    else{
+      list.reduce((o,term) =>{
+        entityToUpdate.queryOptions.filter.dictID.push(EntityDbs[term]);
+      }, {});
     }
 
     // update VSM root with new dictionaries for autocomplete
