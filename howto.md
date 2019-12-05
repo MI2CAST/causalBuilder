@@ -17,3 +17,10 @@ Trick: for Uniprot, using the _'Entry name'_ provides always only one result! Fo
 
 <img src="{{site.url}}/images/howto/entry_name.gif" id="gif" alt="Minimum causal statement with VSM" width="700"/>
 
+
+#### How to annotate the biological type of an entity?
+By default, the biological type of an entity is determined by the ontology used. For instance, a source entity annotated with a Uniprot identifier is considered as a protein. The mapping of ontologies and biological type is provided in the Table 1 below: 
+
+In the case when the curators knows that the ontology used to annotate an entity DOES NOT corresponds to its real biological type, then the real biological type of the entity should be annotated. For instance, if an article assesses the causal regulation of a transcript but the transcript identifier is unknown or not mentioned in the paper, then the curator would use the identifier of the gene to annotate the target entity, because the gene is most likely to be known. In this case, the biological type of the target entity should be annotated as "ribonucleic acid" ([http://purl.obolibrary.org/obo/MI_2233](http://purl.obolibrary.org/obo/MI_2233)) if following the PSI-MI.
+
+#### How to annotate Taxon?
