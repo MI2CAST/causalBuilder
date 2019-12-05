@@ -95,8 +95,8 @@ function getFlatVsmJson() {
 
 /**
  * Fill the json object
- * @param json
- * @param terms
+ * @param {Object} json
+ * @param {Array} terms
  * @returns {boolean} annotated term?
  */
 function fillCausalJson(json, terms) {
@@ -135,7 +135,7 @@ function fillCausalJson(json, terms) {
                     }
                      break;
                 default:
-                    var path = VSM_TO_CAUSALJSON.get(key)[0] + "." + VSM_TO_CAUSALJSON.get(key)[1]+VSM_TO_CAUSALJSON.get(key)[2];
+                    var path = VSM_TO_CAUSALJSON.get(key)[0] + "." + VSM_TO_CAUSALJSON.get(key)[1];
                     setValue(path, terms[key], json);
                     break;
             }
@@ -169,15 +169,18 @@ function setValue(propertyPath, value, obj) {
             // We set the value to the last property
             obj[properties[0]]["identifier"] = value.id;
             obj[properties[0]]["name"] = value.str;
+
       return true // this is the end
     }
-
   }
 
-/**
- * Taken from: https://stackoverflow.com/questions/19721439/download-json-object-as-a-file-from-browser
- * Download an object as a JSON file.
- */
+
+  /**
+   * Taken from: https://stackoverflow.com/questions/19721439/download-json-object-as-a-file-from-browser
+   * Download an object as a JSON file.
+   * @param {Array} exportObj 
+   * @param {String} exportName 
+   */
 function downloadObjectAsJson(exportObj, exportName) {
     var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
     var downloadAnchorNode = document.createElement('a');
