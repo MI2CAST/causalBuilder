@@ -115,12 +115,16 @@ function fillCausalJson(json, terms) {
                     break;
                 case "targetModificationMod":
                 case "sourceModificationMod":
-                    json[VSM_TO_CAUSALJSON.get(key)[0]][VSM_TO_CAUSALJSON.get(key)[1]] = {};
                 case "sourceModificationModRes":
                 case "targetModificationModRes":
                 case "sourceModificationModPos":
                 case "targetModificationModPos":
-                    addModification(json, key, terms);
+                        for (let index of terms[key].keys()) {
+                            if (index in terms[key] !== false) {
+                                var path = VSM_TO_CAUSALJSON.get(key)[0] + "." + VSM_TO_CAUSALJSON.get(key)[1] + "." + VSM_TO_CAUSALJSON.get(key)[2]+index + "." + VSM_TO_CAUSALJSON.get(key)[3];
+                                setValue(path, terms[key][index], json)
+                            }
+                        }
                     break;
                 case "reference":
                 case "evidence":
@@ -136,28 +140,6 @@ function fillCausalJson(json, terms) {
                     break;
             }
         }
-    }
-}
-
-
-/**
- * Add the biological modifications into the json object
- * Handles the following possible combinations: mod, mod+pos, mod+res, mod+pos+res
- * @param json
- * @param key
- * @param annotation
- */
-function addModification(json, key, annotation) {
-    for (let index of annotation[key].keys()) {
-        if (index in annotation[key] !== false) {
-            if (!(json[VSM_TO_CAUSALJSON.get(key)[0]][VSM_TO_CAUSALJSON.get(key)[1]][VSM_TO_CAUSALJSON.get(key)[2] + index])){
-                json[VSM_TO_CAUSALJSON.get(key)[0]][VSM_TO_CAUSALJSON.get(key)[1]][VSM_TO_CAUSALJSON.get(key)[2] + index] = {};
-            }
-            json[VSM_TO_CAUSALJSON.get(key)[0]][VSM_TO_CAUSALJSON.get(key)[1]][VSM_TO_CAUSALJSON.get(key)[2] + index][VSM_TO_CAUSALJSON.get(key)[3]] = {};
-            json[VSM_TO_CAUSALJSON.get(key)[0]][VSM_TO_CAUSALJSON.get(key)[1]][VSM_TO_CAUSALJSON.get(key)[2] + index][VSM_TO_CAUSALJSON.get(key)[3]]['identifier'] = annotation[key][index].id;
-            json[VSM_TO_CAUSALJSON.get(key)[0]][VSM_TO_CAUSALJSON.get(key)[1]][VSM_TO_CAUSALJSON.get(key)[2] + index][VSM_TO_CAUSALJSON.get(key)[3]]['name'] = annotation[key][index].str;
-        }
-        
     }
 }
 
