@@ -82,12 +82,12 @@ function computeInitialPanelState() {
         targetExperiment,
         targetTaxon,
         targetCompartment,
-        regulationMechanism: false,
-        regulationTaxon: false,
-        regulationCompartment: false,
-        regulationCellLine: false,
-        regulationCellType: false,
-        regulationTissue: false,
+        effectMechanism: false,
+        effectTaxon: false,
+        effectCompartment: false,
+        effectCellLine: false,
+        effectCellType: false,
+        effectTissue: false,
         reference: 0,
         evidence: 0
     };
@@ -104,14 +104,13 @@ function computeInitialPanelState() {
 function updateVsmBox(){
     if(typeof vsmSentInBox !== "undefined"){ //there has been some annotation done in the vsmbox
         vsmSentInBox.terms.reduce((objVsm, oldVsmTerm) => {
-            vsmRoot.terms.reduce((objRoot, newVsmTerm) =>{ //keep annotation about source | regulation | target
+            vsmRoot.terms.reduce((objRoot, newVsmTerm) =>{ //keep annotation about source | effect | target
                 if (oldVsmTerm.tag === newVsmTerm.tag) {
                     delete oldVsmTerm.queryOptions; // to keep the database(s) selected for the entities
                     // update the rest of the properties
                     Object.assign(newVsmTerm, oldVsmTerm);
                 }
             }, {});
-            //TODO: cases with multiple tags (modification, reference & evidence)
             insertionTasks.reduce((obj_meta, newMetaTerm) =>{ //keep annotation of the rest of metadata
                 if(typeof newMetaTerm.insertFrag !== "undefined"){
                     if(newMetaTerm.insertFrag.terms[2].tag === oldVsmTerm.tag){
@@ -176,7 +175,7 @@ function updateEntityDatabase(list, type){
     vsmRoot = {
         terms: [
             X(SourceEntity,     'source',     'source'),
-            X(Regulation, 'regulation', 'regulation'),
+            X(Effect, 'effect', 'effect'),
             X(TargetEntity,     'target',     'target'),
         ],
         conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
@@ -198,7 +197,7 @@ const TargetEntity = {
     queryOptions: { filter: { dictID: [] }}
 };
 
-const Regulation = {
+const Effect = {
     queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/MI', "http://data.bioontology.org/ontologies/OBOREL" ] }}
 };
 
@@ -227,7 +226,7 @@ const OfResidue = {
     str: 'of', classID: null, instID: null
 };
 const Residue = {
-    queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/AMINO-ACID' ] }},
+    queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/CHEBI' ] }},
     editWidth: 50
 };
 
@@ -323,7 +322,7 @@ function X(obj, tag, placeholder) {
 var vsmRoot = {
     terms: [
         X(SourceEntity,     'source',     'source'),
-        X(Regulation, 'regulation', 'regulation'),
+        X(Effect, 'effect', 'effect'),
         X(TargetEntity,     'target',     'target'),
     ],
     conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
@@ -343,7 +342,7 @@ tagOrder = [
     'sourceExperiment',
     'sourceTaxon',
     'sourceCompartment',
-    'regulation',
+    'effect',
     'target',
     'targetType',
     'targetActivity',
@@ -353,12 +352,12 @@ tagOrder = [
     'targetExperiment',
     'targetTaxon',
     'targetCompartment',
-    'regulationMechanism',
-    'regulationTaxon',
-    'regulationTissue',
-    'regulationCellType',
-    'regulationCellLine',
-    'regulationCompartment',
+    'effectMechanism',
+    'effectTaxon',
+    'effectTissue',
+    'effectCellType',
+    'effectCellLine',
+    'effectCompartment',
     'reference',
     'evidence',
 ];
@@ -565,50 +564,50 @@ var insertionTasks = [
 
     // --- REGULATION extensions ---
 
-    { panelCondition: 'regulationMechanism',
-        findTag: 'regulation',
+    { panelCondition: 'effectMechanism',
+        findTag: 'effect',
         insertFrag:
-            { terms: [ 0, HasMechanism, X(Mechanism, 'regulationMechanism', 'mechanism') ],
+            { terms: [ 0, HasMechanism, X(Mechanism, 'effectMechanism', 'mechanism') ],
                 conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
             }
     },
 
-    { panelCondition: 'regulationTaxon',
-        findTag: 'regulation',
+    { panelCondition: 'effectTaxon',
+        findTag: 'effect',
         insertFrag:
-            { terms: [ 0, PartOfTaxon, X(Taxon, 'regulationTaxon', 'taxon') ],
+            { terms: [ 0, PartOfTaxon, X(Taxon, 'effectTaxon', 'taxon') ],
                 conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
             }
     },
 
-    { panelCondition: 'regulationTissue',
-        findTag: 'regulation',
+    { panelCondition: 'effectTissue',
+        findTag: 'effect',
         insertFrag:
-            { terms: [ 0, PartOfTissue, X(Tissue, 'regulationTissue', 'tissue') ],
+            { terms: [ 0, PartOfTissue, X(Tissue, 'effectTissue', 'tissue') ],
                 conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
             }
     },
 
-    { panelCondition: 'regulationCellType',
-        findTag: 'regulation',
+    { panelCondition: 'effectCellType',
+        findTag: 'effect',
         insertFrag:
-            { terms: [ 0, PartOfCellType, X(CellType, 'regulationCellType', 'cell type') ],
+            { terms: [ 0, PartOfCellType, X(CellType, 'effectCellType', 'cell type') ],
                 conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
             }
     },
 
-    { panelCondition: 'regulationCellLine',
-        findTag: 'regulation',
+    { panelCondition: 'effectCellLine',
+        findTag: 'effect',
         insertFrag:
-            { terms: [ 0, PartOfCellLine, X(CellLine, 'regulationCellLine', 'cell line') ],
+            { terms: [ 0, PartOfCellLine, X(CellLine, 'effectCellLine', 'cell line') ],
                 conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
             }
     },
 
-    { panelCondition: 'regulationCompartment',
-        findTag: 'regulation',
+    { panelCondition: 'effectCompartment',
+        findTag: 'effect',
         insertFrag:
-            { terms: [ 0, PartOfCompartment, X(Compartment, 'regulationCompartment', 'compartment') ],
+            { terms: [ 0, PartOfCompartment, X(Compartment, 'effectCompartment', 'compartment') ],
                 conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
             }
     },
@@ -618,7 +617,7 @@ var insertionTasks = [
     // --- REGULATION extensions part 2 ---
 
     { panelCondition: 'reference',
-        findTag: 'regulation',
+        findTag: 'effect',
         insertFrag:
             { terms: [ 0, HasReference, X(Reference, 'reference', 'reference') ],
                 conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
@@ -626,7 +625,7 @@ var insertionTasks = [
     },
 
     { panelCondition: 'evidence',
-        findTag: 'regulation',
+        findTag: 'effect',
         insertFrag:
             { terms: [ 0, AssessedByEvidence, X(Evidence, 'evidence', 'evidence') ],
                 conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
@@ -705,7 +704,7 @@ function insertFrag(findTag, frag, tagExt, str) {
  * where the terms behind `frag`'s 'head' (term===0) should be inserted,
  * E.g.:
  *   + 'sourceType'-related terms should go right after 'source'.
- *   + 'reference'-related terms should go not only after 'regulation',
+ *   + 'reference'-related terms should go not only after 'effect',
  *      but also after 'target', and also after e.g. 'reference__1'.
  */
 function whereToInsertFragTail(frag) {

@@ -70,13 +70,13 @@ layout: default
       <label><input type="checkbox" id="targetCompartment" onchange='updatePanelState(this);' /> Compartment </label><br> <br>
   </div>
   <div class="column">
-    <h4> Regulation</h4>
-      <label><input type="checkbox" id="regulationMechanism" onchange='updatePanelState(this);' /> Biological mechanism </label><br> <br>
-      <label><input type="checkbox" id="regulationTaxon" onchange='updatePanelState(this);' /> Taxon </label><br> <br>
-      <label><input type="checkbox" id="regulationCompartment" onchange='updatePanelState(this);' /> Compartment </label><br> <br>
-      <label><input type="checkbox" id="regulationCellLine" onchange='updatePanelState(this);' /> Cell line </label><br> <br>
-      <label><input type="checkbox" id="regulationCellType" onchange='updatePanelState(this);' /> Cell Type </label><br> <br>
-      <label><input type="checkbox" id="regulationTissue" onchange='updatePanelState(this);' /> Tissue type </label><br> <br>
+    <h4> Effect</h4>
+      <label><input type="checkbox" id="effectMechanism" onchange='updatePanelState(this);' /> Biological mechanism </label><br> <br>
+      <label><input type="checkbox" id="effectTaxon" onchange='updatePanelState(this);' /> Taxon </label><br> <br>
+      <label><input type="checkbox" id="effectCompartment" onchange='updatePanelState(this);' /> Compartment </label><br> <br>
+      <label><input type="checkbox" id="effectCellLine" onchange='updatePanelState(this);' /> Cell line </label><br> <br>
+      <label><input type="checkbox" id="effectCellType" onchange='updatePanelState(this);' /> Cell Type </label><br> <br>
+      <label><input type="checkbox" id="effectTissue" onchange='updatePanelState(this);' /> Tissue type </label><br> <br>
   </div>
   
   <div class="column">
@@ -115,4 +115,4 @@ layout: default
 
 ### 3. Download the causal statement
 <button onclick="log(exportCausalJson());">causal-JSON</button>
-<button onclick="log(extractData());">log data</button>
+<button onclick="log(getFlatVsmJson());">log data</button>

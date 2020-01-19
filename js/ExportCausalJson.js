@@ -11,7 +11,7 @@ let causalJson = [];
 let VSM_TO_CAUSALJSON = new Map();
 VSM_TO_CAUSALJSON.set("source", ["source"]);
 VSM_TO_CAUSALJSON.set("target", ["target"]);
-VSM_TO_CAUSALJSON.set("regulation", ["regulation"]);
+VSM_TO_CAUSALJSON.set("effect", ["effect"]);
 
 VSM_TO_CAUSALJSON.set("sourceType", ["source", "biologicalType"]);
 VSM_TO_CAUSALJSON.set("sourceActivity", ["source", "biologicalActivity"]);
@@ -31,12 +31,12 @@ VSM_TO_CAUSALJSON.set("targetModificationModRes", ["target", "biologicalModifica
 VSM_TO_CAUSALJSON.set("targetCompartment", ["target", "entityCompartment"]);
 VSM_TO_CAUSALJSON.set("targetExperiment", ["target", "experimentalSetup"]);
 
-VSM_TO_CAUSALJSON.set("regulationMechanism", ["regulation", "biologicalMechanism"]);
-VSM_TO_CAUSALJSON.set("regulationTaxon", ["regulation", "regulationTaxon"]);
-VSM_TO_CAUSALJSON.set("regulationCompartment", ["regulation", "regulationCompartment"]);
-VSM_TO_CAUSALJSON.set("regulationCellLine", ["regulation", "cellLine"]);
-VSM_TO_CAUSALJSON.set("regulationCellType", ["regulation", "cellType"]);
-VSM_TO_CAUSALJSON.set("regulationTissueType", ["regulation", "tissueType"]);
+VSM_TO_CAUSALJSON.set("effectMechanism", ["effect", "biologicalMechanism"]);
+VSM_TO_CAUSALJSON.set("effectTaxon", ["effect", "effectTaxon"]);
+VSM_TO_CAUSALJSON.set("effectCompartment", ["effect", "effectCompartment"]);
+VSM_TO_CAUSALJSON.set("effectCellLine", ["effect", "cellLine"]);
+VSM_TO_CAUSALJSON.set("effectCellType", ["effect", "cellType"]);
+VSM_TO_CAUSALJSON.set("effectTissueType", ["effect", "tissueType"]);
 VSM_TO_CAUSALJSON.set("reference", ["references", "reference"]);
 VSM_TO_CAUSALJSON.set("evidence", ["evidences", "evidence"]);
 
@@ -71,6 +71,7 @@ function onVsmBoxChange(event) {
  *   }
  */
 function getFlatVsmJson() {
+    console.log(vsmSentInBox)
     return vsmSentInBox.terms.reduce((o, term) => {
         if (term.tag) {
             var val =
@@ -109,7 +110,7 @@ function fillCausalJson(json, terms) {
             switch (key) {
                 case "source":
                 case "target":
-                case "regulation":
+                case "effect":
                     var path = (VSM_TO_CAUSALJSON.get(key))[0];
                     setValue(path, terms[key], json);
                     break;
