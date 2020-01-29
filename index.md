@@ -15,6 +15,7 @@ layout: default
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
 <link href="https://www.jqueryscript.net/demo/jQuery-Plugin-For-Multi-Select-List-with-Checkboxes-MultiSelect/jquery.multiselect.css" rel="stylesheet" type="text/css">
 <script src="https://www.jqueryscript.net/demo/jQuery-Plugin-For-Multi-Select-List-with-Checkboxes-MultiSelect/jquery.multiselect.js"></script>
+<script src="https://unpkg.com/export-causal-json@^1.0.4/dist/export-causal-json.min.js"></script>
 <script src="js/VsmCausalTemplate.js"></script>
 <script src="js/ExportCausalJson.js"></script>
 
@@ -31,6 +32,7 @@ layout: default
           <option value="sourceRnacentral">RNA central</option>
           <option value="sourceChebi">ChEBI</option>
           <option value="sourceComplexportal">Complex Portal</option>
+          <option value="sourceGO">Gene Ontology</option>
         </select>
       </div>
       <label><input title="To annotate only when the source entity's identifier does not correspond to the exact biological type" type="checkbox" id="sourceType" onchange='updatePanelState(this);' /> Biological type </label><br> <br>
@@ -41,9 +43,10 @@ layout: default
           <label for="sourceModification1">Biological modification  </label> <br> <br>
         </div>
       </div>
-      <label><input type="checkbox" id="sourceExperiment" onchange='updatePanelState(this);' /> Experimental setup </label><br> <br>
       <label><input type="checkbox" id="sourceTaxon" onchange='updatePanelState(this);' /> Taxon </label><br> <br>
       <label><input type="checkbox" id="sourceCompartment" onchange='updatePanelState(this);' /> Compartment </label><br> <br>
+      Experimental Setup <br><input title= "Experimental setup" type="number" id="sourceExperiment" min="0" max="10" placeholder="0" onchange='updatePanelState(this);' /> <br> <br>
+
   </div>
   <div class="column">
     <h4>  Target entity </h4>
@@ -55,6 +58,7 @@ layout: default
           <option value="targetRnacentral">RNA central</option>
           <option value="targetChebi">ChEBI</option>
           <option value="targetComplexportal">Complex Portal</option>
+          <option value="sourceGO">Gene Ontology</option>
         </select>
       </div>
       <label><input title="To annotate only when the target entity's identifier does not correspond to the exact biological type" type="checkbox" id="targetType" onchange='updatePanelState(this);' /> Biological type </label><br> <br>
@@ -65,9 +69,10 @@ layout: default
           <label for="targetModification1">Biological modification </label> <br> <br>
         </div>
       </div>
-      <label><input type="checkbox" id="targetExperiment" onchange='updatePanelState(this);' /> Experimental setup </label><br> <br>
       <label><input type="checkbox" id="targetTaxon" onchange='updatePanelState(this);' /> Taxon </label><br> <br>
       <label><input type="checkbox" id="targetCompartment" onchange='updatePanelState(this);' /> Compartment </label><br> <br>
+      Experimental Setup <br><input title= "Experimental setup" type="number" id="targetExperiment" min="0" max="10" placeholder="0" onchange='updatePanelState(this);' /> <br> <br>
+           
   </div>
   <div class="column">
     <h4> Effect</h4>
@@ -115,4 +120,4 @@ layout: default
 
 ### 3. Download the causal statement
 <button onclick="log(exportCausalJson());">causal-JSON</button>
-<button onclick="log(getFlatVsmJson());">log data</button>
+<button onclick="log(getFlatVsmJson());">flat-VSM-JSON</button>
