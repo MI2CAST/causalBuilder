@@ -73,7 +73,7 @@ function downloadObjectAsJson(exportObj, exportName) {
  * Create and export the causalJson
  */
 function exportCausalJson() {
-    const exportFile = new ExportCausalJson();
+    let exportFile = new ExportCausalJson();
     exportFile.exportCausalJson(getFlatVsmJson());
     downloadObjectAsJson(exportFile.causalJson, "causalJson");
 }

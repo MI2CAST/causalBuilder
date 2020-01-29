@@ -72,14 +72,14 @@ function computeInitialPanelState() {
         sourceActivity: false,
         sourceModification: [
         ],
-        sourceExperiment: false,
+        sourceExperiment: 0,
         sourceTaxon: false,
         sourceCompartment: false,
         targetType: false,
         targetActivity: false,
         targetModification: [
         ],
-        targetExperiment,
+        targetExperiment: 0,
         targetTaxon,
         targetCompartment,
         effectMechanism: false,
@@ -143,7 +143,9 @@ const EntityDbs = {
     "sourceChebi" : "http://data.bioontology.org/ontologies/CHEBI",
     "targetChebi" : "http://data.bioontology.org/ontologies/CHEBI",
     "sourceComplexportal" : "https://www.ebi.ac.uk/complexportal",
-    "targetComplexportal" : "https://www.ebi.ac.uk/complexportal"
+    "targetComplexportal" : "https://www.ebi.ac.uk/complexportal",
+    "sourceGO": "https://data.bioontology.org/ontologies/GO",
+    "targetGO": "https://data.bioontology.org/ontologies/GO",
 }
 
 
@@ -198,7 +200,7 @@ const TargetEntity = {
 };
 
 const Effect = {
-    queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/MI', "http://data.bioontology.org/ontologies/OBOREL" ] }}
+    queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/MI', 'http://data.bioontology.org/ontologies/OBOREL' ] }}
 };
 
 const IsAType = {
@@ -241,7 +243,7 @@ const HasSetup = {
     str: 'has setup', classID: null, instID: null
 };
 const Experiment = {
-    queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/ECO' ] }}
+    queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/ECO', 'http://data.bioontology.org/ontologies/MI' ] }}
 };
 
 const PartOfTaxon = {
@@ -269,7 +271,10 @@ const PartOfTissue = {
     str: 'in', classID: null, instID: null
 };
 const Tissue = {
-    queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/UBERON' ] }}
+    queryOptions: { filter: { dictID: [
+                'http://data.bioontology.org/ontologies/UBERON',
+                'http://data.bioontology.org/ontologies/PO',
+                'http://data.bioontology.org/ontologies/FAO' ] }}
 };
 
 const PartOfCellType = {
@@ -278,8 +283,8 @@ const PartOfCellType = {
 const CellType = {
     queryOptions: { filter: { dictID: [
                 'http://data.bioontology.org/ontologies/CL' ,
-                'http://data.bioontology.org/ontologies/PO',
-                'http://data.bioontology.org/ontologies/FAO' ] }}
+                'http://data.bioontology.org/ontologies/BTO'
+ ] }}
 };
 
 const PartOfCellLine = {
