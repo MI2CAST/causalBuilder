@@ -32,6 +32,8 @@ var dictionary = new VsmDictionaryCombinerCached({
 var vsmbox;      // The <vsm-box> HTML-element.
 var panelState;  // An object that represents the current values in web-page's template configuration panel.
 
+var vsmSentInBox = { terms: [], conns: [] };  // The vsmbox's latest emitted data, i.e. its current content.
+
 window.onload = function() {
     vsmbox = document.getElementsByTagName('vsm-box')[0];
     vsmbox.sizes = { minWidth: 500 };
@@ -95,13 +97,13 @@ function computeInitialPanelState() {
 
 
 /**
- * Update the VSM box whenever a change occurs in the interface that adds or removes a vsm term.
- * This function:
- * -  keeps track of annotation already entered by the user + DB selection (updateEntityDatabase())
- * - calls 'doInsertionTasks' to add/remove the vsm term.
- * - sends back the updated vsmbox
+ * Updates the vsm-box after a change occurs in the interface, to add or remove some vsm-terms. It:
+ * - builds a new vsm-template based on the new settings (by calling 'doInsertionTasks'),
+ * - moves any filled-in annotations (incl. entity-DB selection) from the existing template to the new one,
+ * - puts this new template in the vsm-box.
  */
 function updateVsmBox(){
+    /*
     if(typeof vsmSentInBox !== "undefined"){ //there has been some annotation done in the vsmbox
         vsmSentInBox.terms.reduce((objVsm, oldVsmTerm) => {
             vsmRoot.terms.reduce((objRoot, newVsmTerm) =>{ //keep annotation about source | effect | target
@@ -121,10 +123,19 @@ function updateVsmBox(){
             }, {});
         }, {});
     }
+    */
 
     vsmSent = clone(vsmRoot);
     insertionTasks.forEach(doInsertionTask);
-    vsmbox.initialValue = vsmSent;
+
+    vsmSentInBox.terms.forEach(term => {
+      if (term.tag) {
+        var i = vsmSent.terms.findIndex(termNew => termNew.tag == term.tag);
+        if (i != -1)  vsmSent.terms[i] = clone(term);
+      }
+    });
+
+    vsmbox.initialValue = vsmSentInBox = vsmSent;
 }
 
 
