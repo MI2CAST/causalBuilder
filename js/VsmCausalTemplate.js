@@ -99,39 +99,22 @@ function computeInitialPanelState() {
 /**
  * Updates the vsm-box after a change occurs in the interface, to add or remove some vsm-terms. It:
  * - builds a new vsm-template based on the new settings (by calling 'doInsertionTasks'),
- * - moves any filled-in annotations (incl. entity-DB selection) from the existing template to the new one,
+ * - copies any filled-in annotations from the existing template to the new one, but keeps
+ *   DB-selection options (in queryOptions, set by updateEntityDatabase()) from the new vsm-terms,
  * - puts this new template in the vsm-box.
  */
 function updateVsmBox(){
-    /*
-    if(typeof vsmSentInBox !== "undefined"){ //there has been some annotation done in the vsmbox
-        vsmSentInBox.terms.reduce((objVsm, oldVsmTerm) => {
-            vsmRoot.terms.reduce((objRoot, newVsmTerm) =>{ //keep annotation about source | effect | target
-                if (oldVsmTerm.tag === newVsmTerm.tag) {
-                    delete oldVsmTerm.queryOptions; // to keep the database(s) selected for the entities
-                    // update the rest of the properties
-                    Object.assign(newVsmTerm, oldVsmTerm);
-                }
-            }, {});
-            insertionTasks.reduce((obj_meta, newMetaTerm) =>{ //keep annotation of the rest of metadata
-                if(typeof newMetaTerm.insertFrag !== "undefined"){
-                    if(newMetaTerm.insertFrag.terms[2].tag === oldVsmTerm.tag){
-                        delete oldVsmTerm.queryOptions;
-                        Object.assign(newMetaTerm.insertFrag.terms[2], oldVsmTerm);
-                    }
-                }
-            }, {});
-        }, {});
-    }
-    */
-
     vsmSent = clone(vsmRoot);
     insertionTasks.forEach(doInsertionTask);
 
     vsmSentInBox.terms.forEach(term => {
       if (term.tag) {
         var i = vsmSent.terms.findIndex(termNew => termNew.tag == term.tag);
-        if (i != -1)  vsmSent.terms[i] = clone(term);
+        if (i != -1) {
+          var q = vsmSent.terms[i].queryOptions;
+          var t = vsmSent.terms[i] = clone(term);
+          if (q)  t.queryOptions = clone(q);
+        }
       }
     });
 
