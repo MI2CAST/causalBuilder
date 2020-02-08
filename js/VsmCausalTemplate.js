@@ -725,6 +725,17 @@ function whereToInsertFragTail(frag) {
     i = (tagOrder.indexOf(fragTag) + 1) || tagOrder.length;
     var tagsBefore = tagOrder.slice(0, i);
 
+    // A hard-coded hack (until a more general template-generator would be built):
+    // insert a new Mod after all Mod, and after all ModRes/ModPos too.
+    if (tagsBefore.includes('sourceModificationMod')) {
+      tagsBefore.push('sourceModificationModRes');
+      tagsBefore.push('sourceModificationModPos');
+    }
+    if (tagsBefore.includes('targetModificationMod')) {
+      tagsBefore.push('targetModificationModRes');
+      tagsBefore.push('targetModificationModPos');
+    }
+
     // In the current `vsmSent`, find the position of the last term that has any of those tags.
     // Take into account that some tags can have an appended array-index.
     var insertPos = 0;
