@@ -11,5 +11,6 @@ The causalBuilder is a web application that uses the [VSM](https://github.com/vs
 ## Documentation
 See [the Documentation page](https://vtoure.github.io/causalBuilder/documentation) for instructions on how to build a causal statement from the interface.
 
-## Notes
-The application is under development!
+## License
+
+This project is licensed under the AGPL-3.0 license - see [LICENSE.md](LICENSE.md).
