@@ -90,8 +90,8 @@ function computeInitialPanelState() {
         effectCellLine: false,
         effectCellType: false,
         effectTissue: false,
-        reference: 0,
-        evidence: 0
+        reference: 1,
+        evidence: 1
     };
 }
 

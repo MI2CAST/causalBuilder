@@ -87,9 +87,9 @@ layout: default
   <div class="column">
     <h4> Causal Statement</h4>
       Reference(s) <br>
-      <input title= "Number of references: PMIDs, DOIs" type="number" id="reference" min="0" max="10" placeholder="0" onchange='updatePanelState(this);' /> <br> <br>
+      <input title= "Number of references: PMIDs, DOIs" type="number" id="reference" min="1" max="10" placeholder="1" onchange='updatePanelState(this);' /> <br> <br>
       Evidence <br>
-      <input title="Number of evidence codes" type="number" id="evidence"  min="0" max="10" placeholder="0" onchange='updatePanelState(this);' />     
+      <input title="Number of evidence codes" type="number" id="evidence"  min="1" max="10" placeholder="1" onchange='updatePanelState(this);' />     
   </div>
 </div> 
 
