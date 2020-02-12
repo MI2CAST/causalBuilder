@@ -6,7 +6,7 @@ permalink: /about/
 
 The __causalBuilder__ is developed by [Vasundra Touré](https://www.ntnu.edu/employees/vasundra.toure) and [Steven Vercruysse](https://www.ntnu.no/ansatte/steven.vercruysse).
 
-The source code can be found in GitHub at [https://github.com/vtoure/causalBuilder](https://github.com/vtoure/causalBuilder).
+The source code can be found in GitHub at [https://github.com/MI2CAST/causalBuilder](https://github.com/MI2CAST/causalBuilder).
 
 <br> <br>
 <div class="row">

@@ -51,7 +51,7 @@ The causalBuilder is divided into three parts:
 3- download the annotated causal statement.  
 
 
-Go to the [causalBuilder home page](https://vtoure.github.io/causalBuilder) and follow the steps below:
+Go to the [causalBuilder home page](https://mi2cast.github.io/causalBuilder) and follow the steps below:
 
 ### 1. Select all the annotations (context) to add in the causal statement
 
