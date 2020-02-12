@@ -13,40 +13,40 @@ you can build the causal statement with the metadata wished to be annotated. The
 </div>
 
 ## What is a molecular interaction causal statement?
-> __In simple words__: It is a directed interaction between biological entities where a source entity regulates the activity of a target entity, given a certain context.
+> __In simple words__: It is an interaction between biological entities where a source entity regulates the activity of a target entity in a specific context.
 >
 > ![Causal statement]({{site.url}}/images/causal_statement.png "Description of a causal statement.")
 >
-> __In more details__: A molecular interaction causal statement can be decomposed into a molecular interaction and a causal statement. 
-> The __molecular interaction__ covers undirected interactions between biological entities (e.g., protein, chemical, gene, complex), and can or not be physical interactions. 
-> The __causal statement__ adds a causal aspect to the molecular interaction with a regulatory event and a direction of the regulation, i.e.,
-> a biological entity A (called source) interacts with and has an effect on a biological entity B (called target). 
-> Furthermore, a causal statement can additionally describe contextual information that inform on specific circumstances in which the causal effect is observed.
+> __In more detail__: A molecular interaction causal statement can be decomposed into a molecular interaction and a causal statement. 
+> The __molecular interaction__ covers undirected (i.e., non-oriented) interactions between biological entities (e.g., protein, gene, complex), and does not have to be necessarily physical interactions. 
+> The __causal statement__ adds a causal aspect to the molecular interaction with a regulatory aspect and a direction of the regulation, i.e.,
+> a biological entity A (the source) interacts with and has an effect on a biological entity B (the target). 
+> Furthermore, a causal statement describes contextual details that inform on specific circumstances in which the causal effect is observed.
 >
-> To know more about the minimum set of information to annotate about a molecular interaction causal statement, check [MI2CAST](https://github.com/MI2CAST/MI2CAST).
+> To know more about the minimum set of information to annotate about a molecular interaction causal statement, read the [MI2CAST guidelines](https://github.com/MI2CAST/MI2CAST).
 
 ## What is VSM (Visual Syntax Method)?
 > VSM is a general framework for communicating pieces of information that are both human and computer understandable. VSM defines three components:
 >
-> 1- a VSM-term: association of a term (human-readable) and an identifier (machine-readable),
+> 1- a VSM-term, which is an association of a term (human-readable) and an identifier (machine-readable),
 >
-> 2- a VSM-connector: grouping of VSM-terms with semantics (subject-object-predicate),
+> 2- a VSM-connector, which is a grouping of VSM-terms with semantics (subject-object-predicate),
 >
-> 3- a VSM-sentence: association of VSM-terms connected with VSM-connectors.
+> 3- a VSM-sentence which consists of an association of VSM-terms connected with VSM-connectors.
 >
 > <img src="{{site.url}}/images/VSM.png" alt="Example of a VSM-sentence with VSM-terms, VSM-connectors" width="600"/>
 >
 > The causalBuilder is built on top of the VSM framework to facilitate the annotation of causal statements with contextual information. 
->The causalBuilder generates on-demand templates of VSM sentences to be filled in by the user.
+> The causalBuilder generates on-demand templates of VSM sentences to be filled in by the user.
 >
 > <img src="{{site.url}}/images/minimum_statement_VSM.png" alt="Minimum causal statement with VSM" width="600"/>
 >
-> To know more about VSM, check the [VSM introduction](http://scicura.org/vsm/intro.html).
+> To know more about VSM, read the [VSM introduction](http://scicura.org/vsm/intro.html).
 
 
 ## How to use the web application?
-The causalBuilder is divided in three parts:  
-1- the selection of contextual annotations to add in the causal statement. The VSM-sentence "template" is progressively built as the annotations are selected,  
+The causalBuilder is divided into three parts:  
+1- the selection of contextual annotations to add in the causal statement,  
 2- the template needs to be filled in manually by the user with the adequate data,  
 3- download the annotated causal statement.  
 
@@ -70,7 +70,7 @@ For instance, if you would like to annotate the biological type of a source enti
 #### 1.3 Adding a biological modification
 A biological entity, whether it is a source or target entity can have multiple biological modifications annotated. 
 The biological modifications correspond to physical modifications or conformations of an entity (e.g., phosphorylation of a protein, methylation of a gene, etc.). 
-To add a biological modification, whether it belongs to the source entity or the target entity, first check the *biological state* box 
+To add a biological modification, whether it belongs to the source entity or the target entity, first, check the *biological state* box 
 and then select the type of annotation in the drop-down list that appears: 
 ##### 1.3.1 mod
 Biological modification with information on the type of modification only. Modification corresponds to the chemical modification affecting the entity (e.g., phosphorylation, acetylation).
@@ -79,7 +79,7 @@ Biological modification with information on the type of modification and the res
 ##### 1.3.3 mod+pos
 Biological modification with information on the type of modification and the position. The position corresponds to the position of the modified amino acid in the entity.
 ##### 1.3.4 mod+res+pos
-Biological modification with information on the type of modification, the residue and the position  
+Biological modification with information on the type of modification, the residue and, the position.
 
 
 <img src="{{site.url}}/images/documentation/biological_state.gif" id="gif" alt="Checked biologicalmodification with 'modification' selected"/>
@@ -88,24 +88,26 @@ Once the *biological modification* is checked, a new one appears below to enable
 If the checkbox is not checked and if the type of annotation _(i.e., mod, mod+red, mod+pos, mod+pos+res)_ is not selected, the terms will not appear in the VSM-sentence.
 
 #### 1.4 Adding experimental setups(s), reference(s) and evidence
-A causal statement has at least 1 references and/or evidence, but can also have more. A source entity and a target entity can have 0, 1 or many experimental setup defined. 
+A causal statement has at least 1 references and/or evidence, but can also have more. A source entity and a target entity can have 0, 1 or many experimental setups defined. 
 Consequently, indicate the number of *reference* and *evidence* metadata wished to annotate by entering a number or by using the arrow on the right side of the box. 
 By default, the amount is set to zero for experimental setup and to 1 for reference and evidence.  
 
 <img src="{{site.url}}/images/documentation/reference_evidence.gif" id="gif" alt="Annotation of one reference and zero evidence" />
 
 
-When a checkbox is checked, a type selected or a number added in the reference/evidence, see that the VSM box is automatically updated to insert the blocks of information that you will annotate.
+The VSM-sentence "template" is progressively built as the annotations are selected. 
+When a checkbox is checked, a type selected or a number added in the reference/evidence/experimental setup, 
+you can see that the VSM box is automatically updated to insert the blocks of information to be annotated.
 
 ### 2. Fill the VSM template
 Click on a VSM-term and start typing the identifier or the name of the annotation. 
-When the corresponding match appear, select the appropriate annotation term and click on it or press ENTER. Fill the other annotations accordingly.
+When the corresponding match appears, select the appropriate annotation term and click on it or press ENTER. Fill the other annotations accordingly.
 
 <img src="{{site.url}}/images/documentation/fill_vsm.gif" id="gif" alt="A causal statement filled in a VSM-box" />
 
 
 ### 3. Download the causal statement in the desired format
-CausalBuilder generates a causal-json file and will soon generate a [mitab2.8](http://psicquic.github.io/MITAB28Format.html) file as well. 
+The causalBuilder generates a causal-json file and will soon support the export into a [mitab2.8](http://psicquic.github.io/MITAB28Format.html) format as well. 
 All information filled in the VSM template generated will be translated accordingly in these file formats.
 
 
