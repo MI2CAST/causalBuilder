@@ -41,7 +41,7 @@ div.column input {
 }
 
 
-input {
+div:not(.vsm-box) input {
   width: 15px;
   height: 15px;
 
