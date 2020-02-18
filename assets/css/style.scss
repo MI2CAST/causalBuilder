@@ -4,21 +4,26 @@
 @import "{{ site.theme }}";
 
 
-/* increased width and reduced padding of main-content */
+/* Increased width and reduced padding of main-content */
 .main-content {
   max-width: 75rem; 
-  padding: 2rem 1rem;}
+  padding: 2rem 1rem;
+}
+
 h1 {
   font-size: 1.5em;
-  margin: 0.67em 0; }
+  margin: 0.67em 0;
+}
   
-table { font-size: 14px; }
+table {
+  font-size: 14px;
+}
 
 * {
   box-sizing: border-box;
 }
 
-/* Create four equal columns that floats next to each other */
+/* Create four equal columns that float next to each other */
 .column {
   float: left;
   width: 25%;
@@ -37,26 +42,24 @@ table { font-size: 14px; }
 }
 
 div.column input { 
-    text-align: center; 
+  text-align: center; 
 }
 
 
 div:not(.vsm-box) input {
   width: 15px;
   height: 15px;
-
   vertical-align: middle;
   position: relative;
   top: -1px;
-
 }
 
 div p {
-text-align: justify;
+  text-align: justify;
 }
 
 td, th {
-    border: 1px solid grey
+  border: 1px solid grey;
 }
 
 .side-label {
@@ -65,7 +68,7 @@ td, th {
   text-indent: -15px;
 }
 
-input[type=number]{
+input[type=number] {
   width: 120px;
   height: 50px;
 }
@@ -74,7 +77,7 @@ ul,
 li {
   margin: 0;
   padding: 0;
-  list-style: nont;
+  list-style: none;
   vertical-align: middle;
   font-size: 11pt;
 }
@@ -84,19 +87,18 @@ li {
   margin-bottom: 2rem;
 }
 
-/* add shadow to gif images*/ 
-#gif{
+/* Add shadow to gif images */ 
+#gif {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 /*
-#vsm-box .term{
-	font-size:20px;
-	line-height: normal;
+#vsm-box .term {
+  font-size: 20px;
+  line-height: normal;
 }
 
-#vsm-box .term.inp input{
-	font-size: 17px;
+#vsm-box .term.inp input {
+  font-size: 17px;
 }
-
 */
