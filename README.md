@@ -1,4 +1,8 @@
-# The causalBuilder Interface
+# The causalBuilder interface
+
+[![Build Status](https://travis-ci.org/MI2CAST/causalBuilder.svg?branch=master)](https://travis-ci.org/MI2CAST/causalBuilder)
+[![License](https://img.shields.io/github/license/MI2CAST/causalBuilder)](LICENSE.md)
+![Repo size](https://img.shields.io/github/repo-size/MI2CAST/causalBuilder)
 
 An intuitive interface for the creation of causal statements.
 
