@@ -121,4 +121,4 @@ layout: default
 ### 3. Download the causal statement
 <button onclick="log(exportCausalJson());">causal-JSON</button>
 <button onclick="log(exportMitab28());">MITAB2.8</button>
-<button onclick="log(getFlatJson());">flat-JSON</button>
+<!--<button onclick="log(getFlatJson());">flat-JSON</button>-->
