@@ -4,7 +4,7 @@
  * This function gets called when the content of the vsm-box changes,
  * so also when the user fills in a field.
  * It makes that `vsmSentInBox` always contains the latest data,
- * and it is from this that `getFlatVsmJson()` extracts what it needs.
+ * and it is from this that `getFlatJson()` extracts what it needs.
  */
 function onVsmBoxChange(event) {
     vsmSentInBox = event.detail[0];  // See the <vsm-box> project's "index-prod-standalone.html" example.
@@ -30,7 +30,7 @@ function onVsmBoxChange(event) {
  *     ...
  *   }
  */
-function getFlatVsmJson() {
+function getFlatJson() {
     console.log(vsmSentInBox)
     return vsmSentInBox.terms.reduce((o, term) => {
         if (term.tag) {
@@ -59,21 +59,38 @@ function getFlatVsmJson() {
    * @param {Array} exportObj
    * @param {String} exportName
    */
-function downloadObjectAsJson(exportObj, exportName) {
-    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
+function downloadObjectAsJson(object, filename) {
+    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(object));
     var downloadAnchorNode = document.createElement('a');
     downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", exportName + ".json");
+    downloadAnchorNode.setAttribute("download", filename + ".json");
     document.body.appendChild(downloadAnchorNode); // required for firefox
     downloadAnchorNode.click();
     downloadAnchorNode.remove();
 }
 
-/**
- * Create and export the causalJson
- */
-function exportCausalJson() {
-    let exportFile = new ExportCausalJson();
-    exportFile.exportCausalJson(getFlatVsmJson());
-    downloadObjectAsJson(exportFile.causalJson, "causalJson");
+function downloadTextFile(text, filename) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+}
+
+function exportCausalJson(){
+    let exportcausaljson = new ConvertCausalFormats();
+    exportcausaljson.choice = "flatjson2causaljson";
+    exportcausaljson.input = getFlatJson();
+    var causalJson = exportcausaljson.doConversion();
+    downloadObjectAsJson(causalJson, "causal-json.json");
+}
+
+function exportMitab28(){
+    let exportmitab = new ConvertCausalFormats();
+    exportmitab.choice = "flatjson2mitab";
+    exportmitab.input = getFlatJson();
+    var mitab = exportmitab.doConversion();
+    downloadTextFile(mitab, "causal-mitab.txt");
 }
