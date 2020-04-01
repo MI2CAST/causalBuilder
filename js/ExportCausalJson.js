@@ -72,7 +72,7 @@ function downloadObjectAsJson(object, filename) {
 function downloadTextFile(text, filename) {
     var element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    element.setAttribute('download', filename);
+    element.setAttribute('download', filename + ".txt");
     element.style.display = 'none';
     document.body.appendChild(element);
     element.click();
@@ -84,7 +84,7 @@ function exportCausalJson(){
     exportcausaljson.choice = "flatjson2causaljson";
     exportcausaljson.input = getFlatJson();
     var causalJson = exportcausaljson.doConversion();
-    downloadObjectAsJson(causalJson, "causal-json.json");
+    downloadObjectAsJson(causalJson, "causal-json");
 }
 
 function exportMitab28(){
@@ -92,5 +92,5 @@ function exportMitab28(){
     exportmitab.choice = "flatjson2mitab";
     exportmitab.input = getFlatJson();
     var mitab = exportmitab.doConversion();
-    downloadTextFile(mitab, "causal-mitab.txt");
+    downloadTextFile(mitab, "causal-mitab");
 }
