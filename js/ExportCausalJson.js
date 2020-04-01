@@ -79,6 +79,10 @@ function downloadTextFile(text, filename) {
     document.body.removeChild(element);
 }
 
+/**
+ * Export function to generate a causal-json
+ * Uses the converter-causal-formats npm package
+ */
 function exportCausalJson(){
     let exportcausaljson = new ConvertCausalFormats();
     exportcausaljson.choice = "flatjson2causaljson";
@@ -87,6 +91,10 @@ function exportCausalJson(){
     downloadObjectAsJson(causalJson, "causal-json");
 }
 
+/**
+ * Export function to generate a MITAB2.8
+ * Uses the converter-causal-formats npm package
+ */
 function exportMitab28(){
     let exportmitab = new ConvertCausalFormats();
     exportmitab.choice = "flatjson2mitab";

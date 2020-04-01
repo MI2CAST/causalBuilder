@@ -107,10 +107,12 @@ When the corresponding match appears, select the appropriate annotation term and
 
 
 ### 3. Download the causal statement in the desired format
-The causalBuilder generates a causal-json file and will soon support the export into a [mitab2.8](http://psicquic.github.io/MITAB28Format.html) format as well. 
-All information filled in the VSM template generated will be translated accordingly in these file formats.
+The causalBuilder can generate a causal-json and a [MITAB2.8](http://psicquic.github.io/MITAB28Format.html). 
+All information filled in the VSM template generated will be translated accordingly in the causal-json. 
+In the MITAB2.8, only the information that can be supported by this format are stored 
+(for instance, the experimental setup can currently not be stored). Check the [MITAB2.8 documentation](http://psicquic.github.io/MITAB28Format.html) for more information.
 
 
-## Questions? Contact us!
-Vasundra Touré: <vasundra.toure@ntnu.no>
+## Questions? Problems? Contact us!
+Do not hesitate to reach us via the [github platform](https://github.com/MI2CAST/causalBuilder/issues).
 
