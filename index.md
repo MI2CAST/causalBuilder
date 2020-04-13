@@ -79,8 +79,7 @@ layout: default
       <label><input type="checkbox" id="effectMechanism" onchange='updatePanelState(this);' /> Biological mechanism </label><br> <br>
       <label><input type="checkbox" id="effectTaxon" onchange='updatePanelState(this);' /> Taxon </label><br> <br>
       <label><input type="checkbox" id="effectCompartment" onchange='updatePanelState(this);' /> Compartment </label><br> <br>
-      <label><input type="checkbox" id="effectCellLine" onchange='updatePanelState(this);' /> Cell line </label><br> <br>
-      <label><input type="checkbox" id="effectCellType" onchange='updatePanelState(this);' /> Cell Type </label><br> <br>
+      <label><input type="checkbox" id="effectCellType" onchange='updatePanelState(this);' /> Cell type or cell line </label><br> <br>
       <label><input type="checkbox" id="effectTissue" onchange='updatePanelState(this);' /> Tissue type </label><br> <br>
   </div>
   

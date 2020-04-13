@@ -87,7 +87,6 @@ function computeInitialPanelState() {
         effectMechanism: false,
         effectTaxon: false,
         effectCompartment: false,
-        effectCellLine: false,
         effectCellType: false,
         effectTissue: false,
         reference: 1,
@@ -281,12 +280,6 @@ const CellType = {
  ] }}
 };
 
-const PartOfCellLine = {
-    str: 'in', classID: null, instID: null
-};
-const CellLine = {
-    queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/BTO' ] }}
-};
 
 const HasReference = {
     str: 'has reference', classID: null, instID: null
@@ -355,7 +348,6 @@ tagOrder = [
     'effectTaxon',
     'effectTissue',
     'effectCellType',
-    'effectCellLine',
     'effectCompartment',
     'reference',
     'evidence',
@@ -591,14 +583,6 @@ var insertionTasks = [
         findTag: 'effect',
         insertFrag:
             { terms: [ 0, PartOfCellType, X(CellType, 'effectCellType', 'cell type') ],
-                conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
-            }
-    },
-
-    { panelCondition: 'effectCellLine',
-        findTag: 'effect',
-        insertFrag:
-            { terms: [ 0, PartOfCellLine, X(CellLine, 'effectCellLine', 'cell line') ],
                 conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
             }
     },
