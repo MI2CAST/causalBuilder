@@ -15,7 +15,7 @@ layout: default
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
 <link href="https://www.jqueryscript.net/demo/jQuery-Plugin-For-Multi-Select-List-with-Checkboxes-MultiSelect/jquery.multiselect.css" rel="stylesheet" type="text/css">
 <script src="https://www.jqueryscript.net/demo/jQuery-Plugin-For-Multi-Select-List-with-Checkboxes-MultiSelect/jquery.multiselect.js"></script>
-<script src="https://unpkg.com/converter-causal-formats@^1.0.0/dist/converter-causal-formats.min.js"></script>
+<script src="https://unpkg.com/converter-causal-formats@^1.0.2/dist/converter-causal-formats.min.js"></script>
 <script src="js/VsmCausalTemplate.js"></script>
 <script src="js/ExportCausalJson.js"></script>
 
