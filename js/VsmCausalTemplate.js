@@ -210,8 +210,8 @@ const Activity = {
     queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/GO' ] }}
 };
 
-const HasState = {
-    str: 'has state', classID: null, instID: null
+const HasModif = {
+    str: 'has modif', classID: null, instID: null
 };
 const Modification = {
     queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/PSIMOD' ] }}
@@ -403,12 +403,12 @@ var insertionTasks = [
         findTag: 'source',
         insertVariants: {
             'mod':
-                { terms: [ 0, HasState, X(Modification, 'sourceModificationMod', 'modification') ],
+                { terms: [ 0, HasModif, X(Modification, 'sourceModificationMod', 'modification') ],
                     conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
                 },
             'modres':
                 { terms: [ 0,
-                        HasState, X(Modification, 'sourceModificationMod', 'modification'),
+                        HasModif, X(Modification, 'sourceModificationMod', 'modification'),
                         OfResidue, X(Residue, 'sourceModificationModRes', 'residue')
                     ],
                     conns: [
@@ -418,7 +418,7 @@ var insertionTasks = [
                 },
             'modpos':
                 { terms: [ 0,
-                        HasState, X(Modification, 'sourceModificationMod', 'modification'),
+                        HasModif, X(Modification, 'sourceModificationMod', 'modification'),
                         AtPosition, X(Position, 'sourceModificationModPos', 'pos')
                     ],
                     conns: [
@@ -428,7 +428,7 @@ var insertionTasks = [
                 },
             'modrespos':
                 { terms: [ 0,
-                        HasState, X(Modification, 'sourceModificationMod', 'modification'),
+                        HasModif, X(Modification, 'sourceModificationMod', 'modification'),
                         OfResidue, X(Residue, 'sourceModificationModRes', 'residue'),
                         AtPosition, X(Position, 'sourceModificationModPos', 'pos')
                     ],
@@ -489,12 +489,12 @@ var insertionTasks = [
         findTag: 'target',
         insertVariants: {
             'mod':
-                { terms: [ 0, HasState, X(Modification, 'targetModificationMod', 'modification') ],
+                { terms: [ 0, HasModif, X(Modification, 'targetModificationMod', 'modification') ],
                     conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
                 },
             'modres':
                 { terms: [ 0,
-                        HasState, X(Modification, 'targetModificationMod', 'modification'),
+                        HasModif, X(Modification, 'targetModificationMod', 'modification'),
                         OfResidue, X(Residue, 'targetModificationModRes', 'residue')
                     ],
                     conns: [
@@ -504,7 +504,7 @@ var insertionTasks = [
                 },
             'modpos':
                 { terms: [ 0,
-                        HasState, X(Modification, 'targetModificationMod', 'modification'),
+                        HasModif, X(Modification, 'targetModificationMod', 'modification'),
                         AtPosition, X(Position, 'targetModificationModPos', 'pos')
                     ],
                     conns: [
@@ -514,7 +514,7 @@ var insertionTasks = [
                 },
             'modrespos':
                 { terms: [ 0,
-                        HasState, X(Modification, 'targetModificationMod', 'modification'),
+                        HasModif, X(Modification, 'targetModificationMod', 'modification'),
                         OfResidue, X(Residue, 'targetModificationModRes', 'residue'),
                         AtPosition, X(Position, 'targetModificationModPos', 'pos')
                     ],
