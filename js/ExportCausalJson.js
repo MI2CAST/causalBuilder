@@ -53,31 +53,33 @@ function getFlatJson() {
     }, {});
 }
 
-  /**
-   * Taken from: https://stackoverflow.com/questions/19721439/download-json-object-as-a-file-from-browser
-   * Download an object as a JSON file.
-   * @param {Array} exportObj
-   * @param {String} exportName
-   */
-function downloadObjectAsJson(object, filename) {
-    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(object));
-    var downloadAnchorNode = document.createElement('a');
-    downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", filename + ".json");
-    document.body.appendChild(downloadAnchorNode); // required for firefox
-    downloadAnchorNode.click();
-    downloadAnchorNode.remove();
+
+/**
+* Based on: https://stackoverflow.com/questions/19721439/download-json-object-as-a-file-from-browser
+*/
+function downloadStr(str, type, filenameExt) {
+    var dataStr = "data:text/" + type + ";charset=utf-8," + encodeURIComponent(str);
+    var el = document.createElement('a');
+    el.setAttribute("href", dataStr);
+    el.setAttribute("download", filenameExt);
+    el.style.display = 'none';
+    document.body.appendChild(el); // required for firefox
+    el.click();
+    el.remove();
 }
 
 function downloadTextFile(text, filename) {
-    var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    element.setAttribute('download', filename + ".txt");
-    element.style.display = 'none';
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
+    downloadStr(text, "plain", filename + ".txt");
 }
+
+function downloadStringAsJson(text, filename) {
+    downloadStr(text, "json", filename + ".json");
+}
+
+function downloadObjectAsJson(object, filename) {
+    downloadStringAsJson(JSON.stringify(object), filename);
+}
+
 
 /**
  * Export function to generate a causal-json
@@ -103,6 +105,6 @@ function exportMitab28(){
     downloadTextFile(mitab, "causal-mitab");
 }
 
-function exportFlatVsm(){
-    downloadTextFile(VsmJsonPretty(vsmSentInBox), "causal-vsm");
+function exportVsmJson(){
+    downloadStringAsJson(VsmJsonPretty(vsmSentInBox), "causal-vsm");
 }
