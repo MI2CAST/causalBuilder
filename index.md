@@ -16,6 +16,7 @@ layout: default
 <link href="https://www.jqueryscript.net/demo/jQuery-Plugin-For-Multi-Select-List-with-Checkboxes-MultiSelect/jquery.multiselect.css" rel="stylesheet" type="text/css">
 <script src="https://www.jqueryscript.net/demo/jQuery-Plugin-For-Multi-Select-List-with-Checkboxes-MultiSelect/jquery.multiselect.js"></script>
 <script src="https://unpkg.com/converter-causal-formats@^1.0.2/dist/converter-causal-formats.min.js"></script>
+<script src="https://unpkg.com/vsm-json-pretty@^1.0.0/dist/vsm-json-pretty.min.js"></script>
 <script src="js/VsmCausalTemplate.js"></script>
 <script src="js/ExportCausalJson.js"></script>
 
@@ -118,6 +119,7 @@ layout: default
 
 
 ### 3. Download the causal statement
+<button onclick="log(exportFlatVsm());">VSM-JSON</button>
 <button onclick="log(exportCausalJson());">causal-JSON</button>
 <button onclick="log(exportMitab28());">MITAB2.8</button>
-<!--<button onclick="log(getFlatJson());">flat-JSON</button>-->
+

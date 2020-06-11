@@ -102,3 +102,7 @@ function exportMitab28(){
     var mitab = exportmitab.doConversion();
     downloadTextFile(mitab, "causal-mitab");
 }
+
+function exportFlatVsm(){
+    downloadTextFile(VsmJsonPretty(vsmSentInBox), "causal-vsm");
+}
