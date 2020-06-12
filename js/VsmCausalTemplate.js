@@ -170,7 +170,7 @@ function updateEntityDatabase(list, type){
     vsmRoot = {
         terms: [
             X(SourceEntity,     'source',     'source'),
-            X(Effect, 'effect', 'effect'),
+            X(Effect, 'effect', 'causal relation'),
             X(TargetEntity,     'target',     'target'),
         ],
         conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]
@@ -211,7 +211,7 @@ const Activity = {
 };
 
 const HasModif = {
-    str: 'has modif', classID: null, instID: null
+    str: 'has modif.', classID: null, instID: null
 };
 const Modification = {
     queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/PSIMOD' ] }}
@@ -314,7 +314,7 @@ function X(obj, tag, placeholder) {
 var vsmRoot = {
     terms: [
         X(SourceEntity,     'source',     'source'),
-        X(Effect, 'effect', 'effect'),
+        X(Effect, 'effect', 'causal relation'),
         X(TargetEntity,     'target',     'target'),
     ],
     conns: [ { type: 'T', pos: [ 0, 1, 2 ] } ]

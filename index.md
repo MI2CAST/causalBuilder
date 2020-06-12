@@ -76,7 +76,7 @@ layout: default
            
   </div>
   <div class="column">
-    <h4> Effect</h4>
+    <h4>Causal relationship</h4>
       <label><input type="checkbox" id="effectMechanism" onchange='updatePanelState(this);' /> Biological mechanism </label><br> <br>
       <label><input type="checkbox" id="effectTaxon" onchange='updatePanelState(this);' /> Taxon </label><br> <br>
       <label><input type="checkbox" id="effectCompartment" onchange='updatePanelState(this);' /> Compartment </label><br> <br>
