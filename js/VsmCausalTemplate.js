@@ -238,7 +238,7 @@ const Position = {
 };
 
 const HasSetup = {
-    str: 'has setup', classID: 'http://example.org/ID:has_experimental setup', instID: null
+    str: 'has setup', classID: 'http://example.org/ID:has_experimental_setup', instID: null
 };
 const Experiment = {
     queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/ECO', 'http://data.bioontology.org/ontologies/MI' ] }}
