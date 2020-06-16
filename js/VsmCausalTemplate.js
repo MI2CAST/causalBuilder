@@ -37,7 +37,7 @@ var vsmSentInBox = { terms: [], conns: [] };  // The vsmbox's latest emitted dat
 window.onload = function() {
     vsmbox = document.getElementsByTagName('vsm-box')[0];
     vsmbox.sizes = { minWidth: 500 };
-    vsmbox.queryOptions = { perPage: 7 };
+    vsmbox.queryOptions = { perPage: 10 };
 
     makeAllRequestsHttps();  // To make VsmDictionaryBioportal's http-requests work on GitHub Pages.
 
