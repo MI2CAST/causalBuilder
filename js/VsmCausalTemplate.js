@@ -214,7 +214,12 @@ const HasModif = {
     str: 'has modif.', classID: null, instID: null
 };
 const Modification = {
-    queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/PSIMOD' ] }}
+    // Either without or with a fixedTerm:
+    ///queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/PSIMOD' ] }}
+    queryOptions: {
+      filter: { dictID: [ 'http://data.bioontology.org/ontologies/PSIMOD' ] },
+      fixedTerms: [ { id: 'http://purl.obolibrary.org/obo/MOD_00696', str: 'phosphorylated residue' } ]
+    }
 };
 
 const OfResidue = {
