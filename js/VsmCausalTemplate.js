@@ -234,7 +234,9 @@ const AtPosition = {
     str: 'at', classID: 'http://example.org/ID:is_located_at_amino_acid_position_number', instID: null
 };
 const Position = {
-    type: 'EL', editWidth: 26
+    // Make either an Edit-Literal or an Edit-Instance type VSM-term:
+    ///type: 'EL', editWidth: 26,
+    queryOptions: { filter: { dictID: [ '-' ] }}, editWidth: 26
 };
 
 const HasSetup = {
