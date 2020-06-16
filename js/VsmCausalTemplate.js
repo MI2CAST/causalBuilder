@@ -197,21 +197,21 @@ const Effect = {
 };
 
 const IsAType = {
-    str: 'is a', classID: null, instID: null
+    str: 'is a', classID: 'http://example.org/ID:has_biological_type', instID: null
 };
 const Type = {
     queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/MI' ] }}
 };
 
 const HasActivity = {
-    str: 'has activity', classID: null, instID: null
+    str: 'has activity', classID: 'http://example.org/ID:has_biological_activity', instID: null
 };
 const Activity = {
     queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/GO' ] }}
 };
 
 const HasModif = {
-    str: 'has modif.', classID: null, instID: null
+    str: 'has modif.', classID: 'http://example.org/ID:has_biological_modification', instID: null
 };
 const Modification = {
     // Either without or with a fixedTerm:
@@ -223,7 +223,7 @@ const Modification = {
 };
 
 const OfResidue = {
-    str: 'of', classID: null, instID: null
+    str: 'of', classID: 'http://example.org/ID:affects', instID: null
 };
 const Residue = {
     queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/CHEBI' ] }},
@@ -231,42 +231,42 @@ const Residue = {
 };
 
 const AtPosition = {
-    str: 'at', classID: null, instID: null
+    str: 'at', classID: 'http://example.org/ID:is_located_at_amino_acid_position_number', instID: null
 };
 const Position = {
     type: 'EL', editWidth: 26
 };
 
 const HasSetup = {
-    str: 'has setup', classID: null, instID: null
+    str: 'has setup', classID: 'http://example.org/ID:has_experimental setup', instID: null
 };
 const Experiment = {
     queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/ECO', 'http://data.bioontology.org/ontologies/MI' ] }}
 };
 
 const PartOfTaxon = {
-    str: 'in', classID: null, instID: null
+    str: 'in', classID: 'http://example.org/ID:is_part_of_taxon', instID: null
 };
 const Taxon = {
     queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/NCBITAXON' ] }}
 };
 
 const PartOfCompartment = {
-    str: 'in', classID: null, instID: null
+    str: 'in', classID: 'http://example.org/ID:has_location', instID: null
 };
 const Compartment = {
     queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/GO' ] }}
 };
 
 const HasMechanism = {
-    str: 'has mechanism', classID: null, instID: null
+    str: 'has mechanism', classID: 'http://example.org/ID:has_mechanism', instID: null
 };
 const Mechanism = {
     queryOptions: { filter: { dictID: [ 'http://data.bioontology.org/ontologies/MI' ] }}
 };
 
 const PartOfTissue = {
-    str: 'in', classID: null, instID: null
+    str: 'in', classID: 'http://example.org/ID:has_location', instID: null
 };
 const Tissue = {
     queryOptions: { filter: { dictID: [
@@ -276,7 +276,7 @@ const Tissue = {
 };
 
 const PartOfCellType = {
-    str: 'in', classID: null, instID: null
+    str: 'in', classID: 'http://example.org/ID:has_location', instID: null
 };
 const CellType = {
     queryOptions: { filter: { dictID: [
@@ -287,14 +287,14 @@ const CellType = {
 
 
 const HasReference = {
-    str: 'has reference', classID: null, instID: null
+    str: 'has reference', classID: 'http://example.org/ID:has_reference', instID: null
 };
 const Reference = {
     queryOptions: {filter: { dictID: ['https://www.ncbi.nlm.nih.gov/pubmed']}}
 };
 
 const AssessedByEvidence = {
-    str: 'is assessed by', classID: null, instID: null
+    str: 'is assessed by', classID: 'http://example.org/ID:is_assessed_by', instID: null
 };
 const Evidence = {
     queryOptions: {filter: { dictID: [ 'http://data.bioontology.org/ontologies/ECO' ] }}
