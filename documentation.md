@@ -26,18 +26,18 @@ you can build the causal statement with the metadata wished to be annotated. The
 > To know more about the minimum set of information to annotate about a molecular interaction causal statement, read the [MI2CAST guidelines](https://github.com/MI2CAST/MI2CAST).
 
 ## What is VSM (Visual Syntax Method)?
-> VSM is a general framework for communicating pieces of information that are both human and computer understandable. VSM defines three components:
+> VSM is a general framework for communicating pieces of information that are both human and computer understandable. VSM includes three component types:
 >
 > 1- a VSM-term, which is an association of a term (human-readable) and an identifier (machine-readable),
 >
-> 2- a VSM-connector, which is a grouping of VSM-terms with semantics (subject-object-predicate),
+> 2- a VSM-connector, which is a grouping of VSM-terms based on a particular semantics (for example subject-relation-object),
 >
-> 3- a VSM-sentence which consists of an association of VSM-terms connected with VSM-connectors.
+> 3- a VSM-sentence, which consists of an association of VSM-terms connected with VSM-connectors.
 >
-> <img src="{{site.url}}/images/VSM.png" alt="Example of a VSM-sentence with VSM-terms, VSM-connectors" width="600"/>
+> <img src="{{site.url}}/images/VSM.png" alt="Example of a VSM-sentence with VSM-terms and VSM-connectors" width="600"/>
 >
 > The causalBuilder is built on top of the VSM framework to facilitate the annotation of causal statements with contextual information. 
-> The causalBuilder generates on-demand templates of VSM sentences to be filled in by the user.
+> The causalBuilder generates on-demand templates of VSM-sentences to be filled in by the user.
 >
 > <img src="{{site.url}}/images/minimum_statement_VSM.png" alt="Minimum causal statement with VSM" width="600"/>
 >
@@ -57,7 +57,7 @@ Go to the [causalBuilder home page](https://mi2cast.github.io/causalBuilder) and
 
 #### 1.1 Select the database to annotate your entities
 By default, all databases will be checked for the annotation of entities (Uniprot, Ensembl, Complex Portal, RNA central, etc). 
-To restrict the options (and get more accurate terms in the auto-complete when filling the [VSM template at step 2](#2.-fill-the-vsm-template)), 
+To restrict the options (and get more accurate terms in the auto-complete when filling the [VSM-template at step 2](#2.-fill-the-vsm-template)), 
 click on the desired database(s) for the annotation of your source and target entities. The selection should be based on the biological type of the entity. 
 For instance, if your source entity is a protein, check the _Uniprot_ under _Source entity_, then the options in the VSM-term of the 'source' will be restricted to Uniprot identifiers only (step 2).
 
@@ -97,9 +97,9 @@ By default, the amount is set to zero for experimental setup and to 1 for refere
 
 The VSM-sentence "template" is progressively built as the annotations are selected. 
 When a checkbox is checked, a type selected or a number added in the reference/evidence/experimental setup, 
-you can see that the VSM box is automatically updated to insert the blocks of information to be annotated.
+you can see that the VSM-box is automatically updated to insert the blocks of information to be annotated.
 
-### 2. Fill the VSM template
+### 2. Fill the VSM-template
 Click on a VSM-term and start typing the identifier or the name of the annotation. 
 When the corresponding match appears, select the appropriate annotation term and click on it or press ENTER. Fill the other annotations accordingly.
 
@@ -108,11 +108,11 @@ When the corresponding match appears, select the appropriate annotation term and
 
 ### 3. Download the causal statement in the desired format
 The causalBuilder can generate a causal-json and a [MITAB2.8](http://psicquic.github.io/MITAB28Format.html). 
-All information filled in the VSM template generated will be translated accordingly in the causal-json. 
+All information filled in the VSM-template generated will be translated accordingly in the causal-json. 
 In the MITAB2.8, only the information that can be supported by this format are stored 
 (for instance, the experimental setup can currently not be stored). Check the [MITAB2.8 documentation](http://psicquic.github.io/MITAB28Format.html) for more information.
 
 
 ## Questions? Problems? Contact us!
-Do not hesitate to reach us via the [github platform](https://github.com/MI2CAST/causalBuilder/issues).
+Do not hesitate to reach us via the [GitHub platform](https://github.com/MI2CAST/causalBuilder/issues).
 
