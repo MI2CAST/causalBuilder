@@ -27,7 +27,7 @@ layout: default
     <h4>  Source Entity </h4>
       <div class="dropdownbox">
         <select name="source_database" multiple class="form-control" id="source_db">
-          <option value="sourceUniprot">Uniprot</option>
+          <option value="sourceUniprot">UniProt</option>
           <option value="sourceEnsembl">Ensembl</option>
           <option value="sourceEnsemblGen">Ensembl genomes</option>
           <option value="sourceRnacentral">RNA central</option>
@@ -53,7 +53,7 @@ layout: default
     <h4>  Target entity </h4>
       <div class="dropdownbox">
         <select name="target_database" multiple class="form-control" id="target_db">
-          <option value="targetUniprot">Uniprot</option>
+          <option value="targetUniprot">UniProt</option>
           <option value="targetEnsembl">Ensembl</option>
           <option value="targetEnsemblGen">Ensembl genomes</option>
           <option value="targetRnacentral">RNA central</option>
