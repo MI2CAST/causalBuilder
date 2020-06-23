@@ -109,6 +109,9 @@ function resetPanel() {
 
     document.getElementById('reference').value = panelState.reference;  // } Set the ones that are not 0.
     document.getElementById('evidence' ).value = panelState.evidence;   // }
+
+    document.getElementById('source_db').selectedIndex = -1;
+    document.getElementById('target_db').selectedIndex = -1;
 }
 
 
