@@ -61,6 +61,7 @@ function makeAllRequestsHttps() {
  */
 function initVsmBox(){
     computeInitialPanelState();
+    resetPanel();
     updateVsmBox();
 }
 
@@ -92,6 +93,22 @@ function computeInitialPanelState() {
         reference: 1,
         evidence: 1
     };
+}
+
+
+/**
+ * Make the checkboxes and number-fields correspond to the initial panelState.
+ */
+function resetPanel() {
+    var elems = document.getElementsByTagName('input');
+    elems = [].slice.call(elems);
+    elems.forEach(inp => {
+      if (     inp.type === 'checkbox')  inp.checked = false;
+      else if (inp.type === 'number'  )  inp.value   = 0;
+    });
+
+    document.getElementById('reference').value = panelState.reference;  // } Set the ones that are not 0.
+    document.getElementById('evidence' ).value = panelState.evidence;   // }
 }
 
 
