@@ -108,3 +108,15 @@ function exportMitab28(){
 function exportVsmJson(){
     downloadStringAsJson(VsmJsonPretty(vsmSentInBox), "causal-vsm");
 }
+
+function exportVsmLightJson(){
+    var vsm = JSON.parse(JSON.stringify(vsmSentInBox));
+    vsm.terms.forEach(t => {
+      delete t.queryOptions;
+      delete t.tag;
+      delete t.dictID;
+      delete t.descr;
+      if (t.str)  delete t.placeholder;
+    });
+    downloadStringAsJson(VsmJsonPretty(vsm), "causal-vsm-light");
+}
