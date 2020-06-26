@@ -112,10 +112,14 @@ function exportVsmJson(){
 function exportVsmLightJson(){
     var vsm = JSON.parse(JSON.stringify(vsmSentInBox));
     vsm.terms.forEach(t => {
-      delete t.queryOptions;
-      delete t.tag;
       delete t.dictID;
       delete t.descr;
+      delete t.queryOptions;
+      delete t.minWidth;
+      delete t.maxWidth;
+      delete t.editWidth;
+      delete t.type;
+      delete t.tag;
       if (t.str)  delete t.placeholder;
     });
     downloadStringAsJson(VsmJsonPretty(vsm), "causal-vsm-light");
