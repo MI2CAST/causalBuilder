@@ -26,7 +26,7 @@ layout: default
   <div class="column">
     <h4>  Source Entity </h4>
       <div class="dropdownbox">
-        <select name="source_database" multiple class="form-control" id="source_db">
+        <select autocomplete="off" name="source_database" multiple class="form-control" id="source_db">
           <option value="sourceUniprot">UniProt</option>
           <option value="sourceEnsembl">Ensembl</option>
           <option value="sourceEnsemblGen">Ensembl genomes</option>
@@ -52,7 +52,7 @@ layout: default
   <div class="column">
     <h4>  Target entity </h4>
       <div class="dropdownbox">
-        <select name="target_database" multiple class="form-control" id="target_db">
+        <select autocomplete="off" name="target_database" multiple class="form-control" id="target_db">
           <option value="targetUniprot">UniProt</option>
           <option value="targetEnsembl">Ensembl</option>
           <option value="targetEnsemblGen">Ensembl genomes</option>
