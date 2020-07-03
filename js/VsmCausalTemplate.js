@@ -14,6 +14,7 @@ var VsmDictBioPortal      = new VsmDictionaryBioPortal({ apiKey: keyBioportal })
 
 // initialize a cached version of the combiner
 var VsmDictionaryCombinerCached = VsmDictionaryCacher(VsmDictionaryCombiner, { predictEmpties: false });
+VsmDictionaryCombinerCached     = vsmDictNumberTweak (VsmDictionaryCombinerCached);
 var dictionary = new VsmDictionaryCombinerCached({
     // Give all required dictionaries as initialized Objects in this array
     dictionaries: [
@@ -53,6 +54,35 @@ function makeAllRequestsHttps() {
     meta.httpEquiv = "Content-Security-Policy";
     meta.content = "upgrade-insecure-requests";
     document.getElementsByTagName('head')[0].appendChild(meta);
+}
+
+
+/**
+ * Tweak for vsm-dictionary 2.6.*:
+ * Background: When the user types a number, vsm-dictionary automatically adds a 'number-concept' match,
+ *   which is then shown on top of the autocomplete list.
+ *   This is necessary e.g. for the protein-modification-Position field (to get a number+ID term),
+ *   but it gets in the way for the Reference field, when the user types a number to get a PubMedID term.
+ * Tweak: Here we remove a number-match for the Reference field (i.e. when the query filters for vsm-dictionary-pubmed matches).
+ */
+function vsmDictNumberTweak(Dict) {
+  return class VsmDictionaryNumberFixed extends Dict {
+    constructor(options) {
+      super(options);
+    }
+    getMatchesForString(str, options, cb) {  // Extend the function that combined entry-matches with special matches (refTerms, numbers).
+      super.getMatchesForString(str, options, (err, res) => {
+        try {
+          if ( options.filter.dictID.includes('https://www.ncbi.nlm.nih.gov/pubmed')
+               &&  res.items[0].dictID == '00' ) {  // No need to test for missing properties, thanks to `catch`.
+            res.items.shift();
+          }
+        }
+        catch(x) { };
+        return cb(err, res);
+      });
+    }
+  };
 }
 
 
