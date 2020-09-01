@@ -24,7 +24,7 @@ layout: default
 
 <div class="row">
   <div class="column">
-    <h4>  Source Entity </h4>
+    <h4>  Source entity </h4>
       <div class="dropdownbox">
         <select autocomplete="off" name="source_database" multiple class="form-control" id="source_db">
           <option value="sourceUniprot">UniProt</option>
@@ -46,7 +46,7 @@ layout: default
       </div>
       <label><input type="checkbox" id="sourceTaxon" onchange='updatePanelState(this);' /> Taxon </label><br> <br>
       <label><input type="checkbox" id="sourceCompartment" onchange='updatePanelState(this);' /> Compartment </label><br> <br>
-      Experimental Setup <br><input title= "Experimental setup" type="number" id="sourceExperiment" min="0" max="10" value="0" onchange='updatePanelState(this);' /> <br> <br>
+      Experimental setup <br><input title= "Experimental setup" type="number" id="sourceExperiment" min="0" max="10" value="0" onchange='updatePanelState(this);' /> <br> <br>
 
   </div>
   <div class="column">
@@ -72,7 +72,7 @@ layout: default
       </div>
       <label><input type="checkbox" id="targetTaxon" onchange='updatePanelState(this);' /> Taxon </label><br> <br>
       <label><input type="checkbox" id="targetCompartment" onchange='updatePanelState(this);' /> Compartment </label><br> <br>
-      Experimental Setup <br><input title= "Experimental setup" type="number" id="targetExperiment" min="0" max="10" value="0" onchange='updatePanelState(this);' /> <br> <br>
+      Experimental setup <br><input title= "Experimental setup" type="number" id="targetExperiment" min="0" max="10" value="0" onchange='updatePanelState(this);' /> <br> <br>
            
   </div>
   <div class="column">
@@ -85,7 +85,7 @@ layout: default
   </div>
   
   <div class="column">
-    <h4> Causal Statement</h4>
+    <h4> Causal statement</h4>
       Reference(s) <br>
       <input title= "Number of references: PMIDs, DOIs" type="number" id="reference" min="1" max="10" value="1" onchange='updatePanelState(this);' /> <br> <br>
       Evidence <br>
