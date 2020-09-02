@@ -97,13 +97,13 @@ By default, the amount is set to zero for experimental setup and to 1 for refere
 
 The VSM-sentence "template" is progressively built as the annotations are selected. 
 When a checkbox is checked, a type selected or a number added in the reference/evidence/experimental setup, 
-you can see that the VSM-box is automatically updated to insert the blocks of information to be annotated.
+you can see that the vsm-box is automatically updated to insert the blocks of information to be annotated.
 
 ### 2. Fill the VSM-template
 Click on a VSM-term and start typing the identifier or the name of the annotation. 
 When the corresponding match appears, select the appropriate annotation term and click on it or press ENTER. Fill the other annotations accordingly.
 
-<img src="{{site.url}}/images/documentation/fill_vsm.gif" id="gif" alt="A causal statement filled in a VSM-box" />
+<img src="{{site.url}}/images/documentation/fill_vsm.gif" id="gif" alt="A causal statement filled in a vsm-box" />
 
 
 ### 3. Download the causal statement in the desired format

@@ -113,7 +113,7 @@ layout: default
 </script>
 
 
-### 2. Fill the VSM box
+### 2. Fill the vsm-box
 <vsm-box id="vsm-box"></vsm-box>
 <br>
 
