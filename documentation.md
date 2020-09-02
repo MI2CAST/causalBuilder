@@ -88,8 +88,8 @@ Once the *biological modification* is checked, a new one appears below to enable
 If the checkbox is not checked and if the type of annotation _(i.e., mod, mod+red, mod+pos, mod+pos+res)_ is not selected, the terms will not appear in the VSM-sentence.
 
 #### 1.4 Adding experimental setups(s), reference(s) and evidence
-A causal statement has at least 1 references and/or evidence, but can also have more. A source entity and a target entity can have 0, 1 or many experimental setups defined. 
-Consequently, indicate the number of *reference* and *evidence* metadata wished to annotate by entering a number or by using the arrow on the right side of the box. 
+A causal statement has at least 1 references and/or evidence, but can also have more. A source entity and a target entity can have 0, 1 or many experimental setups defined, which correspond to particular experimental setting(s) applied to the entities to observe the causal interaction. 
+Consequently, indicate the number of *reference*, *experimental setup* and *evidence* metadata wished to annotate by entering a number or by using the arrow on the right side of the box. 
 By default, the amount is set to zero for experimental setup and to 1 for reference and evidence.  
 
 <img src="{{site.url}}/images/documentation/reference_evidence.gif" id="gif" alt="Annotation of one reference and zero evidence" />
