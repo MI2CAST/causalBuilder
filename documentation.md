@@ -7,7 +7,7 @@ permalink: /documentation
 # User documentation
 
 <div style="text-align: justify">The causalBuilder is a prototype web application for building molecular interaction causal statements. 
-This curation interface takes advantage of the <a href="https://github.com/vsmjs/"> VSM framework </a> to generate customized VSM-templates for the annotation of specific causal statements: 
+This curation interface takes advantage of the <a href="https://vsm.github.io"> VSM framework </a> to generate customized VSM-templates for the annotation of specific causal statements: 
 you can build the causal statement with the metadata wished to be annotated. The causal statements generated are compatible with the MI2CAST 
 (Minimum Information about a Molecular Interaction Causal Statement) checklist that is available at <a href="https://github.com/MI2CAST/MI2CAST">MI2CAST GitHub project</a>.
 </div>
@@ -41,7 +41,7 @@ you can build the causal statement with the metadata wished to be annotated. The
 >
 > <img src="{{site.url}}/images/minimum_statement_VSM.png" alt="Minimum causal statement with VSM" width="600"/>
 >
-> To know more about VSM, read the [VSM introduction](http://scicura.org/vsm/intro.html).
+> To know more about VSM, see the [VSM overview](https://vsm.github.io).
 
 
 ## How to use the web application?
@@ -107,10 +107,10 @@ When the corresponding match appears, select the appropriate annotation term and
 
 
 ### 3. Download the causal statement in the desired format
-The causalBuilder can generate a causal-json and a [MITAB2.8](http://psicquic.github.io/MITAB28Format.html). 
+The causalBuilder can generate a causal-json and a [MITAB2.8](https://psicquic.github.io/MITAB28Format.html). 
 All information filled in the VSM-template generated will be translated accordingly in the causal-json. 
 In the MITAB2.8, only the information that can be supported by this format are stored 
-(for instance, the experimental setup can currently not be stored). Check the [MITAB2.8 documentation](http://psicquic.github.io/MITAB28Format.html) for more information.
+(for instance, the experimental setup can currently not be stored). Check the [MITAB2.8 documentation](https://psicquic.github.io/MITAB28Format.html) for more information.
 
 
 ## Questions? Problems? Contact us!
