@@ -702,7 +702,7 @@ function doInsertionTask(task) {
  * + Arg. `str`: is just for logging.
  */
 function insertFrag(findTag, frag, tagExt, str) {
-    ///log('attaching to ' + findTag + ': ' + str);
+    ///console.log('attaching to ' + findTag + ': ' + str);
 
     // Clone: ensures that changes to what we insert, won't pollute the original `frag`-Object.
     frag = clone(frag);
@@ -780,7 +780,7 @@ function whereToInsertFragTail(frag) {
         if (tagsBefore.includes(tag))  insertPos = i;
     });
 
-    ///log('tag: ' + fragTag + ', before: ' + tagsBefore + ', insertPos: ' + (insertPos + 1));
+    ///console.log('tag: ' + fragTag + ', before: ' + tagsBefore + ', insertPos: ' + (insertPos + 1));
     return insertPos + 1;
 }
 
@@ -789,9 +789,6 @@ function clone(obj) {
     return JSON.parse(JSON.stringify(obj));
 }
 
-function log(s) {
-    console.log(s);
-}
 
 /**
  * Creation and removal of biological modification checkboxes

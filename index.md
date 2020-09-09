@@ -119,8 +119,8 @@ layout: default
 
 
 ### 3. Download the causal statement
-<button onclick="log(exportVsmJson());">VSM-JSON</button><button
-style="margin-left:1px;" onclick="log(exportVsmLightJson());">-light</button>
-<button onclick="log(exportCausalJson());">causal-JSON</button>
-<button onclick="log(exportMitab28());">MITAB2.8</button>
+<button onclick="exportVsmJson();">VSM-JSON</button><button
+style="margin-left:1px;" onclick="exportVsmLightJson();">-light</button>
+<button onclick="exportCausalJson();">causal-JSON</button>
+<button onclick="exportMitab28();">MITAB2.8</button>
 

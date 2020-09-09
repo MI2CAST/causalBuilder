@@ -31,7 +31,7 @@ function onVsmBoxChange(event) {
  *   }
  */
 function getFlatJson() {
-    console.log(vsmSentInBox)
+    console.log(vsmSentInBox);
     return vsmSentInBox.terms.reduce((o, term) => {
         if (term.tag) {
             var val =
@@ -66,6 +66,7 @@ function downloadStr(str, type, filenameExt) {
     document.body.appendChild(el); // required for firefox
     el.click();
     el.remove();
+    console.log(str);
 }
 
 function downloadTextFile(text, filename) {
