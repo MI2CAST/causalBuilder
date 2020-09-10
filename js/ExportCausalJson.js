@@ -87,9 +87,11 @@ function downloadObjectAsJson(object, filename) {
  * Uses the converter-causal-formats npm package
  */
 function exportCausalJson(){
-    let exportcausaljson = new ConvertCausalFormats();
+    var flatJson = getFlatJson();
+    warnIfIncomplete(flatJson);
+    var exportcausaljson = new ConvertCausalFormats();
     exportcausaljson.choice = "flatjson2causaljson";
-    exportcausaljson.input = getFlatJson();
+    exportcausaljson.input = flatJson;
     var causalJson = exportcausaljson.doConversion();
     downloadObjectAsJson(causalJson, "causal-json");
 }
@@ -99,9 +101,11 @@ function exportCausalJson(){
  * Uses the converter-causal-formats npm package
  */
 function exportMitab28(){
-    let exportmitab = new ConvertCausalFormats();
+    var flatJson = getFlatJson();
+    warnIfIncomplete(flatJson);
+    var exportmitab = new ConvertCausalFormats();
     exportmitab.choice = "flatjson2mitab";
-    exportmitab.input = getFlatJson();
+    exportmitab.input = flatJson;
     var mitab = exportmitab.doConversion();
     downloadTextFile(mitab, "causal-mitab");
 }
@@ -124,4 +128,19 @@ function exportVsmLightJson(){
       if (t.str)  delete t.placeholder;
     });
     downloadStringAsJson(VsmJsonPretty(vsm), "causal-vsm-light");
+}
+
+function warnIfIncomplete(o) {
+    var absent = '';
+    if      (!o.source)  absent = 'source';
+    else if (!o.effect)  absent = 'causal relation';
+    else if (!o.target)  absent = 'target';
+    else if (!o.reference || !o.reference.filter(x => x).length)  absent = 'reference';
+    else if (!o.evidence  || !o.evidence .filter(x => x).length)  absent = 'evidence';
+    if (absent) {
+        alert (
+            'Warning: data entry is incomplete according to MI2CAST guidelines: \n"' +
+            absent + '" is missing.'
+        );
+    }
 }
