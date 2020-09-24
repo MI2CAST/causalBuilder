@@ -105,6 +105,8 @@ When the corresponding match appears, select the appropriate annotation term and
 
 <img src="{{site.url}}/images/documentation/fill_vsm.gif" id="gif" alt="A causal statement filled in a vsm-box" />
 
+Note: Double-clicking on an empty VSM-term shows to which ontologies and controlled vocabularies the auto-complete of that specific field limits to.
+
 
 ### 3. Download the causal statement in the desired format
 The causalBuilder can generate a causal-json and a [MITAB2.8](https://psicquic.github.io/MITAB28Format.html). 
