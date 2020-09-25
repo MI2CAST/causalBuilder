@@ -29,8 +29,8 @@ layout: default
         <select autocomplete="off" name="source_database" multiple class="form-control" id="source_db">
           <option value="sourceUniprot">UniProt</option>
           <option value="sourceEnsembl">Ensembl</option>
-          <option value="sourceEnsemblGen">Ensembl genomes</option>
-          <option value="sourceRnacentral">RNA central</option>
+          <option value="sourceEnsemblGen">Ensembl Genomes</option>
+          <option value="sourceRnacentral">RNAcentral</option>
           <option value="sourceChebi">ChEBI</option>
           <option value="sourceComplexportal">Complex Portal</option>
           <option value="sourceGO">Gene Ontology</option>
@@ -55,8 +55,8 @@ layout: default
         <select autocomplete="off" name="target_database" multiple class="form-control" id="target_db">
           <option value="targetUniprot">UniProt</option>
           <option value="targetEnsembl">Ensembl</option>
-          <option value="targetEnsemblGen">Ensembl genomes</option>
-          <option value="targetRnacentral">RNA central</option>
+          <option value="targetEnsemblGen">Ensembl Genomes</option>
+          <option value="targetRnacentral">RNAcentral</option>
           <option value="targetChebi">ChEBI</option>
           <option value="targetComplexportal">Complex Portal</option>
           <option value="sourceGO">Gene Ontology</option>
