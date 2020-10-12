@@ -1,10 +1,9 @@
 ---
 layout: default
 title: How to?
-permalink: /howto
+permalink: /tips
 ---
 
-# How to?
 Some tips to effectively annotate a molecular causal interaction's different aspects, using causalBuilder.
 
 #### How to annotate an entity?
