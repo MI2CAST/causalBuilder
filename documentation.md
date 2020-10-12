@@ -105,7 +105,8 @@ When the corresponding match appears, select the appropriate annotation term and
 
 <img src="{{site.url}}/images/documentation/fill_vsm.gif" id="gif" alt="A causal statement filled in a vsm-box" />
 
-Note: Double-clicking on an empty VSM-term shows to which ontologies and controlled vocabularies the auto-complete of that specific field limits to.
+Note: Double-clicking on an empty VSM-term field shows the vocabularies or ID lists that the auto-complete for that specific field is configured for. 
+The list of possible annotations for a term can also be found at [https://github.com/MI2CAST/MI2CAST](https://github.com/MI2CAST/MI2CAST).
 
 
 ### 3. Download the causal statement in the desired format
