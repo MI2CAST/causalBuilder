@@ -56,10 +56,10 @@ Go to the [causalBuilder home page](https://mi2cast.github.io/causalBuilder) and
 ### 1. Select all the annotations (context) to add in the causal statement
 
 #### 1.1 Select the database to annotate your entities
-By default, all databases will be checked for the annotation of entities (Uniprot, Ensembl, Complex Portal, RNA central, etc). 
+By default, all databases will be checked for the annotation of entities (UniProt, Ensembl, Complex Portal, RNAcentral, etc). 
 To restrict the options (and get more accurate terms in the auto-complete when filling the [VSM-template at step 2](#2.-fill-the-vsm-template)), 
 click on the desired database(s) for the annotation of your source and target entities. The selection should be based on the biological type of the entity. 
-For instance, if your source entity is a protein, check the _Uniprot_ under _Source entity_, then the options in the VSM-term of the 'source' will be restricted to Uniprot identifiers only (step 2).
+For instance, if your source entity is a protein, check the _UniProt_ under _Source entity_, then the options in the VSM-term of the 'source' will be restricted to UniProt identifiers only (step 2).
 
 <img src="{{site.url}}/images/documentation/database_selection.gif" id="gif" alt="Selection of databases to annotate entities"/>
 
