@@ -110,11 +110,13 @@ The list of possible annotations for a term can also be found at [https://github
 
 
 ### 3. Download the causal statement in the desired format
-The causalBuilder can generate a causal-json and a [MITAB2.8](https://psicquic.github.io/MITAB28Format.html). 
-All information filled in the VSM-template generated will be translated accordingly in the causal-json. 
-In the MITAB2.8, only the information that can be supported by this format are stored 
+The causalBuilder can generate causal-JSON and a [MITAB2.8](https://psicquic.github.io/MITAB28Format.html) formatted files. 
+In the causal-JSON, all information that a curator filled in the VSM-template will be translated and included in full. 
+In the MITAB2.8, only the information that can be supported by this format is stored 
 (for instance, the experimental setup can currently not be stored). Check the [MITAB2.8 documentation](https://psicquic.github.io/MITAB28Format.html) for more information.
 
+In addition, causalBuilder can export the VSM-JSON format, which is a direct representation of the VSM-sentence or -template data emitted by the vsm-box. 
+The VSM-JSON-'light' format is a subset of core data (including IDs and terms names but excluding some template-related data like autocomplete filters), and constitutes a concisely formatted and human-readable essence of what the curator has annotated.
 
 ## Questions? Problems? Contact us!
 Do not hesitate to reach us via the [GitHub platform](https://github.com/MI2CAST/causalBuilder/issues).
