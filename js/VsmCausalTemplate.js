@@ -1,6 +1,6 @@
 
 // initialize the vsm-dictionaries
-var VsmDictUniprot     	= new VsmDictionaryUniprot();
+var VsmDictUniProt     	= new VsmDictionaryUniProt();
 var VsmDictComplexPortal  = new VsmDictionaryComplexPortal();
 var VsmDictEnsemblGenomes = new VsmDictionaryEnsemblGenomes();
 var VsmDictEnsembl    	= new VsmDictionaryEnsembl();
@@ -18,7 +18,7 @@ VsmDictionaryCombinerCached     = vsmDictNumberTweak (VsmDictionaryCombinerCache
 var dictionary = new VsmDictionaryCombinerCached({
     // Give all required dictionaries as initialized Objects in this array
     dictionaries: [
-        VsmDictUniprot,
+        VsmDictUniProt,
         VsmDictEnsembl,
         VsmDictRNAcentral,
         VsmDictComplexPortal,
@@ -175,8 +175,8 @@ function updateVsmBox(){
  * Mapping between the DB name associated with the type of the entity (source|target) and the databases' links
  */
 const EntityDbs = {
-    "sourceUniprot" : "https://www.uniprot.org",
-    "targetUniprot" : "https://www.uniprot.org",
+    "sourceUniProt" : "https://www.uniprot.org",
+    "targetUniProt" : "https://www.uniprot.org",
     "sourceEnsembl" : "https://www.ensembl.org",
     "targetEnsembl" : "https://www.ensembl.org",
     "sourceRnacentral" : "https://www.rnacentral.org",
