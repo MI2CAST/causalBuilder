@@ -2,21 +2,21 @@
 layout: default
 ---
 
-<script src="https://unpkg.com/vsm-dictionary-complex-portal@^1.0.1/dist/vsm-dictionary-complex-portal.min.js"></script>
-<script src="https://unpkg.com/vsm-dictionary-ensembl-genomes@^1.0.2/dist/vsm-dictionary-ensembl-genomes.min.js"></script>
-<script src="https://unpkg.com/vsm-dictionary-ensembl@^1.0.3/dist/vsm-dictionary-ensembl.min.js"></script>
-<script src="https://unpkg.com/vsm-dictionary-rnacentral@^1.0.1/dist/vsm-dictionary-rnacentral.min.js"></script>
-<script src="https://unpkg.com/vsm-dictionary-uniprot@^1.0.5/dist/vsm-dictionary-uniprot.min.js"></script>
-<script src="https://unpkg.com/vsm-dictionary-bioportal@^1.2.0/dist/vsm-dictionary-bioportal.min.js"></script>
-<script src="https://unpkg.com/vsm-dictionary-pubmed@^1.0.0/dist/vsm-dictionary-pubmed.min.js"></script>
-<script src="https://unpkg.com/vsm-dictionary-cacher@^1.2.1/dist/vsm-dictionary-cacher.min.js"></script>
-<script src="https://unpkg.com/vsm-dictionary-combiner@^1.0.1/dist/vsm-dictionary-combiner.min.js"></script>
-<script src="https://unpkg.com/vsm-box@^1.0.0/dist/vsm-box.standalone.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vsm-dictionary-complex-portal@^1.0.1/dist/vsm-dictionary-complex-portal.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vsm-dictionary-ensembl-genomes@^1.0.2/dist/vsm-dictionary-ensembl-genomes.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vsm-dictionary-ensembl@^1.0.3/dist/vsm-dictionary-ensembl.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vsm-dictionary-rnacentral@^1.0.1/dist/vsm-dictionary-rnacentral.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vsm-dictionary-uniprot@^1.0.5/dist/vsm-dictionary-uniprot.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vsm-dictionary-bioportal@^1.2.0/dist/vsm-dictionary-bioportal.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vsm-dictionary-pubmed@^1.0.0/dist/vsm-dictionary-pubmed.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vsm-dictionary-cacher@^1.2.1/dist/vsm-dictionary-cacher.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vsm-dictionary-combiner@^1.0.1/dist/vsm-dictionary-combiner.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vsm-box@^1.0.0/dist/vsm-box.standalone.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
 <link href="https://www.jqueryscript.net/demo/jQuery-Plugin-For-Multi-Select-List-with-Checkboxes-MultiSelect/jquery.multiselect.css" rel="stylesheet" type="text/css">
 <script src="https://www.jqueryscript.net/demo/jQuery-Plugin-For-Multi-Select-List-with-Checkboxes-MultiSelect/jquery.multiselect.js"></script>
-<script src="https://unpkg.com/converter-causal-formats@^1.0.2/dist/converter-causal-formats.min.js"></script>
-<script src="https://unpkg.com/vsm-json-pretty@^1.0.0/dist/vsm-json-pretty.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/converter-causal-formats@^1.0.2/dist/converter-causal-formats.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vsm-json-pretty@^1.0.0/dist/vsm-json-pretty.min.js"></script>
 <script src="js/VsmCausalTemplate.js"></script>
 <script src="js/ExportCausalJson.js"></script>
 
